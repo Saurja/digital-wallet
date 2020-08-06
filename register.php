@@ -11,5 +11,6 @@
 </head>
     <body>
         <h1>Digital Wallets</h1>
+        <button>Register</button>
     </body>
 </html>
