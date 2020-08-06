@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 ### Node ###
+=======
+>>>>>>> aa1e7c71842cd429ccb03d954850df1a58396268
 # Logs
 logs
 *.log
@@ -42,8 +45,13 @@ build/Release
 node_modules/
 jspm_packages/
 
+<<<<<<< HEAD
 # TypeScript v1 declaration files
 typings/
+=======
+# Snowpack dependency directory (https://snowpack.dev/)
+web_modules/
+>>>>>>> aa1e7c71842cd429ccb03d954850df1a58396268
 
 # TypeScript cache
 *.tsbuildinfo
@@ -75,9 +83,17 @@ typings/
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
+<<<<<<< HEAD
 
 # Next.js build output
 .next
+=======
+.parcel-cache
+
+# Next.js build output
+.next
+out
+>>>>>>> aa1e7c71842cd429ccb03d954850df1a58396268
 
 # Nuxt.js build / generate output
 .nuxt
@@ -106,3 +122,13 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+<<<<<<< HEAD
+=======
+
+# yarn v2
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+>>>>>>> aa1e7c71842cd429ccb03d954850df1a58396268
