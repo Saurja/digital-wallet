@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Wallet</title>
+
+    <?php include("includes/bootstrap.php"); ?>
+
 </head>
-<body>
-    
-</body>
+    <body>
+        
+    </body>
 </html>
