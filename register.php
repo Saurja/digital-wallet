@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Wallet</title>
 </head>
-<body>
-    
-</body>
+    <body>
+        
+    </body>
 </html>
