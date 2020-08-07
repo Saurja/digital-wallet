@@ -30,7 +30,21 @@ body {
 
 .sidebar .navigation .group div a {
   text-decoration: none;
-  color: whitesmoke;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.sidebar .navigation .group div a:hover {
+  text-decoration: none;
+  color: #f1f1f1;
+}
+
+.navItem {
+  margin-top: 5px;
+  padding: 5px 0px;
 }
 
 .mainViewContainer {
@@ -40,14 +54,16 @@ body {
 }
 
 .mainViewContainer .mainContent {
-  padding: 0 20px;
+  padding: 55px 20px;
 }
 
 /*  Index.php   */
 .pageHeadingBig {
-  margin: auto;
-  width: 50%;
   text-align: center;
-  padding: 10px;
+  margin: 10rem 0;
+}
+
+.pageHeadingBig .pageHeadingBigBox {
+  padding: 2rem 5rem;
 }
 /*# sourceMappingURL=style.css.map */
