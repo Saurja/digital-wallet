@@ -36,21 +36,21 @@
                 <td>From user_A@exapmple.com</td>
                 <td>20 Points Requested</td>
                 <td>2020-01-23</td>
-                <td><button type="button" class="btn btn-dark">Pay</button></td>
+                <td><button type="button" class="btn btn-dark">Pay Now</button></td>
                 </tr>
                 <tr>
-                <th scope="row">1</th>
+                <th scope="row">2</th>
                 <td>To user_B@exapmple.com</td>
                 <td>15 Points Requested</td>
                 <td>2020-01-28</td>
-                <td><button type="button" class="btn btn-dark">Pay</button></td>
+                <td><button type="button" class="btn btn-dark">Pay Now</button></td>
                 </tr>
                 <tr>
-                <th scope="row">1</th>
+                <th scope="row">3</th>
                 <td>To user_B@exapmple.com</td>
                 <td>100 Points Requested</td>
                 <td>2020-01-28</td>
-                <td><button type="button" class="btn btn-dark">Pay</button></td>
+                <td><button type="button" class="btn btn-dark">Pay Now</button></td>
                 </tr>
             </tbody>
         </table>

@@ -1,6 +1,6 @@
 <?php include("includes/header.php"); ?>
 <div class="row justify-content-center mt-5">
-    <div class="col-8">  
+    <div class="col-6">  
         <form>
             <label for="exampleInput">Create Voucher</label>
             <div class="input-group mb-3">
