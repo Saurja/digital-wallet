@@ -1,1 +1,53 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-size: 14px;
+  min-width: 720px;
+}
+
+.sidebar {
+  background-color: #2E2E2E;
+  width: 220px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+}
+
+.sidebar .navigation {
+  padding: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  -ms-flex-direction: column;
+}
+
+.sidebar .navigation .group div a {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+.mainViewContainer {
+  margin-left: 220px;
+  padding-bottom: 90px;
+  width: calc(100% - 220px);
+}
+
+.mainViewContainer .mainContent {
+  padding: 0 20px;
+}
+
+/*  Index.php   */
+.pageHeadingBig {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+  padding: 10px;
+}
+/*# sourceMappingURL=style.css.map */
