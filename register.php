@@ -8,9 +8,19 @@
     <!--    Add Bootstrap links (Bootstrap / Jquery / Popper.js)-->
     <?php include("includes/bootstrap.php"); ?>
 
+    <link rel="stylesheet" href="assets/css/register.css">
+
 </head>
     <body>
-        <h1>Digital Wallets</h1>
-        <button>Register</button>
+        
+        <form class="myLoginForm" >
+            <h1>Digital Wallets</h1>
+            <div class="form-group">
+                <label for="fname"> Email id:</label><br>
+                <input class="form-control" type="text" id="fname" name="fname" value="abc@gmail.com">
+            </div>
+            <button type="button" class="btn btn-primary" >Login</button>
+        </form>
+
     </body>
 </html>
