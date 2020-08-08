@@ -10,7 +10,7 @@ body {
 }
 
 .sidebar {
-    background-color: #2E2E2E;
+    background-color: #424242   ;
     width: 220px;
     height: 100vh;
     position: fixed;
@@ -22,9 +22,20 @@ body {
         -ms-flex-direction: column;
         .group div a{
             text-decoration: none;
-            color: whitesmoke;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+        .group div a:hover{
+            text-decoration: none;
+            color: #f1f1f1;
         }
     }
+}
+
+.navItem {
+    margin-top: 5px;
+    padding: 5px 0px;
 }
 
 .mainViewContainer {
@@ -32,14 +43,16 @@ body {
     padding-bottom: 90px;
     width: calc(100% - 220px);
     .mainContent {
-        padding: 0 20px;
+        padding: 55px 20px;
     }
 }
 
 /*  Index.php   */
 .pageHeadingBig{
-    margin: auto;
-    width: 50%;
     text-align: center;
-    padding: 10px;
+    margin: 10rem 0;
+    .pageHeadingBigBox {
+        padding: 2rem 5rem;
+    }
 }
+
