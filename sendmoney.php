@@ -1,5 +1,5 @@
 <?php include("includes/header.php"); ?>
-<div class="row justify-content-center mt-5">
+<div class="row justify-content-center my-5">
     <div class="col-6">
         <form class="reqCreditMoney">
             <div class="form-group ">
@@ -17,8 +17,8 @@
     </div>
 </div>
 
-<div class="row justify-content-center mt-5">
-    <div class="col-6"> 
+<div class="row justify-content-center my-5">
+    <div class="col-10"> 
     <h3>Transfer Requests</h3>
         <table class="table table-bordered mt-2">
             <thead>

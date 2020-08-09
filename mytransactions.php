@@ -1,6 +1,6 @@
 <?php include("includes/header.php"); ?>
 <div class="row justify-content-center mt-5 mx-2">
-    <div class="col-8">
+    <div class="col-10">
         <h3>Transaction History</h3>
         <table class="table table-bordered mt-4">
             <thead>
