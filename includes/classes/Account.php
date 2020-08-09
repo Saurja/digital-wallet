@@ -86,14 +86,19 @@
 
         private function validatePhoneNumber($mb)
         {
-            // Check the lenght of number
-            // This can be customized if you want phone number from a specific country
+            $checkMobileQuery = mysqli_query($this->con, "SELECT `contact_no` FROM `login_details` WHERE `contact_no`='$mb'");
+            if (mysqli_num_rows($checkMobileQuery) != 0) {
+                array_push($this->errorArray, Constants::$MobileTaken);
+                return;
+            }
+
             if (strlen($mb) < 10 || strlen($mb) > 14) {
                 array_push($this->errorArray, Constants::$MobileNotValid);
                 return;
             } else {
             return true;
             }
+            
         }
     }
 

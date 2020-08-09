@@ -11,6 +11,8 @@ class Constants {
     public static $loginFailed = "Error: Your Email ID is incorrect";
 
     public static $MobileNotValid = "Error: Your phone is Invalid";
+    public static $MobileTaken = "Error: The Mobile Number is already taken";
+
     
 }
 

@@ -12,6 +12,6 @@
         <span class="navbar-text white-text mr-3">
             Hello, <?php echo $_SESSION["userLoggedIn"]; ?>
         </span>
-        <button type="button" class="btn btn-danger" onclick="logout()">Logout</button>
+        <a href="logout.php"><button type="button" class="btn btn-danger">Logout</button></a> 
     </div>
 </nav>

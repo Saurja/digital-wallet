@@ -61,7 +61,7 @@ function getInputValue($name) {
     }
 
     ?>
-        <div class="from-group loginFormHeading mb-5">
+        <div class="from-group loginFormHeading my-5">
             <h1>Digital Wallets</h1>
         </div>
         <div id="loginContainer">
@@ -121,6 +121,7 @@ function getInputValue($name) {
                             <label for="mobile">Enter Mobile Number:</label><br>
                             <input id="mobile" name="mobile" class="form-control" type="tel" value="<?php getInputValue('mobile') ?>"  placeholder="+918555751171" required>
                             <?php echo $account->getError(Constants::$MobileNotValid); ?>
+                            <?php echo $account->getError(Constants::$MobileTaken); ?>
                         </div>
                         <button type="submit" name="registerButton" class="btn btn-primary">SIGN UP</button>
 
