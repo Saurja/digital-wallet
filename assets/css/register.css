@@ -1,18 +1,19 @@
+html,
 body {
-  background-color: #e6f0ef;
+  height: 100%;
 }
 
-.myLoginForm {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-}
-
-form input[type=Email] {
-  width: 100%;
-  padding: 15px;
-  margin: 6px 0 26px 0;
-  display: inline-block;
-  border: none;
+.loginFormHeading {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
 }
 /*# sourceMappingURL=register.css.map */

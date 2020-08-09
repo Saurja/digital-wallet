@@ -1,27 +1,11 @@
-/*
+html,
 body {
-    background-color: #e6f0ef;
+  height: 100%
 }
 
-.myLoginForm {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-  input[type=Email] {
-    width: 100%;
-    padding: 15px;
-    margin: 6px 0 26px 0;
-    display: inline-block;
-    border: none;
-  }
+.loginFormHeading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
-*/
-
-    
-  
-
-  
-
-  
-
-  

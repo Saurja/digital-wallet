@@ -10,7 +10,7 @@ body {
 }
 
 .sidebar {
-  background-color: #2E2E2E;
+  background-color: #424242;
   width: 220px;
   height: 100vh;
   position: fixed;
@@ -30,7 +30,6 @@ body {
 
 .sidebar .navigation .group div a {
   text-decoration: none;
-  font-size: 20px;
   color: #818181;
   display: block;
   -webkit-transition: 0.3s;
