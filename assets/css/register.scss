@@ -9,3 +9,47 @@ body {
     justify-content: center;
     text-align: center;
 }
+
+#loginContainer * {
+  box-sizing: border-box;
+}
+
+#loginContainer {
+  margin: 0 auto;
+  position: relative;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #fff;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #fff;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #fff;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #fff;
+}
+
+.hasAccountText {
+  text-align: center;
+}
+
+.hasAccountText span{
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+
+#walletLoginForm, #walletRegisterForm {
+  display: none;
+}
+
+#loginContainer .errorMessage {
+  color: #cc0033;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}

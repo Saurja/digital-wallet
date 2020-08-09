@@ -1,3 +1,15 @@
+<?php
+
+include("includes/config.php");
+
+if(isset($_SESSION['userLoggedIn'])) {
+    $userLoggedIn = $_SESSION['userLoggedIn'];
+} else {
+    header("Location: register.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,6 +22,8 @@
 
         <!--    Adds CSS links      -->
         <link rel="stylesheet" href="assets/css/style.css">
+
+        
 
     </head>
         <body>

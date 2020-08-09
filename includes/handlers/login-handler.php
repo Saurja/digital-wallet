@@ -7,6 +7,7 @@
     $loginSuccessful = $account->login($email);
 
     if($loginSuccessful) {
+        $_SESSION['userLoggedIn'] = $email;
         header("Location: index.php");
     }
 }

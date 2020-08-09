@@ -26,6 +26,7 @@
         public function register($un, $em, $em2, $mb) { 
             $this->validateUsername($un);
             $this->validateEmails($em, $em2);
+            $this->validatePhoneNumber($mb);
 
             if(empty($this->errorArray)) {
                 //Insert into db
@@ -80,6 +81,18 @@
             if (mysqli_num_rows($checkEmailQuery) != 0) {
                 array_push($this->errorArray, Constants::$emailTaken);
                 return;
+            }
+        }
+
+        private function validatePhoneNumber($mb)
+        {
+            // Check the lenght of number
+            // This can be customized if you want phone number from a specific country
+            if (strlen($mb) < 10 || strlen($mb) > 14) {
+                array_push($this->errorArray, Constants::$MobileNotValid);
+                return;
+            } else {
+            return true;
             }
         }
     }
