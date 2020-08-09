@@ -1,11 +1,14 @@
 <!--    PHP Code    -->
 <?php 
 
+#   MySQL Database Config File
+include("includes/config.php"); 
+
 #   PHP Classes Links
 include("includes/classes/Account.php"); 
 include("includes/classes/Constants.php"); 
 
-$account = new Account();
+$account = new Account($con);
 
 #   PHP Handlers Links
 include("includes/handlers/register-handler.php");
@@ -66,6 +69,7 @@ function getInputValue($name) {
                         <label for="username">Enter Username:</label><br>
                         <input id="username" name="username" class="form-control" type="text" value="<?php getInputValue('username') ?>"  placeholder="johnDoe" required>
                         <?php echo $account->getError(Constants::$UsernameCharecters); ?>
+                        <?php echo $account->getError(Constants::$usernameTaken); ?>
 
                         <label for="email">Enter Email id:</label><br>
                         <input id="email" name="email" class="form-control" type="email" value="<?php getInputValue('email') ?>"  placeholder="johnDoe@gmail.com" required>
@@ -74,6 +78,7 @@ function getInputValue($name) {
                         <input id="email2" name="email2" class="form-control" type="email" value="<?php getInputValue('email2') ?>"  placeholder="johnDoe@gmail.com" required>
                         <?php echo $account->getError(Constants::$emailsDoNotMatch); ?>
                         <?php echo $account->getError(Constants::$emailsNotValid); ?>
+                        <?php echo $account->getError(Constants::$emailTaken); ?>
 
                         <label for="mobile">Enter Mobile Number:</label><br>
                         <input id="mobile" name="mobile" class="form-control" type="tel" value="<?php getInputValue('mobile') ?>"  placeholder="+918555751171" required>

@@ -30,8 +30,9 @@
         $username = sanatizeFormUsername($_POST['username']);
         $email = sanatizeFormString($_POST['email']);
         $email2 = sanatizeFormString($_POST['email2']);
+        $mobile = sanatizeFormString($_POST['mobile']);
 
-        $wasSuccessful = $account->register($username, $email, $email2);
+        $wasSuccessful = $account->register($username, $email, $email2, $mobile);
 
         if($wasSuccessful) {
             header("Location: index.php");
