@@ -10,6 +10,19 @@
             $this->errorArray = array();
         }
 
+        public function login($em) {
+            
+            $query = mysqli_query($this->con, "SELECT * FROM `login_details` WHERE `email_id`='$em'");
+
+            if(mysqli_num_rows($query)) {
+                return true;
+            } else {
+                array_push($this->errorArray, Constants::$loginFailed);
+                return false;
+            }
+
+        }
+
         public function register($un, $em, $em2, $mb) { 
             $this->validateUsername($un);
             $this->validateEmails($em, $em2);

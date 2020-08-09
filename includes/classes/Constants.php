@@ -7,6 +7,8 @@ class Constants {
 
     public static $UsernameCharecters = "Your username must be between 5 and 25 charecters";
     public static $usernameTaken = "The username already exists";
+
+    public static $loginFailed = "Your Email ID is incorrect";
     
 }
 

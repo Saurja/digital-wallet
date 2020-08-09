@@ -52,6 +52,7 @@ function getInputValue($name) {
                     <div class="form-group">
                         <label for="loginEmail">Enter Email id:</label><br>
                         <input id="loginEmail" name="loginEmail" class="form-control" type="email"  placeholder="johnDoe@gmail.com" required>
+                        <?php echo $account->getError(Constants::$loginFailed); ?>
                     </div>
                     <button type="submit" name="loginButton" class="btn btn-primary">LOGIN</button>
                 </form>
