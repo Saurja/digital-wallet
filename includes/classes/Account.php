@@ -12,7 +12,7 @@
 
         public function login($em) {
             
-            $query = mysqli_query($this->con, "SELECT * FROM `login_details` WHERE `email_id`='$em'");
+            $query = mysqli_query($this->con, "SELECT * FROM `user_details` WHERE `email_id`='$em'");
 
             if(mysqli_num_rows($query)) {
                 return true;
@@ -46,7 +46,8 @@
         private function insertUserDetails($un, $em, $mb){
 
             $init_cridit = 100;
-            $result = mysqli_query($this->con, "INSERT INTO `login_details` (`user_name`, `contact_no`, `email_id`, `credits`, `counter`) VALUES ('$un', '$mb', '$em', '$init_cridit', '1')");
+            $date = date("Y-m-d h:i:sa");
+            $result = mysqli_query($this->con, "INSERT INTO `user_details` (`user_name`, `contact_no`, `email_id`, `credits`, `last_activity` ,`counter`) VALUES ('$un', '$mb', '$em', '$init_cridit','$date' ,'1')");
         
             return $result;
         }
@@ -58,7 +59,7 @@
                 return;
             }
 
-            $checkUserNameQuery = mysqli_query($this->con, "SELECT `user_name` FROM `login_details` WHERE `user_name`='$un'");
+            $checkUserNameQuery = mysqli_query($this->con, "SELECT `user_name` FROM `user_details` WHERE `user_name`='$un'");
             if (mysqli_num_rows($checkUserNameQuery) != 0) {
                 array_push($this->errorArray, Constants::$usernameTaken);
                 return;
@@ -77,7 +78,7 @@
                 return;
             }
 
-            $checkEmailQuery = mysqli_query($this->con, "SELECT `email_id` FROM `login_details` WHERE `email_id`='$em'");
+            $checkEmailQuery = mysqli_query($this->con, "SELECT `email_id` FROM `user_details` WHERE `email_id`='$em'");
             if (mysqli_num_rows($checkEmailQuery) != 0) {
                 array_push($this->errorArray, Constants::$emailTaken);
                 return;
@@ -86,7 +87,7 @@
 
         private function validatePhoneNumber($mb)
         {
-            $checkMobileQuery = mysqli_query($this->con, "SELECT `contact_no` FROM `login_details` WHERE `contact_no`='$mb'");
+            $checkMobileQuery = mysqli_query($this->con, "SELECT `contact_no` FROM `user_details` WHERE `contact_no`='$mb'");
             if (mysqli_num_rows($checkMobileQuery) != 0) {
                 array_push($this->errorArray, Constants::$MobileTaken);
                 return;

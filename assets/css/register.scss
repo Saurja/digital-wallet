@@ -38,10 +38,12 @@ body {
 
 .hasAccountText span{
   font-weight: bold;
-
   cursor: pointer;
 }
 
+#hideLogin, #hideRegister {
+  color: #0275d8;
+}
 
 #walletLoginForm, #walletRegisterForm {
   display: none;

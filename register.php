@@ -119,7 +119,7 @@ function getInputValue($name) {
                             <?php echo $account->getError(Constants::$emailTaken); ?>
                             
                             <label for="mobile">Enter Mobile Number:</label><br>
-                            <input id="mobile" name="mobile" class="form-control" type="tel" value="<?php getInputValue('mobile') ?>"  placeholder="+918555751171" required>
+                            <input id="mobile" name="mobile" class="form-control" type="tel" value="<?php getInputValue('mobile') ?>"  placeholder="09864452185" required>
                             <?php echo $account->getError(Constants::$MobileNotValid); ?>
                             <?php echo $account->getError(Constants::$MobileTaken); ?>
                         </div>
