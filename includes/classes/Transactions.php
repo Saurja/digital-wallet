@@ -20,7 +20,7 @@
                 array_push($this->errorArray, Constants::$amountLessthanZero);
                 return false;
             }
-            else if($resultarr['credits'] <= $amt) { //if the above condition fails, but this condition satisfies then logic 2 is executed
+            else if($resultarr['credits'] < $amt) { 
                 array_push($this->errorArray, Constants::$InsufficientBalance);
                 return false;
             }
