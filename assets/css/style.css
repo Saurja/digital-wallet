@@ -60,4 +60,11 @@ html, body {
 .pageHeadingBig .pageHeadingBigBox {
   padding: 2rem 5rem;
 }
+
+.errorMessage {
+  color: #cc0033;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
 /*# sourceMappingURL=style.css.map */

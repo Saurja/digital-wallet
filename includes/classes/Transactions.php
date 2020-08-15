@@ -16,28 +16,20 @@
             $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
             $resultarr = mysqli_fetch_assoc($creditbalance);
             
-            if($amt > 0) {
-
-                if($resultarr['credits'] >= $amt) {
-
-                    if(mysqli_num_rows($query) == 1) {
-                        return $this->sendCreditToUser($sen, $reciv, $amt);
-                    } else {
-                        array_push($this->errorArray, Constants::$usernameInvalid);
-                        return false;
-                    }
-    
-                    
-                } else {
-
-                    array_push($this->errorArray, Constants::$InsufficientBalance);
-                    return false;
-
-                }
-
-            } else {
+            if($amt < 0) { 
                 array_push($this->errorArray, Constants::$amountLessthanZero);
                 return false;
+            }
+            else if($resultarr['credits'] <= $amt) { //if the above condition fails, but this condition satisfies then logic 2 is executed
+                array_push($this->errorArray, Constants::$InsufficientBalance);
+                return false;
+            }
+            else if(mysqli_num_rows($query) != 1) {
+                    array_push($this->errorArray, Constants::$usernameInvalid);
+                    return false;
+            }
+            else { 
+                    return $this->sendCreditToUser($sen, $reciv, $amt);
             }
             
         }
