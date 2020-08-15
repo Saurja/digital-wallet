@@ -6,7 +6,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Your Points: 100</a>
+            <?php
+                $user = $_SESSION["userLoggedIn"];
+                $albumQuery = mysqli_query($con, "SELECT `credits` FROM `user_details` where `email_id` = '$user'");
+                $resultarr = mysqli_fetch_assoc($albumQuery);
+                echo "<a class='nav-link' href='#'>Your Points: " . $resultarr['credits'] . "</a>";
+                
+            ?>
             </li>
         </ul>
         <span class="navbar-text white-text mr-3">

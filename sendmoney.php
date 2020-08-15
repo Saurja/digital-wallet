@@ -1,56 +1,67 @@
 <?php include("includes/header.php"); ?>
+
+<?php 
+
+#   PHP Handlers Links
+
+?>
+
+<!--    Website Code    -->
+
+<!--    Send Money Form    -->
 <div class="row justify-content-center my-5">
     <div class="col-6">
-        <form class="reqCreditMoney">
+        <form class="sendCreditMoney" action="sendMoney.php" method="POST">
             <div class="form-group ">
-                <label for="formGroupExampleInput">Send To</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter Name...">
+                <label for="sendTo">Send To</label>
+                <input type="text" class="form-control" id="sendTo" name="sendTo" placeholder="Enter Name...">
             </div>
             <div class="form-group">
-                <label for="formGroupExampleInput2">Amount</label>
-                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter Amount...">
+                <label for="sendAmount">Amount</label>
+                <input type="number" class="form-control" id="sendAmount" name="sendAmount" placeholder="Enter Amount...">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Send</button>
+                <button type="submit" name="sendMoneyButton" class="btn btn-primary">Send</button>
             </div>
         </form>
     </div>
 </div>
 
+<!--    Display Request table    -->
 <div class="row justify-content-center my-5">
     <div class="col-10"> 
     <h3>Transfer Requests</h3>
         <table class="table table-bordered mt-2">
             <thead>
                 <tr>
-                <th scope="col">#</th>
-                <th scope="col">Who</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Req-Date</th>
-                <th scope="col">Responsce</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Who</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Req-Date</th>
+                    <th scope="col">Responsce</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                <th scope="row">1</th>
-                <td>From user_A@exapmple.com</td>
-                <td>20 Points Requested</td>
-                <td>2020-01-23</td>
-                <td><button type="button" class="btn btn-dark">Pay Now</button></td>
+                    <th scope="row">1</th>
+                    <td>From user_A@exapmple.com</td>
+                    <td>20 Points Requested</td>
+                    <td>2020-01-23</td>
+                    <td><button type="button" class="btn btn-dark">Pay Now</button></td>
                 </tr>
                 <tr>
-                <th scope="row">2</th>
-                <td>To user_B@exapmple.com</td>
-                <td>15 Points Requested</td>
-                <td>2020-01-28</td>
-                <td><button type="button" class="btn btn-dark">Pay Now</button></td>
+                    <th scope="row">2</th>
+                    <td>From user_B@exapmple.com</td>
+                    <td>15 Points Requested</td>
+                    <td>2020-01-28</td>
+                    <td><button type="button" class="btn btn-dark">Pay Now</button></td>
                 </tr>
                 <tr>
-                <th scope="row">3</th>
-                <td>To user_B@exapmple.com</td>
-                <td>100 Points Requested</td>
-                <td>2020-01-28</td>
-                <td><button type="button" class="btn btn-dark">Pay Now</button></td>
+                    <th scope="row">3</th>
+                    <td>From user_B@exapmple.com</td>
+                    <td>100 Points Requested</td>
+                    <td>2020-01-28</td>
+                    <td><button type="button" class="btn btn-dark">Pay Now</button></td>
                 </tr>
             </tbody>
         </table>
