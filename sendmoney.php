@@ -3,7 +3,7 @@
 <?php 
 
 #   PHP Handlers Links
-
+$transactions = new Transactions($con);
 ?>
 
 <!--    Website Code    -->

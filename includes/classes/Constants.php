@@ -13,6 +13,10 @@ class Constants {
     public static $MobileNotValid = "Error: Your phone is Invalid";
     public static $MobileTaken = "Error: The Mobile Number is already taken";
 
+    public static $usernameInvalid = "Error: User doesn't exist";
+
+
+
     
 }
 

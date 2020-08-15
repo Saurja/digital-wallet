@@ -7,6 +7,8 @@ include("includes/config.php");
 #   PHP Classes Links
 include("includes/classes/Account.php"); 
 include("includes/classes/Constants.php"); 
+include("includes/classes/Transactions.php"); 
+
 
 $account = new Account($con);
 
