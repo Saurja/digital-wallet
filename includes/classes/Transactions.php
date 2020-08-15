@@ -13,11 +13,30 @@
         public function sendcredits($sen, $reciv, $amt) {
 
             $query = mysqli_query($this->con, "SELECT * FROM user_details WHERE email_id='$reciv'");
+            $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
+            $resultarr = mysqli_fetch_assoc($creditbalance);
             
-            if(mysqli_num_rows($query) == 1) {
-                return $this->sendCreditToUser($sen, $reciv, $amt);
+            if($amt > 0) {
+
+                if($resultarr['credits'] >= $amt) {
+
+                    if(mysqli_num_rows($query) == 1) {
+                        return $this->sendCreditToUser($sen, $reciv, $amt);
+                    } else {
+                        array_push($this->errorArray, Constants::$usernameInvalid);
+                        return false;
+                    }
+    
+                    
+                } else {
+
+                    array_push($this->errorArray, Constants::$InsufficientBalance);
+                    return false;
+
+                }
+
             } else {
-                array_push($this->errorArray, Constants::$usernameInvalid);
+                array_push($this->errorArray, Constants::$amountLessthanZero);
                 return false;
             }
             

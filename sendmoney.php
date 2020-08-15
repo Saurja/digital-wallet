@@ -45,6 +45,8 @@ if(isset($_POST['sendMoneyButton'])){
             <div class="form-group">
                 <label for="sendAmount">Amount</label>
                 <input type="number" class="form-control" id="sendAmount" name="sendAmount" placeholder="Enter Amount...">
+                <?php echo $transactions->getError(Constants::$InsufficientBalance); ?>
+                <?php echo $transactions->getError(Constants::$amountLessthanZero); ?>
             </div>
             <div class="form-group">
                 <button type="submit" name="sendMoneyButton" class="btn btn-primary">Send</button>
