@@ -4,6 +4,11 @@ include("includes/config.php");
 include("includes/classes/Constants.php"); 
 include("includes/classes/Transactions.php"); 
 
+include("includes/handlers/transaction-handler.php");
+
+$transactions = new Transactions($con);
+
+
 if(isset($_SESSION['userLoggedIn'])) {
     $userLoggedIn = $_SESSION['userLoggedIn'];
 } else {

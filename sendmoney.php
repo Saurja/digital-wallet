@@ -1,10 +1,6 @@
 <?php include("includes/header.php"); ?>
 
-<?php 
 
-#   PHP Handlers Links
-$transactions = new Transactions($con);
-?>
 
 <!--    Website Code    -->
 
@@ -15,6 +11,7 @@ $transactions = new Transactions($con);
             <div class="form-group ">
                 <label for="sendTo">Send To</label>
                 <input type="text" class="form-control" id="sendTo" name="sendTo" placeholder="Enter Name...">
+                <?php echo $transactions->getError(Constants::$usernameInvalid); ?>
             </div>
             <div class="form-group">
                 <label for="sendAmount">Amount</label>

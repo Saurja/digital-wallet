@@ -3,9 +3,11 @@
     class Transactions{
 
         private $con;
+        private $errorArray;
 
         public function __construct($con) {
             $this->con = $con;
+            $this->errorArray = array();
         }
 
         public function sendMoney($sen, $reciv, $amt) {
@@ -19,6 +21,13 @@
                 return false;
             }
             
+        }
+
+        Public function getError($error) {
+            if(!in_array($error, $this->errorArray)) {
+                $error = "";
+            }
+            return "<span class='errorMessage'>$error</span>";
         }
 
     }

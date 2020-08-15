@@ -1,6 +1,6 @@
 <?php
 
-    function sanitizeFormString($inputText) {
+    function sanitizeSender($inputText) {
         $inputText = strip_tags($inputText);
         $inputText = str_replace(" ", "", $inputText);
         $inputText = ucfirst(strtolower($inputText));
@@ -10,10 +10,10 @@
     if(isset($_POST['sendMoneyButton'])){
         
         $sender = $_SESSION['userLoggedIn'];
-        $receiver = sanitizeFormString($_POST['sendTo']);
+        $receiver = sanitizeSender($_POST['sendTo']);
         $amount = $_POST['sendAmount'];
         
-        $wasSuccessful = $account->sendMoney($sender, $receiver, $amount);
+        $wasSuccessful = $transactions->sendMoney($sender, $receiver, $amount);
 
     }
 ?>
