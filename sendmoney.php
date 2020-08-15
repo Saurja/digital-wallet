@@ -1,5 +1,34 @@
 <?php include("includes/header.php"); ?>
 
+<?php
+
+include("includes/classes/Transactions.php"); 
+
+$transactions = new Transactions($con);
+
+function sanitizeSender($inputText) {
+    $inputText = strip_tags($inputText);
+    $inputText = str_replace(" ", "", $inputText);
+    $inputText = ucfirst(strtolower($inputText));
+    return $inputText;
+}
+
+if(isset($_POST['sendMoneyButton'])){
+    
+    $sender = $_SESSION['userLoggedIn'];
+    $receiver = sanitizeSender($_POST['sendTo']);
+    $amount = $_POST['sendAmount'];
+    
+    $wasSuccessful = $transactions->sendcredits($sender, $receiver, $amount);
+
+    if($wasSuccessful){
+        echo $sender . " ";
+        echo $receiver . " ";
+        echo $amount . " ";
+    }
+
+}
+?>
 
 
 <!--    Website Code    -->
