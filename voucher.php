@@ -20,7 +20,7 @@ if(isset($_POST['createVoucherbutton'])){
     $amount = $_POST['voucherAmt'];
     
     $wasSuccessful = $transactions->generateVoucherID($sender, $amount);
-
+    echo $wasSuccessful;
     if(!isset($wasSuccessful)){
         header("Location: voucher.php");
     }

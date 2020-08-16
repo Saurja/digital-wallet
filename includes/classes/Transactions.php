@@ -47,22 +47,22 @@
             $db = new mysqli("localhost", "root", "", "digital-wallet");
 
             try {
-                // First of all, let's begin a transaction
+                # First of all, let's begin a transaction
                 $db->begin_transaction();
-                // A set of queries; if one fails, an exception should be thrown
+                # A set of queries; if one fails, an exception should be thrown
                 $db->query("DELETE FROM `credit_requests` WHERE  `req_id` = '$Id'");
 
-                // If we arrive here, it means that no exception was thrown
-                // i.e. no query has failed, and we can commit the transaction
+                # If we arrive here, it means that no exception was thrown
+                # i.e. no query has failed, and we can commit the transaction
                 $db->commit();
             } catch (\Throwable $e) {
-                // An exception has been thrown
-                // We must rollback the transaction
+                # An exception has been thrown
+                # We must rollback the transaction
                 $db->rollback();
-                throw $e; // but the error must be handled anyway
+                throw $e; # but the error must be handled anyway
             }
             
-            // closing connection 
+            # closing connection 
             mysqli_close($db); 
         }
 
@@ -128,7 +128,6 @@
             $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
             $resultarr = mysqli_fetch_assoc($creditbalance);
 
-            var_dump($resultarr);
             $db = new mysqli("localhost", "root", "", "digital-wallet");
             if($amt < 1) { 
                 array_push($this->errorArray, Constants::$amountLessthanOne);
@@ -139,25 +138,27 @@
                 return false;
             }else{
                 try {
-                    // First of all, let's begin a transaction
+                    # First of all, let's begin a transaction
                     $db->begin_transaction();
-                    // A set of queries; if one fails, an exception should be thrown
+                    # A set of queries; if one fails, an exception should be thrown
                     $db->query("INSERT INTO `voucher_table`(`sender`, `amount`, `voucher_code`) VALUES ('$sen','$amt','$VoucherID');");
                     $db->query("UPDATE `user_details` SET `credits`=`credits`-$amt WHERE `email_id` ='$sen';");
-                    // If we arrive here, it means that no exception was thrown
-                    // i.e. no query has failed, and we can commit the transaction
+                    # If we arrive here, it means that no exception was thrown
+                    # i.e. no query has failed, and we can commit the transaction
                     $db->commit();
                 } catch (\Throwable $e) {
-                    // An exception has been thrown
-                    // We must rollback the transaction
+                    # An exception has been thrown
+                    # We must rollback the transaction
                     $db->rollback();
-                    throw $e; // but the error must be handled anyway
+                    throw $e; # but the error must be handled anyway
                 }
             }
             
-
-            // closing connection 
+            # closing connection 
             mysqli_close($db); 
+
+            return "<span class='errorMessage'>$VoucherID</span>";
+
         }
 
         #   Function to Redeem from a voucher ID and drop it from the database
@@ -166,10 +167,10 @@
             
             $checkVoucherCodeQuery = mysqli_query($this->con, "SELECT `voucher_id` FROM `voucher_table` WHERE `voucher_code`='$vId'");
 
+            #   Fetches amount that is need to be added if redeemed
             $amt = mysqli_query($this->con, "SELECT `amount` FROM `voucher_table` WHERE `voucher_code`='$vId'");
-            $amt = mysqli_fetch_assoc($amt);
-            
-            var_dump($amt);
+            $amt = mysqli_fetch_array($amt);
+            $amt = $amt['amount'];
 
             if (mysqli_num_rows($checkVoucherCodeQuery) == 0) {
                 array_push($this->errorArray, Constants::$voucherCodeInvalid);
@@ -179,23 +180,23 @@
                 $db = new mysqli("localhost", "root", "", "digital-wallet");
 
                 try {
-                    // First of all, let's begin a transaction
+                    # First of all, let's begin a transaction
                     $db->begin_transaction();
-                    // A set of queries; if one fails, an exception should be thrown
+                    # A set of queries; if one fails, an exception should be thrown
                     $db->query("UPDATE `user_details` SET `credits`=`credits`+$amt WHERE `email_id` ='$sen'");
 
                     $db->query("DELETE FROM `voucher_table` WHERE  `voucher_code` = '$vId'");
-                    // If we arrive here, it means that no exception was thrown
-                    // i.e. no query has failed, and we can commit the transaction
+                    # If we arrive here, it means that no exception was thrown
+                    # i.e. no query has failed, and we can commit the transaction
                     $db->commit();
                 } catch (\Throwable $e) {
-                    // An exception has been thrown
-                    // We must rollback the transaction
+                    # An exception has been thrown
+                    # We must rollback the transaction
                     $db->rollback();
-                    throw $e; // but the error must be handled anyway
+                    throw $e; # but the error must be handled anyway
                 }
 
-                // closing connection 
+                # closing connection 
                 mysqli_close($db);  
             }
 
@@ -216,24 +217,24 @@
             $db = new mysqli("localhost", "root", "", "digital-wallet");
 
             try {
-                // First of all, let's begin a transaction
+                # First of all, let's begin a transaction
                 $db->begin_transaction();
-                // A set of queries; if one fails, an exception should be thrown
+                # A set of queries; if one fails, an exception should be thrown
                 $db->query("SELECT `credits` FROM `user_details` WHERE `user_ID`='$sen';");
                 $db->query("SELECT `credits` FROM `user_details` WHERE `user_ID`='$reciv';");
                 $db->query("UPDATE `user_details` SET `credits`=`credits`-$amt WHERE email_id ='$sen';");
                 $db->query("UPDATE `user_details` SET `credits`=`credits`+$amt WHERE email_id ='$reciv';");
-                // If we arrive here, it means that no exception was thrown
-                // i.e. no query has failed, and we can commit the transaction
+                # If we arrive here, it means that no exception was thrown
+                # i.e. no query has failed, and we can commit the transaction
                 $db->commit();
             } catch (\Throwable $e) {
-                // An exception has been thrown
-                // We must rollback the transaction
+                # An exception has been thrown
+                # We must rollback the transaction
                 $db->rollback();
-                throw $e; // but the error must be handled anyway
+                throw $e; # but the error must be handled anyway
             }
 
-            // closing connection 
+            # closing connection 
             mysqli_close($db); 
         }
 
@@ -245,21 +246,21 @@
             $date = date("Y-m-d h:i:sa");
 
             try {
-                // First of all, let's begin a transaction
+                # First of all, let's begin a transaction
                 $db->begin_transaction();
-                // A set of queries; if one fails, an exception should be thrown
+                # A set of queries; if one fails, an exception should be thrown
                 $db->query("INSERT INTO `credit_requests`(`req_from`, `send_from`, `credits_requested`, `req_dateTime`) VALUES ('$sen','$reciv','$amt','$date');");
-                // If we arrive here, it means that no exception was thrown
-                // i.e. no query has failed, and we can commit the transaction
+                # If we arrive here, it means that no exception was thrown
+                # i.e. no query has failed, and we can commit the transaction
                 $db->commit();
             } catch (\Throwable $e) {
-                // An exception has been thrown
-                // We must rollback the transaction
+                # An exception has been thrown
+                # We must rollback the transaction
                 $db->rollback();
-                throw $e; // but the error must be handled anyway
+                throw $e; # but the error must be handled anyway
             }
 
-            // closing connection 
+            # closing connection 
             mysqli_close($db); 
         }
 
