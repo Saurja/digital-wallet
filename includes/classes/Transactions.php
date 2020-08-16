@@ -28,8 +28,40 @@
                     array_push($this->errorArray, Constants::$usernameInvalid);
                     return false;
             }
+            else if($sen == $reciv) {
+                array_push($this->errorArray, Constants::$cantSendSelf);
+                return false;
+            }
             else { 
                     return $this->sendCreditToUser($sen, $reciv, $amt);
+            }
+            
+        }
+
+        public function reqCredits($sen, $reciv, $amt) {
+
+            $query = mysqli_query($this->con, "SELECT * FROM user_details WHERE email_id='$reciv'");
+            $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
+            $resultarr = mysqli_fetch_assoc($creditbalance);
+            
+            if($amt < 0) { 
+                array_push($this->errorArray, Constants::$amountLessthanZero);
+                return false;
+            }
+            else if($resultarr['credits'] < $amt) { 
+                array_push($this->errorArray, Constants::$InsufficientBalance);
+                return false;
+            }
+            else if(mysqli_num_rows($query) != 1) {
+                    array_push($this->errorArray, Constants::$usernameInvalid);
+                    return false;
+            }
+            else if($sen == $reciv) {
+                array_push($this->errorArray, Constants::$cantReqSelf);
+                return false;
+            }
+            else { 
+                    return $this->receiveCreditFromUser($sen, $reciv, $amt);
             }
             
         }
@@ -61,6 +93,33 @@
                 $db->rollback();
                 throw $e; // but the error must be handled anyway
             }
+
+            // closing connection 
+            mysqli_close($db); 
+        }
+
+        private function receiveCreditFromUser($sen, $reciv, $amt) {
+
+            $db = new mysqli("localhost", "root", "", "digital-wallet");
+            $date = date("Y-m-d h:i:sa");
+
+            try {
+                // First of all, let's begin a transaction
+                $db->begin_transaction();
+                // A set of queries; if one fails, an exception should be thrown
+                $db->query("INSERT INTO `credit_requests`(`req_from`, `send_from`, `credits_requested`, `req_dateTime`) VALUES ('$sen','$reciv','$amt','$date');");
+                // If we arrive here, it means that no exception was thrown
+                // i.e. no query has failed, and we can commit the transaction
+                $db->commit();
+            } catch (\Throwable $e) {
+                // An exception has been thrown
+                // We must rollback the transaction
+                $db->rollback();
+                throw $e; // but the error must be handled anyway
+            }
+
+            // closing connection 
+            mysqli_close($db); 
         }
 
     }

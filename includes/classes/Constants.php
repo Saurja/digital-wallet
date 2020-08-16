@@ -16,6 +16,8 @@ class Constants {
     public static $usernameInvalid = "Error: User doesn't exist";
     public static $InsufficientBalance = "Error: Insufficient Account Balance";
     public static $amountLessthanZero = "Error: Amount can't be less than zero";
+    public static $cantSendSelf = "Error: You cannot send Money to yourself";
+    public static $cantReqSelf = "Error: You cannot request Money from yourself";
 
 
 

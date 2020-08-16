@@ -1,5 +1,7 @@
 <?php include("includes/header.php"); ?>
 
+
+<!--    Send Money Handler  -->
 <?php
 
 include("includes/classes/Transactions.php"); 
@@ -41,6 +43,7 @@ if(isset($_POST['sendMoneyButton'])){
                 <label for="sendTo">Send To</label>
                 <input type="text" class="form-control" id="sendTo" name="sendTo" placeholder="Enter Name...">
                 <?php echo $transactions->getError(Constants::$usernameInvalid); ?>
+                <?php echo $transactions->getError(Constants::$cantSendSelf); ?>
             </div>
             <div class="form-group">
                 <label for="sendAmount">Amount</label>
@@ -75,20 +78,6 @@ if(isset($_POST['sendMoneyButton'])){
                     <td>From user_A@exapmple.com</td>
                     <td>20 Points Requested</td>
                     <td>2020-01-23</td>
-                    <td><button type="button" class="btn btn-dark">Pay Now</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>From user_B@exapmple.com</td>
-                    <td>15 Points Requested</td>
-                    <td>2020-01-28</td>
-                    <td><button type="button" class="btn btn-dark">Pay Now</button></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>From user_B@exapmple.com</td>
-                    <td>100 Points Requested</td>
-                    <td>2020-01-28</td>
                     <td><button type="button" class="btn btn-dark">Pay Now</button></td>
                 </tr>
             </tbody>
