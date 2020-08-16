@@ -37,6 +37,7 @@
             else { 
                     return $this->sendCreditToUser($sen, $reciv, $amt);
             }
+            $this->saveTransactionHistory($sen, $reciv, $amt);
             
         }
 
@@ -195,7 +196,6 @@
                     $db->rollback();
                     throw $e; # but the error must be handled anyway
                 }
-
                 # closing connection 
                 mysqli_close($db);  
             }
@@ -233,7 +233,7 @@
                 $db->rollback();
                 throw $e; # but the error must be handled anyway
             }
-
+            $this->saveTransactionHistory($sen, $reciv, $amt);
             # closing connection 
             mysqli_close($db); 
         }
@@ -262,6 +262,30 @@
 
             # closing connection 
             mysqli_close($db); 
+        }
+
+        private function saveTransactionHistory($sen, $rec, $amt) {
+            $db = new mysqli("localhost", "root", "", "digital-wallet");
+            $date = date("Y-m-d h:i:sa");
+
+            try {
+                # First of all, let's begin a transaction
+                $db->begin_transaction();
+                # A set of queries; if one fails, an exception should be thrown
+                $db->query("INSERT INTO `transaction_table`(`sender`, `reciever`, `trans_date`, `amount`) VALUES ('$sen','$rec','$date','$amt')");
+                # If we arrive here, it means that no exception was thrown
+                # i.e. no query has failed, and we can commit the transaction
+                $db->commit();
+            } catch (\Throwable $e) {
+                # An exception has been thrown
+                # We must rollback the transaction
+                $db->rollback();
+                throw $e; # but the error must be handled anyway
+            }
+
+            # closing connection 
+            mysqli_close($db);
+
         }
 
     }
