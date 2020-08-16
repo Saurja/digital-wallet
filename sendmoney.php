@@ -23,10 +23,8 @@ if(isset($_POST['sendMoneyButton'])){
     
     $wasSuccessful = $transactions->sendcredits($sender, $receiver, $amount);
 
-    if($wasSuccessful){
-        echo $sender . " ";
-        echo $receiver . " ";
-        echo $amount . " ";
+    if(!isset($wasSuccessful)){
+        header("Location: sendmoney.php");
     }
 
 }
