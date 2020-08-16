@@ -23,10 +23,8 @@ if(isset($_POST['reqMoneyButton'])){
     
     $wasSuccessful = $transactions->reqCredits($sender, $receiver, $amount);
 
-    if($wasSuccessful){
-        echo $sender . " ";
-        echo $receiver . " ";
-        echo $amount . " ";
+    if(!isset($wasSuccessful)){
+        header("Location: requestmoney.php");
     }
 
 }
@@ -47,9 +45,9 @@ if(isset($_POST['reqMoneyButton'])){
             </div>
             <div class="form-group">
                 <label for="reqAmount">Amount</label>
-                <input type="text" class="form-control" id="reqAmount" name="reqAmount" placeholder="Enter Amount...">
+                <input type="number" class="form-control" id="reqAmount" name="reqAmount" placeholder="Enter Amount...">
                 <?php echo $transactions->getError(Constants::$InsufficientBalance); ?>
-                <?php echo $transactions->getError(Constants::$amountLessthanZero); ?>
+                <?php echo $transactions->getError(Constants::$amountLessthanOne); ?>
             </div>
             <div class="form-group">
                 <button type="submit" name="reqMoneyButton" class="btn btn-primary">Request</button>

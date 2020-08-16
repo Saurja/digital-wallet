@@ -74,8 +74,8 @@
             $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
             $resultarr = mysqli_fetch_assoc($creditbalance);
             
-            if($amt < 0) { 
-                array_push($this->errorArray, Constants::$amountLessthanZero);
+            if($amt < 1) { 
+                array_push($this->errorArray, Constants::$amountLessthanOne);
                 return false;
             }
             else if($resultarr['credits'] < $amt) { 
@@ -101,11 +101,9 @@
         public function reqCredits($sen, $reciv, $amt) {
 
             $query = mysqli_query($this->con, "SELECT * FROM user_details WHERE email_id='$reciv'");
-            $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
-            $resultarr = mysqli_fetch_assoc($creditbalance);
             
-            if($amt < 0) { 
-                array_push($this->errorArray, Constants::$amountLessthanZero);
+            if($amt < 1) { 
+                array_push($this->errorArray, Constants::$amountLessthanOne);
                 return false;
             }
             else if(mysqli_num_rows($query) != 1) {
@@ -120,6 +118,14 @@
                     return $this->receiveCreditFromUser($sen, $reciv, $amt);
             }
             
+        }
+
+        #   Function to generate voucher ID
+
+        public function generateVoucherID($sen, $amt) {
+            $length = random_bytes('32'); 
+            echo $length;
+            return $length;
         }
 
         #   Getting the error array ready
