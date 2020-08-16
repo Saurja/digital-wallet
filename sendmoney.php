@@ -44,8 +44,12 @@ if (isset($_GET['send_task'])) {
         if($row['req_id'] == $requestID) {
             $receiver= $row['req_from'];
             $amount = $row['credits_requested'];
-            $transactions->sendcredits($sender, $receiver, $amount);
-            $transactions->deleteRowWithID($requestID);
+            $sendSuccess = $transactions->sendRequestedcredits($sender, $receiver, $amount);
+
+            if($sendSuccess){
+                $transactions->deleteRowWithID($requestID);
+            }
+            
         }
     }
 
@@ -84,6 +88,7 @@ if (isset($_GET['send_task'])) {
 <div class="row justify-content-center my-5">
     <div class="col-10"> 
     <h3>Transfer Requests</h3>
+    <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
         <table class="table table-bordered mt-2">
             <thead>
                 <tr>

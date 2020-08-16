@@ -10,6 +10,8 @@
             $this->errorArray = array();
         }
 
+        #   Funtion to send Credits to an intended user account
+
         public function sendcredits($sen, $reciv, $amt) {
 
             $query = mysqli_query($this->con, "SELECT * FROM user_details WHERE email_id='$reciv'");
@@ -38,6 +40,71 @@
             
         }
 
+        public function sendRequestedcredits($sen, $reciv, $amt) {
+
+            $query = mysqli_query($this->con, "SELECT * FROM user_details WHERE email_id='$reciv'");
+            $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
+            $resultarr = mysqli_fetch_assoc($creditbalance);
+            
+            if($amt < 0) { 
+                array_push($this->errorArray, Constants::$amountLessthanZero);
+                return false;
+            }
+            else if($resultarr['credits'] < $amt) { 
+                array_push($this->errorArray, Constants::$InsufficientBalanceForReq);
+                return false;
+            }
+            else if(mysqli_num_rows($query) != 1) {
+                    array_push($this->errorArray, Constants::$usernameInvalid);
+                    return false;
+            }
+            else if($sen == $reciv) {
+                array_push($this->errorArray, Constants::$cantSendSelf);
+                return false;
+            }
+            else { 
+                    return $this->sendCreditToUser($sen, $reciv, $amt);
+            }
+            
+        }
+        
+        #   Funtion to request Credits from an intended user account
+
+        public function reqCredits($sen, $reciv, $amt) {
+
+            $query = mysqli_query($this->con, "SELECT * FROM user_details WHERE email_id='$reciv'");
+            $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
+            $resultarr = mysqli_fetch_assoc($creditbalance);
+            
+            if($amt < 0) { 
+                array_push($this->errorArray, Constants::$amountLessthanZero);
+                return false;
+            }
+            else if(mysqli_num_rows($query) != 1) {
+                    array_push($this->errorArray, Constants::$usernameInvalid);
+                    return false;
+            }
+            else if($sen == $reciv) {
+                array_push($this->errorArray, Constants::$cantReqSelf);
+                return false;
+            }
+            else { 
+                    return $this->receiveCreditFromUser($sen, $reciv, $amt);
+            }
+            
+        }
+
+        #   Getting the error array ready
+
+        Public function getError($error) {
+            if(!in_array($error, $this->errorArray)) {
+                $error = "";
+            }
+            return "<span class='errorMessage'>$error</span>";
+        }
+
+        #   Function to delete column using Row ID
+
         public function deleteRowWithID($Id) {
 
             $db = new mysqli("localhost", "root", "", "digital-wallet");
@@ -62,40 +129,7 @@
             mysqli_close($db); 
         }
 
-        public function reqCredits($sen, $reciv, $amt) {
-
-            $query = mysqli_query($this->con, "SELECT * FROM user_details WHERE email_id='$reciv'");
-            $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
-            $resultarr = mysqli_fetch_assoc($creditbalance);
-            
-            if($amt < 0) { 
-                array_push($this->errorArray, Constants::$amountLessthanZero);
-                return false;
-            }
-            else if($resultarr['credits'] < $amt) { 
-                array_push($this->errorArray, Constants::$InsufficientBalance);
-                return false;
-            }
-            else if(mysqli_num_rows($query) != 1) {
-                    array_push($this->errorArray, Constants::$usernameInvalid);
-                    return false;
-            }
-            else if($sen == $reciv) {
-                array_push($this->errorArray, Constants::$cantReqSelf);
-                return false;
-            }
-            else { 
-                    return $this->receiveCreditFromUser($sen, $reciv, $amt);
-            }
-            
-        }
-
-        Public function getError($error) {
-            if(!in_array($error, $this->errorArray)) {
-                $error = "";
-            }
-            return "<span class='errorMessage'>$error</span>";
-        }
+        #   Function to send MySQL commands for sending Credits
 
         private function sendCreditToUser($sen, $reciv, $amt) {
             $db = new mysqli("localhost", "root", "", "digital-wallet");
@@ -121,6 +155,8 @@
             // closing connection 
             mysqli_close($db); 
         }
+
+        #   Function to send MySQL commands for pushing req info to database
 
         private function receiveCreditFromUser($sen, $reciv, $amt) {
 
