@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -7,23 +8,26 @@ html, body {
 
 
 .sidebar {
-    background-color: #424242   ;
+    background-color: #424242;
     width: 220px;
     height: 100vh;
     position: fixed;
-    left: 0; 
-    .navigation{
+    left: 0;
+
+    .navigation {
         padding: 25px;
         display: flex;
         flex-direction: column;
         -ms-flex-direction: column;
-        .group div a{
+
+        .group div a {
             text-decoration: none;
             color: #818181;
             display: block;
             transition: 0.3s;
         }
-        .group div a:hover{
+
+        .group div a:hover {
             text-decoration: none;
             color: #f1f1f1;
         }
@@ -39,15 +43,17 @@ html, body {
     margin-left: 220px;
     padding-bottom: 90px;
     width: calc(100% - 220px);
+
     .mainContent {
         padding: 55px 20px;
     }
 }
 
 /*  Index.php   */
-.pageHeadingBig{
+.pageHeadingBig {
     text-align: center;
     margin: 10rem 0;
+
     .pageHeadingBigBox {
         padding: 2rem 5rem;
     }
@@ -58,13 +64,13 @@ html, body {
     display: block;
     font-weight: bold;
     margin-bottom: 0.5rem;
-  }
+}
 
 .successMessage {
-color: #00C851;
-display: block;
-font-weight: bold;
-margin-bottom: 0.5rem;
+    color: #00C851;
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
 }
 
 .voucherIdhere {

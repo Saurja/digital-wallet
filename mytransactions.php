@@ -21,7 +21,7 @@ $transactions = new Transactions($con);
                 </tr>
             </thead>
             <tbody>
-            <?php
+                <?php
                 $sen = $_SESSION['userLoggedIn'];
                 $albumQuery = mysqli_query($con, "SELECT * FROM `transaction_table` WHERE `sender`='$sen' OR `reciever`='$sen'");
                 while($row = mysqli_fetch_array($albumQuery)) {

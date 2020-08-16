@@ -22,13 +22,14 @@ $transactions = new Transactions($con);
 ?>
 
 <div class="row justify-content-center mt-5">
-    <div class="col-6">  
+    <div class="col-6">
         <!--    Form to Create Voucher  -->
         <form class="createVoucher" action="voucher.php" method="POST">
             <label for="exampleInput">Create Voucher</label>
             <div class="input-group">
-                
-                <input type="number" class="form-control" id="voucherAmt" name="voucherAmt" placeholder="Enter Amount...." aria-label="Enter Amount...." aria-describedby="basic-addon2">
+
+                <input type="number" class="form-control" id="voucherAmt" name="voucherAmt"
+                    placeholder="Enter Amount...." aria-label="Enter Amount...." aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <button type="submit" name="createVoucherbutton" class="btn btn-primary mb-2">Create ID</button>
                 </div>
@@ -52,21 +53,23 @@ $transactions = new Transactions($con);
             <?php echo $transactions->getError(Constants::$amountLessthanOne); ?>
             <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
         </form>
-        
-        
+
+
 
         <!--    Form to Redeem Voucher  -->
         <form class="redeemVoucher" action="voucher.php" method="POST">
             <label for="exampleInput">Reedeem Voucher</label>
             <div class="input-group">
-                
-                <input type="text" class="form-control" id="voucherId" name="voucherId" placeholder="Enter Voucher Id...." aria-label="Enter Voucher Id...." aria-describedby="basic-addon2">
+
+                <input type="text" class="form-control" id="voucherId" name="voucherId"
+                    placeholder="Enter Voucher Id...." aria-label="Enter Voucher Id...."
+                    aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <button type="submit" name="reedeemVoucherbutton" class="btn btn-primary mb-2">Redeem</button>
                 </div>
-                
+
             </div>
-            
+
         </form>
         <?php echo $transactions->getError(Constants::$voucherCodeInvalid); ?>
         <?php echo $transactions->getSuccess(Constants::$VoucherRedeemed); ?>
