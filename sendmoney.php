@@ -44,15 +44,16 @@ if (isset($_GET['send_task'])) {
         if($row['req_id'] == $requestID) {
             $receiver= $row['req_from'];
             $amount = $row['credits_requested'];
-            $sendSuccess = $transactions->sendRequestedcredits($sender, $receiver, $amount);
+            $wasSuccess = $transactions->sendRequestedcredits($sender, $receiver, $amount);
 
-            if($sendSuccess){
+            if(!isset($wasSuccess)) {
                 $transactions->deleteRowWithID($requestID);
             }
+
             
         }
+        
     }
-
 }
 
 
