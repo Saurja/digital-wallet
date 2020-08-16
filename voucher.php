@@ -7,38 +7,18 @@ include("includes/classes/Transactions.php");
 
 $transactions = new Transactions($con);
 
-function sanitizeSender($inputText) {
-    $inputText = strip_tags($inputText);
-    $inputText = str_replace(" ", "", $inputText);
-    $inputText = ucfirst(strtolower($inputText));
-    return $inputText;
-}
+    if(isset($_POST['reedeemVoucherbutton'])){
 
-if(isset($_POST['createVoucherbutton'])){
+        $sender = $_SESSION['userLoggedIn'];
+        $voucherId = $_POST['voucherId'];
+        
+        $wasSuccessful = $transactions->redeemVoucherID($sender, $voucherId);
     
-    $sender = $_SESSION['userLoggedIn'];
-    $amount = $_POST['voucherAmt'];
-    
-    $wasSuccessful = $transactions->generateVoucherID($sender, $amount);
-    echo $wasSuccessful;
-    if(!isset($wasSuccessful)){
-        header("Location: voucher.php");
+        if(isset($wasSuccessful)){
+            header("Location: voucher.php");
+        }
     }
-}
-
-if(isset($_POST['reedeemVoucherbutton'])){
-    
-    $sender = $_SESSION['userLoggedIn'];
-    $voucherId = $_POST['voucherId'];
-    
-    $wasSuccessful = $transactions->redeemVoucherID($sender, $voucherId);
-
-    if(!isset($wasSuccessful)){
-        #header("Location: voucher.php");
-    }
-}
-
-
+        
 ?>
 
 <div class="row justify-content-center mt-5">
@@ -53,9 +33,27 @@ if(isset($_POST['reedeemVoucherbutton'])){
                     <button type="submit" name="createVoucherbutton" class="btn btn-primary mb-2">Create ID</button>
                 </div>
             </div>
+            <?php
+        
+                if(isset($_POST['createVoucherbutton'])){
+            
+                    $sender = $_SESSION['userLoggedIn'];
+                    $amount = $_POST['voucherAmt'];
+                    
+                    $wasSuccessful = $transactions->generateVoucherID($sender, $amount);
+                    echo $wasSuccessful;
+                
+                    if(!isset($wasSuccessful)){
+                        header("Location: voucher.php");
+                    }
+                }
+            
+            ?>
             <?php echo $transactions->getError(Constants::$amountLessthanOne); ?>
             <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
         </form>
+        
+        
 
         <!--    Form to Redeem Voucher  -->
         <form class="redeemVoucher" action="voucher.php" method="POST">
@@ -70,7 +68,10 @@ if(isset($_POST['reedeemVoucherbutton'])){
             </div>
             
         </form>
+
+        
         <?php echo $transactions->getError(Constants::$voucherCodeInvalid); ?>
+        
     </div>
 </div>
 

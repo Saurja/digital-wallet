@@ -157,7 +157,7 @@
             # closing connection 
             mysqli_close($db); 
 
-            return "<span class='errorMessage'>$VoucherID</span>";
+            return "<span class='voucherIdhere'>Voucher ID: $VoucherID</span>";
 
         }
 
@@ -170,7 +170,7 @@
             #   Fetches amount that is need to be added if redeemed
             $amt = mysqli_query($this->con, "SELECT `amount` FROM `voucher_table` WHERE `voucher_code`='$vId'");
             $amt = mysqli_fetch_array($amt);
-            $amt = $amt['amount'];
+            $amt = isset($amt['amount']) ? ($amt['amount']) : 0;
 
             if (mysqli_num_rows($checkVoucherCodeQuery) == 0) {
                 array_push($this->errorArray, Constants::$voucherCodeInvalid);
