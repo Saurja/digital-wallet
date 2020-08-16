@@ -32,11 +32,22 @@ if(isset($_POST['sendMoneyButton'])){
 }
 
 if (isset($_GET['send_task'])) {
-
+    
+    $requestID = $_GET['send_task'];
     //  Get the email of user logged in
-    $sender = $_GET['send_task'];
+    $sender = $_SESSION['userLoggedIn'];
     //  Select all tasks if page is visited or refreshed
     $reqCreditQuery = mysqli_query($con, "SELECT * FROM credit_requests WHERE send_from='$sender'");
+
+    while($row = mysqli_fetch_array($reqCreditQuery)) {
+
+        if($row['req_id'] == $requestID) {
+            $receiver= $row['req_from'];
+            $amount = $row['credits_requested'];
+            $transactions->sendcredits($sender, $receiver, $amount);
+            $transactions->deleteRowWithID($requestID);
+        }
+    }
 
 }
 
