@@ -22,6 +22,8 @@ class Constants {
     public static $InsufficientBalanceForReq = "Error: Insufficient Account Balance To Send Credits";
     public static $amountLessthanOne = "Error: Amount must be greater than zero";
 
+    public static $voucherCodeInvalid = "Error: The voucher code is Invalid";
+
 
 
     

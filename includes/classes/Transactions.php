@@ -120,12 +120,85 @@
             
         }
 
-        #   Function to generate voucher ID
+        #   Function to generate voucher ID and store it in a database
 
         public function generateVoucherID($sen, $amt) {
-            $length = random_bytes('32'); 
-            echo $length;
-            return $length;
+            $VoucherID = md5(time());
+
+            $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
+            $resultarr = mysqli_fetch_assoc($creditbalance);
+
+            var_dump($resultarr);
+            $db = new mysqli("localhost", "root", "", "digital-wallet");
+            if($amt < 1) { 
+                array_push($this->errorArray, Constants::$amountLessthanOne);
+                return false;
+            }
+            else if($resultarr['credits'] < $amt) { 
+                array_push($this->errorArray, Constants::$InsufficientBalanceForReq);
+                return false;
+            }else{
+                try {
+                    // First of all, let's begin a transaction
+                    $db->begin_transaction();
+                    // A set of queries; if one fails, an exception should be thrown
+                    $db->query("INSERT INTO `voucher_table`(`sender`, `amount`, `voucher_code`) VALUES ('$sen','$amt','$VoucherID');");
+                    $db->query("UPDATE `user_details` SET `credits`=`credits`-$amt WHERE `email_id` ='$sen';");
+                    // If we arrive here, it means that no exception was thrown
+                    // i.e. no query has failed, and we can commit the transaction
+                    $db->commit();
+                } catch (\Throwable $e) {
+                    // An exception has been thrown
+                    // We must rollback the transaction
+                    $db->rollback();
+                    throw $e; // but the error must be handled anyway
+                }
+            }
+            
+
+            // closing connection 
+            mysqli_close($db); 
+        }
+
+        #   Function to Redeem from a voucher ID and drop it from the database
+
+        public function redeemVoucherID($sen, $vId) {
+            
+            $checkVoucherCodeQuery = mysqli_query($this->con, "SELECT `voucher_id` FROM `voucher_table` WHERE `voucher_code`='$vId'");
+
+            $amt = mysqli_query($this->con, "SELECT `amount` FROM `voucher_table` WHERE `voucher_code`='$vId'");
+            $amt = mysqli_fetch_assoc($amt);
+            
+            var_dump($amt);
+
+            if (mysqli_num_rows($checkVoucherCodeQuery) == 0) {
+                array_push($this->errorArray, Constants::$voucherCodeInvalid);
+                return;
+            } else {
+
+                $db = new mysqli("localhost", "root", "", "digital-wallet");
+
+                try {
+                    // First of all, let's begin a transaction
+                    $db->begin_transaction();
+                    // A set of queries; if one fails, an exception should be thrown
+                    $db->query("UPDATE `user_details` SET `credits`=`credits`+$amt WHERE `email_id` ='$sen'");
+
+                    $db->query("DELETE FROM `voucher_table` WHERE  `voucher_code` = '$vId'");
+                    // If we arrive here, it means that no exception was thrown
+                    // i.e. no query has failed, and we can commit the transaction
+                    $db->commit();
+                } catch (\Throwable $e) {
+                    // An exception has been thrown
+                    // We must rollback the transaction
+                    $db->rollback();
+                    throw $e; // but the error must be handled anyway
+                }
+
+                // closing connection 
+                mysqli_close($db);  
+            }
+
         }
 
         #   Getting the error array ready
