@@ -30,6 +30,17 @@ if(isset($_POST['sendMoneyButton'])){
     }
 
 }
+
+if (isset($_GET['send_task'])) {
+
+    //  Get the email of user logged in
+    $sender = $_GET['send_task'];
+    //  Select all tasks if page is visited or refreshed
+    $reqCreditQuery = mysqli_query($con, "SELECT * FROM credit_requests WHERE send_from='$sender'");
+
+}
+
+
 ?>
 
 
@@ -76,40 +87,24 @@ if(isset($_POST['sendMoneyButton'])){
 
             <!--    List All Requests   -->
             <?php
-            
+                //  Get the email of user logged in
                 $sender = $_SESSION['userLoggedIn'];
+                //  Select all tasks if page is visited or refreshed
                 $reqCreditQuery = mysqli_query($con, "SELECT * FROM credit_requests WHERE send_from='$sender'");
                 while($row = mysqli_fetch_array($reqCreditQuery)) {
-
-                    $rowID = $row['req_id'];
-                    echo "<tr>
-                            <th scope='row'>" . $row['req_id'] . "</th>
-                            <td>From " . $row['req_from'] .  "</td>
-                            <td>" . $row['credits_requested'] .  " Points Requested</td>
-                            <td>" . $row['req_dateTime'] .  "</td>
-                            <td><button type='submit' name='sendRequestedMoneyButton" . $rowID . "' class='btn btn-dark'>Pay Now</button></td>
-                        </tr>";
-                }
-
-                while($row = mysqli_fetch_array($reqCreditQuery)) {
-
-                    $rowID = $row['req_id'];
-                    
-                    if(isset($_POST['sendRequestedMoneyButton'.$rowID])){
-
-                        $sender = $_SESSION['userLoggedIn'];
-                        $receiverName= $row['req_from'];
-                        $amount = $row['credits_requested'];
-                        
-                        $wasSuccessful = $transactions->sendcredits($sender, $receiverName, $amount);
-
-                        if($wasSuccessful){
-                            echo $sender . " ";
-                            echo $receiver . " ";
-                            echo $amount . " ";
-                        }
+            ?>        
+                    <tr>
+                        <th scope='row'><?php echo $row['req_id']; ?></th>
+                        <td>From <?php echo  $row['req_from']; ?></td>
+                        <td><?php echo $row['credits_requested']; ?> Points Requested</td>
+                        <td><?php echo $row['req_dateTime']; ?></td>
+                        <td><a href="sendMoney.php?send_task=<?php echo $row['req_id'] ?>">
+                            <button type='submit' class='btn btn-dark'>Pay Now</button>
+                            </a>
+                        </td>
+                    </tr>
+            <?php
                     }
-                }
             ?>
             </tbody>
         </table>
