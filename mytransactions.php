@@ -14,10 +14,10 @@ $transactions = new Transactions($con);
         <table class="table table-bordered mt-4">
             <thead>
                 <tr>
-                <th scope="col">Trans_id</th>
-                <th scope="col">Who</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Date</th>
+                    <th scope="col">Trans_id</th>
+                    <th scope="col">To whom/ From whom</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Date</th>
                 </tr>
             </thead>
             <tbody>

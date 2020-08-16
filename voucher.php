@@ -68,10 +68,8 @@ $transactions = new Transactions($con);
             </div>
             
         </form>
-
-        
         <?php echo $transactions->getError(Constants::$voucherCodeInvalid); ?>
-        
+        <?php echo $transactions->getSuccess(Constants::$VoucherRedeemed); ?>
     </div>
 </div>
 

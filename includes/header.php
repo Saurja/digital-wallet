@@ -16,6 +16,7 @@ if(isset($_SESSION['userLoggedIn'])) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Digital Wallet is a payment application that allows users to store and spend virtual money. This project does not use real money and only for educational purposes."/>
         <title>Digital Wallet</title>
 
         <!--    Adds Bootstrap links (Bootstrap / Jquery / Popper.js)    -->

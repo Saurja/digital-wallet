@@ -8,6 +8,7 @@
         public function __construct($con) {
             $this->con = $con;
             $this->errorArray = array();
+            $this->SuccessArray = array();
         }
 
         #   Funtion to send Credits to an intended user account
@@ -108,15 +109,16 @@
                 return false;
             }
             else if(mysqli_num_rows($query) != 1) {
-                    array_push($this->errorArray, Constants::$usernameInvalid);
-                    return false;
+                array_push($this->errorArray, Constants::$usernameInvalid);
+                return false;
             }
             else if($sen == $reciv) {
                 array_push($this->errorArray, Constants::$cantReqSelf);
                 return false;
             }
             else { 
-                    return $this->receiveCreditFromUser($sen, $reciv, $amt);
+                array_push($this->SuccessArray, Constants::$RequestSent);
+                return $this->receiveCreditFromUser($sen, $reciv, $amt);
             }
             
         }
@@ -190,6 +192,7 @@
                     # If we arrive here, it means that no exception was thrown
                     # i.e. no query has failed, and we can commit the transaction
                     $db->commit();
+                    array_push($this->SuccessArray, Constants::$VoucherRedeemed);
                 } catch (\Throwable $e) {
                     # An exception has been thrown
                     # We must rollback the transaction
@@ -209,6 +212,14 @@
                 $error = "";
             }
             return "<span class='errorMessage'>$error</span>";
+        }
+
+        #   Getting the Success array ready
+        Public function getSuccess($Success) {
+            if(!in_array($Success, $this->SuccessArray)) {
+                $Success = "";
+            }
+            return "<span class='successMessage'>$Success</span>";
         }
 
         #   Function to send MySQL commands for sending Credits
@@ -259,7 +270,7 @@
                 $db->rollback();
                 throw $e; # but the error must be handled anyway
             }
-
+            
             # closing connection 
             mysqli_close($db); 
         }

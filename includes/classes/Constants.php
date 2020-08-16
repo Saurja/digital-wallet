@@ -1,6 +1,9 @@
 <?php
 
 class Constants {
+
+    #   Error Messages
+
     public static $emailsDoNotMatch = "Error: Your emails don't match";
     public static $emailsNotValid = "Error: Your email is Invalid";
     public static $emailTaken = "Error: The email is already taken";
@@ -24,7 +27,10 @@ class Constants {
 
     public static $voucherCodeInvalid = "Error: The voucher code is Invalid";
 
+    #   Success Messages
 
+    public static $RequestSent = "Success: The request has been sent to user!";
+    public static $VoucherRedeemed = "Success: The voucher has been Redeemed";
 
     
 }

@@ -23,7 +23,7 @@ if(isset($_POST['reqMoneyButton'])){
     
     $wasSuccessful = $transactions->reqCredits($sender, $receiver, $amount);
 
-    if(!isset($wasSuccessful)){
+    if(isset($wasSuccessful)){
         header("Location: requestmoney.php");
     }
 
@@ -53,6 +53,7 @@ if(isset($_POST['reqMoneyButton'])){
                 <button type="submit" name="reqMoneyButton" class="btn btn-primary">Request</button>
             </div>
         </form>
+        <?php echo $transactions->getSuccess(Constants::$RequestSent); ?>
     </div>
 </div>
 
