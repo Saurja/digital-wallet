@@ -167,7 +167,8 @@
         #   Function to Redeem from a voucher ID and drop it from the database
 
         public function redeemVoucherID($sen, $vId) {
-            
+
+            $date = date("Y-m-d h:i:sa");
             $checkVoucherCodeQuery = mysqli_query($this->con, "SELECT `voucher_id` FROM `voucher_table` WHERE `voucher_code`='$vId'");
 
             #   Fetches amount that is need to be added if redeemed
@@ -180,27 +181,37 @@
                 return;
             } else {
 
-                $db = new mysqli("localhost", "root", "", "digital-wallet");
-
+                # Create and check a new connection to the database
                 try {
-                    # First of all, let's begin a transaction
-                    $db->begin_transaction();
-                    # A set of queries; if one fails, an exception should be thrown
-                    $db->query("UPDATE `user_details` SET `credits`=`credits`+$amt WHERE `email_id` ='$sen'");
+                    $dbh = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
+                } catch (Exception $e) {
+                    die("Unable to connect: " . $e->getMessage());
+                }
 
-                    $db->query("DELETE FROM `voucher_table` WHERE  `voucher_code` = '$vId'");
+                try {  
+                    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+                    # begin a Transaction
+                    $dbh->beginTransaction();
+    
+                    # A set of queries; if one fails, an exception should be thrown
+                    $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`+? WHERE `email_id` =?");
+                    $sth->execute(array($amt,$sen));
+                    $sth = $dbh->prepare("DELETE FROM `voucher_table` WHERE  `voucher_code` = ?");
+                    $sth->execute(array($vId));
                     # If we arrive here, it means that no exception was thrown
                     # i.e. no query has failed, and we can commit the transaction
-                    $db->commit();
+                    array_push($this->SuccessArray, Constants::$RequestSent);
+                    $dbh->commit();
                     array_push($this->SuccessArray, Constants::$VoucherRedeemed);
-                } catch (\Throwable $e) {
-                    # An exception has been thrown
-                    # We must rollback the transaction
-                    $db->rollback();
-                    throw $e; # but the error must be handled anyway
+
+                } catch (Exception $e) {
+                    # An exception has been thrown; We must rollback the transaction
+                    $dbh->rollBack();
+                    array_push($this->errorArray, Constants::$TranscErr);
                 }
                 # closing connection 
-                mysqli_close($db);  
+                $dbh = null;
             }
 
         }
