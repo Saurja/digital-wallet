@@ -101,7 +101,7 @@
         #   Function to generate voucher ID and store it in a database
 
         public function generateVoucherID($sen, $amt) {
-            $VoucherID = md5(time());
+            $VoucherID = $this->generateRandomString(8);
 
             $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
             $resultarr = mysqli_fetch_assoc($creditbalance);
@@ -244,6 +244,18 @@
                 $Success = "";
             }
             return "<span class='successMessage'>$Success</span>";
+        }
+
+        #   Function to generate random strings
+
+        private function generateRandomString($length = 10) {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $charactersLength = strlen($characters);
+            $randomString = '';
+            for ($i = 0; $i < $length; $i++) {
+                $randomString .= $characters[rand(0, $charactersLength - 1)];
+            }
+            return $randomString;
         }
 
         #   Function to send MySQL commands for sending Credits
