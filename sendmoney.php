@@ -114,8 +114,9 @@ if (isset($_GET['send_task'])) {
                         <td>From <?php echo  $row['req_from']; ?></td>
                         <td><?php echo $row['credits_requested']; ?> Points Requested</td>
                         <td><?php echo $row['req_dateTime']; ?></td>
-                        <td><a href="sendMoney.php?send_task=<?php echo $row['req_id'] ?>">
-                            <button type='submit' class='btn btn-dark'>Pay Now</button>
+                        <td>
+                            <a href="sendMoney.php?send_task=<?php echo $row['req_id'] ?>">
+                                <button type='submit' class='btn btn-dark'>Pay Now</button>
                             </a>
                         </td>
                     </tr>
