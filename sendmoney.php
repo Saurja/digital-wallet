@@ -23,12 +23,6 @@ if(isset($_POST['sendMoneyButton'])){
     
     $wasSuccessful = $transactions->sendcredits($sender, $receiver, $amount);
 
-    if(!isset($wasSuccessful)){
-       
-    }
-
-
-
 }
 
 if (isset($_GET['send_task'])) {
