@@ -139,6 +139,14 @@ function getInputValue($name) {
             <!--    Register Form End   -->
         </div>
         <!--    Website View End    -->
+
+        <!--    Stops form from resubmitting    -->
+        <script>
+            if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+            }
+        </script>
+        <!--    Stops form from resubmitting    -->
     </body>
 </html>
 <!--    Website Code End    -->

@@ -23,10 +23,6 @@ if(isset($_POST['reqMoneyButton'])){
     
     $wasSuccessful = $transactions->reqCredits($sender, $receiver, $amount);
 
-    if(isset($wasSuccessful)){
-        header("Location: requestmoney.php");
-    }
-
 }
 ?>
 
@@ -58,4 +54,11 @@ if(isset($_POST['reqMoneyButton'])){
 </div>
 <!--    Request Money Form End   -->
 
+<!--    Stops form from resubmitting    -->
+<script>
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+<!--    Stops form from resubmitting    -->
 <?php include("includes/footer.php"); ?>

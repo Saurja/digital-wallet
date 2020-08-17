@@ -13,14 +13,12 @@ $transactions = new Transactions($con);
         $voucherId = $_POST['voucherId'];
         
         $wasSuccessful = $transactions->redeemVoucherID($sender, $voucherId);
-    
-        if(isset($wasSuccessful)){
-            header("Location: voucher.php");
-        }
+
     }
         
 ?>
 
+<!--    Voucher View    -->
 <div class="row justify-content-center mt-5">
     <div class="col-6">
         <!--    Form to Create Voucher  -->
@@ -79,5 +77,14 @@ $transactions = new Transactions($con);
         <!--    Form to Redeem Voucher End  -->
     </div>
 </div>
+<!--    Voucher View    -->
+
+<!--    Stops form from resubmitting    -->
+<script>
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+<!--    Stops form from resubmitting    -->
 
 <?php include("includes/footer.php"); ?>

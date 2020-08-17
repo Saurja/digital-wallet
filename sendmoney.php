@@ -43,11 +43,6 @@ if (isset($_GET['send_task'])) {
             $receiver= $row['req_from'];
             $amount = $row['credits_requested'];
             $wasSuccess = $transactions->sendRequestedcredits($sender, $receiver, $amount);
-
-            if(!isset($wasSuccess)) {
-                $transactions->deleteRowWithID($requestID);
-            }
-            
         }
         
     }
@@ -127,6 +122,13 @@ if (isset($_GET['send_task'])) {
         </table>
     </div>
 </div>
-<!--    Display Request table    -->
+<!--    Display Request table End    -->
 
+<!--    Stops form from resubmitting    -->
+<script>
+if ( window.history.replaceState ) {
+  window.history.replaceState( null, null, window.location.href );
+}
+</script>
+<!--    Stops form from resubmitting    -->
 <?php include("includes/footer.php"); ?>
