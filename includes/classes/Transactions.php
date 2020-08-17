@@ -238,7 +238,7 @@
                 array_push($this->errorArray, Constants::$TranscErr);
                 die("#UPDATE failed\n");
             }
-            $sth = $db->prepare("UPDATE `user_details` SET `redits`=`credits`+? WHERE email_id =?");
+            $sth = $db->prepare("UPDATE `user_details` SET `credits`=`credits`+? WHERE email_id =?");
             if (!$sth->execute(array($amt,$reciv))){
                 $db->rollback();
                 array_push($this->errorArray, Constants::$TranscErr);
