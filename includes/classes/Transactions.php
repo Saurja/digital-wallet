@@ -226,9 +226,10 @@
 
         private function sendCreditToUser($sen, $reciv, $amt) {
 
-            #$db = new mysqli("localhost", "root", "", "digital-wallet");
+            
             $db = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
             $db->query("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE");
+            
             $db->beginTransaction();
 
             # A set of queries; if one fails, an exception should be thrown
@@ -244,7 +245,7 @@
                 array_push($this->errorArray, Constants::$TranscErr);
                 die("#UPDATE failed\n");
             }
-
+            $db->commit();
             $this->saveTransactionHistory($sen, $reciv, $amt);
             # closing connection 
             $db = null;
