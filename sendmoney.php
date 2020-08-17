@@ -78,6 +78,7 @@ if (isset($_GET['send_task'])) {
             </div>
         </form>
         <?php echo $transactions->getSuccess(Constants::$CreditsSent); ?>
+        <?php echo $transactions->getError(Constants::$TranscErr); ?>
     </div>
 </div>
 <!--    Send Money Form End    -->
