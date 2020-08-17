@@ -131,7 +131,13 @@
             $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
             $resultarr = mysqli_fetch_assoc($creditbalance);
 
-            $db = new mysqli("localhost", "root", "", "digital-wallet");
+            # Create and check a new connection to the database
+            try {
+                $dbh = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
+            } catch (Exception $e) {
+                die("Unable to connect: " . $e->getMessage());
+            }
+
             if($amt < 1) { 
                 array_push($this->errorArray, Constants::$amountLessthanOne);
                 return false;
@@ -140,25 +146,29 @@
                 array_push($this->errorArray, Constants::$InsufficientBalanceForReq);
                 return false;
             }else{
-                try {
-                    # First of all, let's begin a transaction
-                    $db->begin_transaction();
+                try {  
+                    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                    # begin a Transaction
+                    $dbh->beginTransaction();
+
                     # A set of queries; if one fails, an exception should be thrown
-                    $db->query("INSERT INTO `voucher_table`(`sender`, `amount`, `voucher_code`) VALUES ('$sen','$amt','$VoucherID');");
-                    $db->query("UPDATE `user_details` SET `credits`=`credits`-$amt WHERE `email_id` ='$sen';");
+                    $sth = $dbh->prepare("INSERT INTO `voucher_table`(`sender`, `amount`, `voucher_code`) VALUES (?,?,?)");
+                    $sth->execute(array($sen,$amt,$VoucherID));
+                    $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`-? WHERE `email_id` =?");
+                    $sth->execute(array($amt, $sen));
                     # If we arrive here, it means that no exception was thrown
                     # i.e. no query has failed, and we can commit the transaction
-                    $db->commit();
-                } catch (\Throwable $e) {
-                    # An exception has been thrown
-                    # We must rollback the transaction
-                    $db->rollback();
-                    throw $e; # but the error must be handled anyway
+                    $dbh->commit();
+                
+                } catch (Exception $e) {
+                    # An exception has been thrown; We must rollback the transaction
+                    $dbh->rollBack();
+                    array_push($this->errorArray, Constants::$TranscErr);
                 }
+                # closing connection 
+                $dbh = null;
             }
-            
-            # closing connection 
-            mysqli_close($db); 
 
             return "<span class='voucherIdhere'>Voucher ID: $VoucherID</span>";
 
