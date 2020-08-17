@@ -23,10 +23,6 @@ if(isset($_POST['reqMoneyButton'])){
     
     $wasSuccessful = $transactions->reqCredits($sender, $receiver, $amount);
 
-    if(!isset($wasSuccessful)){
-        array_push($transactions->SuccessArray, Constants::$RequestSent);
-    }
-
 }
 ?>
 
@@ -54,6 +50,7 @@ if(isset($_POST['reqMoneyButton'])){
             </div>
         </form>
         <?php echo $transactions->getSuccess(Constants::$RequestSent); ?>
+        <?php echo $transactions->getError(Constants::$TranscErr); ?>
     </div>
 </div>
 <!--    Request Money Form End   -->
