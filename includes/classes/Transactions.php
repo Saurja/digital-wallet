@@ -305,7 +305,7 @@
             # Create and check a new connection to the database
             try {
                 $dbh = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
-            } catch (Exception $e) {
+            } catch (Exception $e) {+
                 die("Unable to connect: " . $e->getMessage());
             }
 
@@ -329,7 +329,7 @@
                 $dbh->rollBack();
                 array_push($this->errorArray, Constants::$TranscErr);
             }
-            $this->saveTransactionHistory($sen, $reciv, $amt);
+            
             # closing connection 
             $dbh = null;
         }
