@@ -56,16 +56,18 @@ body {
   cursor: pointer;
 }
 
-#hideLogin, #hideRegister {
+#hideLogin,
+#hideRegister {
   color: #0275d8;
 }
 
-#walletLoginForm, #walletRegisterForm {
+#walletLoginForm,
+#walletRegisterForm {
   display: none;
 }
 
 #loginContainer .errorMessage {
-  color: #cc0033;
+  color: #ff4444;
   display: block;
   font-weight: bold;
   margin-bottom: 0.5rem;
