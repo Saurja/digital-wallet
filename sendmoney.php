@@ -47,15 +47,15 @@ if (isset($_GET['send_task'])) {
             if(!isset($wasSuccess)) {
                 $transactions->deleteRowWithID($requestID);
             }
-
             
         }
         
     }
 }
 
-
 ?>
+
+<!--    Send Money Handler End  -->
 
 
 <!--    Website Code    -->
@@ -82,6 +82,7 @@ if (isset($_GET['send_task'])) {
         </form>
     </div>
 </div>
+<!--    Send Money Form End    -->
 
 <!--    Display Request table    -->
 <div class="row justify-content-center my-5">
@@ -124,5 +125,7 @@ if (isset($_GET['send_task'])) {
             </tbody>
         </table>
     </div>
-</div
+</div>
+<!--    Display Request table    -->
+
 <?php include("includes/footer.php"); ?>

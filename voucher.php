@@ -34,6 +34,7 @@ $transactions = new Transactions($con);
                     <button type="submit" name="createVoucherbutton" class="btn btn-primary mb-2">Create ID</button>
                 </div>
             </div>
+            <!--    Voucher Handler  -->
             <?php
         
                 if(isset($_POST['createVoucherbutton'])){
@@ -50,9 +51,11 @@ $transactions = new Transactions($con);
                 }
             
             ?>
+            <!--    Voucher Handler End  -->
             <?php echo $transactions->getError(Constants::$amountLessthanOne); ?>
             <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
         </form>
+        <!--    Form to Create Voucher End  -->
 
 
 
@@ -73,6 +76,7 @@ $transactions = new Transactions($con);
         </form>
         <?php echo $transactions->getError(Constants::$voucherCodeInvalid); ?>
         <?php echo $transactions->getSuccess(Constants::$VoucherRedeemed); ?>
+        <!--    Form to Redeem Voucher End  -->
     </div>
 </div>
 

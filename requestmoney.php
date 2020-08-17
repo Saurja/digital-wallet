@@ -56,5 +56,6 @@ if(isset($_POST['reqMoneyButton'])){
         <?php echo $transactions->getSuccess(Constants::$RequestSent); ?>
     </div>
 </div>
+<!--    Request Money Form End   -->
 
 <?php include("includes/footer.php"); ?>

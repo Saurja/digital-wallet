@@ -44,25 +44,28 @@ function getInputValue($name) {
 
     </head>
     <body>
+    <!--    Show/Hide Form Handler    -->
     <?php
 
-    if(isset($_POST['registerButton'])) {
-        echo '<script>
-                $(document).ready(function(){
-                    $("#walletLoginForm").hide();
-                    $("#walletRegisterForm").show();
-                });
-            </script>';
-    } else {
-        echo '<script>
-                $(document).ready(function(){
-                    $("#walletLoginForm").show();
-                    $("#walletRegisterForm").hide();
-                });
-            </script>';
-    }
+        if(isset($_POST['registerButton'])) {
+            echo '<script>
+                    $(document).ready(function(){
+                        $("#walletLoginForm").hide();
+                        $("#walletRegisterForm").show();
+                    });
+                </script>';
+        } else {
+            echo '<script>
+                    $(document).ready(function(){
+                        $("#walletLoginForm").show();
+                        $("#walletRegisterForm").hide();
+                    });
+                </script>';
+        }
 
     ?>
+    <!--    Show/Hide Form Handler End    -->
+        <!--    Website View    -->
         <div class="from-group loginFormHeading my-5">
             <h1>Digital Wallets</h1>
         </div>
@@ -134,6 +137,8 @@ function getInputValue($name) {
                 </div>
             </div>
             <!--    Register Form End   -->
-        /<div>
+        </div>
+        <!--    Website View End    -->
     </body>
 </html>
+<!--    Website Code End    -->

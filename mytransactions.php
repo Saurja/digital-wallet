@@ -4,10 +4,10 @@
 <?php
 
 include("includes/classes/Transactions.php"); 
-
 $transactions = new Transactions($con);
 
 ?>
+
 <div class="row justify-content-center mt-5 mx-2">
     <div class="col-10">
         <h3>Transaction History</h3>
