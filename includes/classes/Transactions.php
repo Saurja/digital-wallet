@@ -298,26 +298,36 @@
         }
 
         private function saveTransactionHistory($sen, $rec, $amt) {
-            $db = new mysqli("localhost", "root", "", "digital-wallet");
-            $date = date("Y-m-d h:i:sa");
 
+            $date = date("Y-m-d h:i:sa");
+            # Create and check a new connection to the database
             try {
-                # First of all, let's begin a transaction
-                $db->begin_transaction();
-                # A set of queries; if one fails, an exception should be thrown
-                $db->query("INSERT INTO `transaction_table`(`sender`, `reciever`, `trans_date`, `amount`) VALUES ('$sen','$rec','$date','$amt')");
-                # If we arrive here, it means that no exception was thrown
-                # i.e. no query has failed, and we can commit the transaction
-                $db->commit();
-            } catch (\Throwable $e) {
-                # An exception has been thrown
-                # We must rollback the transaction
-                $db->rollback();
-                throw $e; # but the error must be handled anyway
+                $dbh = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
+            } catch (Exception $e) {
+                die("Unable to connect: " . $e->getMessage());
             }
 
+            try {  
+                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                # begin a Transaction
+                $dbh->beginTransaction();
+
+                # A set of queries; if one fails, an exception should be thrown
+                $sth = $dbh->prepare("INSERT INTO `transaction_table`(`sender`, `reciever`, `trans_date`, `amount`) VALUES (?,?,?,?)");
+                $sth->execute(array($sen,$rec,$date,$amt));
+                # If we arrive here, it means that no exception was thrown
+                # i.e. no query has failed, and we can commit the transaction
+                array_push($this->SuccessArray, Constants::$RequestSent);
+                $dbh->commit();
+                
+            } catch (Exception $e) {
+                # An exception has been thrown; We must rollback the transaction
+                $dbh->rollBack();
+                array_push($this->errorArray, Constants::$TranscErr);
+            }
             # closing connection 
-            mysqli_close($db);
+            $dbh = null;
 
         }
 
