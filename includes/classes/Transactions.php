@@ -227,28 +227,36 @@
         private function sendCreditToUser($sen, $reciv, $amt) {
 
             
-            $db = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
-            $db->query("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE");
+            #$dbh = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
+            #$dbh->query("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE");
             
-            $db->beginTransaction();
+            try {
+                $dbh = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
+            } catch (Exception $e) {
+                die("Unable to connect: " . $e->getMessage());
+            }
 
-            # A set of queries; if one fails, an exception should be thrown
-            $sth = $db->prepare("UPDATE `user_details` SET `credits`=`credits`-? WHERE email_id=?");
-            if (!$sth->execute(array($amt,$sen))){
-                $db->rollback();
+            try {  
+                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                $dbh->beginTransaction();
+                $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`-? WHERE email_id=?");
+                $sth->execute(array($amt,$sen));
+                $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`+? WHERE email_id=?");
+                $sth->execute(array($amt,$reciv));
+
+                #$dbh->exec("UPDATE `user_details` SET `credits`=`credits`-$amt WHERE email_id=$sen");
+                #$dbh->exec("UPDATE `user_details` SET `credits`=`credits`+$amt WHERE email_id=$reciv");
+                array_push($this->SuccessArray, Constants::$CreditsSent);
+                $dbh->commit();
+                
+            } catch (Exception $e) {
+                $dbh->rollBack();
                 array_push($this->errorArray, Constants::$TranscErr);
-                die("#UPDATE failed\n");
             }
-            $sth = $db->prepare("UPDATE `user_details` SET `credits`=`credits`+? WHERE email_id =?");
-            if (!$sth->execute(array($amt,$reciv))){
-                $db->rollback();
-                array_push($this->errorArray, Constants::$TranscErr);
-                die("#UPDATE failed\n");
-            }
-            $db->commit();
             $this->saveTransactionHistory($sen, $reciv, $amt);
             # closing connection 
-            $db = null;
+            $dbh = null;
             
         }
 

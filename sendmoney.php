@@ -24,7 +24,7 @@ if(isset($_POST['sendMoneyButton'])){
     $wasSuccessful = $transactions->sendcredits($sender, $receiver, $amount);
 
     if(!isset($wasSuccessful)){
-        array_push($transactions->SuccessArray, Constants::$CreditsSent);
+       
     }
 
 
