@@ -225,16 +225,30 @@
         #   Function to send MySQL commands for sending Credits
 
         private function sendCreditToUser($sen, $reciv, $amt) {
-            $db = new mysqli("localhost", "root", "", "digital-wallet");
+
+            #$db = new mysqli("localhost", "root", "", "digital-wallet");
+            $db = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
+            $db->query("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE");
 
             try {
                 # First of all, let's begin a transaction
-                $db->begin_transaction();
+                $db->beginTransaction();
                 # A set of queries; if one fails, an exception should be thrown
-                $db->query("SELECT `credits` FROM `user_details` WHERE `user_ID`='$sen';");
-                $db->query("SELECT `credits` FROM `user_details` WHERE `user_ID`='$reciv';");
-                $db->query("UPDATE `user_details` SET `credits`=`credits`-$amt WHERE email_id ='$sen';");
-                $db->query("UPDATE `user_details` SET `credits`=`credits`+$amt WHERE email_id ='$reciv';");
+                #$db->query("UPDATE `user_details` SET `credits`=`credits`-$amt WHERE email_id ='$sen';");
+                #$db->query("UPDAT `user_details` SET `credits`=`credits`+$amt WHERE email_id ='$reciv';");
+
+                $sth = $db->prepare("UPDATE `user_details` SET `credits`=`credits`-? WHERE email_id=?");
+                if (!$sth->execute(array($amt,$sen))){
+                    $db->rollback();
+                    die("#UPDATE failed\n");
+                }
+
+                $sth = $db->prepare("UPDATE `user_details` SET `credits`=`credits`+? WHERE email_id =?");
+                if (!$sth->execute(array($amt,$reciv))){
+                    $db->rollback();
+                    die("#UPDATE failed\n");
+                }
+
                 # If we arrive here, it means that no exception was thrown
                 # i.e. no query has failed, and we can commit the transaction
                 $db->commit();
@@ -246,7 +260,8 @@
             }
             $this->saveTransactionHistory($sen, $reciv, $amt);
             # closing connection 
-            mysqli_close($db); 
+            #mysqli_close($db); 
+            $db = null;
         }
 
         #   Function to send MySQL commands for pushing req info to database
