@@ -225,11 +225,8 @@
         #   Function to send MySQL commands for sending Credits
 
         private function sendCreditToUser($sen, $reciv, $amt) {
-
             
-            #$dbh = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
-            #$dbh->query("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE");
-            
+            # Create and check a new connection to the database
             try {
                 $dbh = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
             } catch (Exception $e) {
@@ -239,18 +236,22 @@
             try {  
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+                # begin a Transaction
                 $dbh->beginTransaction();
+
+                # A set of queries; if one fails, an exception should be thrown
                 $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`-? WHERE email_id=?");
                 $sth->execute(array($amt,$sen));
                 $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`+? WHERE email_id=?");
                 $sth->execute(array($amt,$reciv));
 
-                #$dbh->exec("UPDATE `user_details` SET `credits`=`credits`-$amt WHERE email_id=$sen");
-                #$dbh->exec("UPDATE `user_details` SET `credits`=`credits`+$amt WHERE email_id=$reciv");
+                # If we arrive here, it means that no exception was thrown
                 array_push($this->SuccessArray, Constants::$CreditsSent);
+                # i.e. no query has failed, and we can commit the transaction
                 $dbh->commit();
                 
             } catch (Exception $e) {
+                # An exception has been thrown; We must rollback the transaction
                 $dbh->rollBack();
                 array_push($this->errorArray, Constants::$TranscErr);
             }
@@ -264,26 +265,36 @@
 
         private function receiveCreditFromUser($sen, $reciv, $amt) {
 
-            $db = new mysqli("localhost", "root", "", "digital-wallet");
             $date = date("Y-m-d h:i:sa");
-
+            # Create and check a new connection to the database
             try {
-                # First of all, let's begin a transaction
-                $db->begin_transaction();
+                $dbh = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
+            } catch (Exception $e) {
+                die("Unable to connect: " . $e->getMessage());
+            }
+
+            try {  
+                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                # begin a Transaction
+                $dbh->beginTransaction();
+
                 # A set of queries; if one fails, an exception should be thrown
-                $db->query("INSERT INTO `credit_requests`(`req_from`, `send_from`, `credits_requested`, `req_dateTime`) VALUES ('$sen','$reciv','$amt','$date');");
+                $sth = $dbh->prepare("INSERT INTO `credit_requests`(`req_from`, `send_from`, `credits_requested`, `req_dateTime`) VALUES (?,?,?,?)");
+                $sth->execute(array($sen,$reciv,$amt,$date));
                 # If we arrive here, it means that no exception was thrown
                 # i.e. no query has failed, and we can commit the transaction
-                $db->commit();
-            } catch (\Throwable $e) {
-                # An exception has been thrown
-                # We must rollback the transaction
-                $db->rollback();
-                throw $e; # but the error must be handled anyway
+                array_push($this->SuccessArray, Constants::$RequestSent);
+                $dbh->commit();
+                
+            } catch (Exception $e) {
+                # An exception has been thrown; We must rollback the transaction
+                $dbh->rollBack();
+                array_push($this->errorArray, Constants::$TranscErr);
             }
-            
+            $this->saveTransactionHistory($sen, $reciv, $amt);
             # closing connection 
-            mysqli_close($db); 
+            $dbh = null;
         }
 
         private function saveTransactionHistory($sen, $rec, $amt) {

@@ -26,7 +26,9 @@ class Constants {
     public static $amountLessthanOne = "Error: Amount must be greater than zero";
 
     public static $voucherCodeInvalid = "Error: The voucher code is Invalid";
+    
     public static $TranscErr = "Error in transaction : Please try again";
+    public static $CannotConnectToDB = "Error : Unable to connect to Database";
 
     #   Success Messages
 
