@@ -23,6 +23,10 @@ if(isset($_POST['reqMoneyButton'])){
     
     $wasSuccessful = $transactions->reqCredits($sender, $receiver, $amount);
 
+    if(!isset($wasSuccessful)){
+        array_push($transactions->SuccessArray, Constants::$RequestSent);
+    }
+
 }
 ?>
 
@@ -35,7 +39,7 @@ if(isset($_POST['reqMoneyButton'])){
         <form class="reqCreditMoney" action="" method="POST">
             <div class="form-group ">
                 <label for="reqFrom">Request From</label>
-                <input type="text" class="form-control" id="reqFrom" name="reqFrom" placeholder="Enter Name...">
+                <input type="text" class="form-control" id="reqFrom" name="reqFrom" placeholder="Enter Email...">
                 <?php echo $transactions->getError(Constants::$usernameInvalid); ?>
                 <?php echo $transactions->getError(Constants::$cantReqSelf); ?>
             </div>

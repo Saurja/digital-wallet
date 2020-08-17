@@ -38,7 +38,8 @@
             else { 
                     return $this->sendCreditToUser($sen, $reciv, $amt);
             }
-            $this->saveTransactionHistory($sen, $reciv, $amt);
+
+            return $this->saveTransactionHistory($sen, $reciv, $amt);
             
         }
 
@@ -117,7 +118,6 @@
                 return false;
             }
             else { 
-                array_push($this->SuccessArray, Constants::$RequestSent);
                 return $this->receiveCreditFromUser($sen, $reciv, $amt);
             }
             

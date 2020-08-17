@@ -31,7 +31,7 @@ class Constants {
 
     public static $RequestSent = "Success: The request has been sent to user!";
     public static $VoucherRedeemed = "Success: The voucher has been Redeemed";
-
+    public static $CreditsSent = "Success: Credits sent to user";
     
 }
 

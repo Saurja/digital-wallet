@@ -5,12 +5,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
-            <li class="nav-item">
+            <li class="nav-item navbar-text white-text">
             <?php
                 $user = $_SESSION["userLoggedIn"];
                 $accBal = mysqli_query($con, "SELECT `credits` FROM `user_details` where `email_id` = '$user'");
                 $resultarr = mysqli_fetch_assoc($accBal);
-                echo "<a class='nav-link' href='#'>Your Points: " . $resultarr['credits'] . "</a>";
+                #echo "<a class='nav-link' href='#'>Your Points: " . $resultarr['credits'] . "</a>";
+                echo "Your Points: ". $resultarr['credits'] . "";
             ?>
             </li>
         </ul>

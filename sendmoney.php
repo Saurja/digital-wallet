@@ -24,8 +24,10 @@ if(isset($_POST['sendMoneyButton'])){
     $wasSuccessful = $transactions->sendcredits($sender, $receiver, $amount);
 
     if(!isset($wasSuccessful)){
-        header("Location: sendmoney.php");
+        array_push($transactions->SuccessArray, Constants::$CreditsSent);
     }
+
+
 
 }
 
@@ -61,7 +63,7 @@ if (isset($_GET['send_task'])) {
         <form class="sendCreditMoney" action="sendMoney.php" method="POST">
             <div class="form-group ">
                 <label for="sendTo">Send To</label>
-                <input type="text" class="form-control" id="sendTo" name="sendTo" placeholder="Enter Name...">
+                <input type="text" class="form-control" id="sendTo" name="sendTo" placeholder="Enter Email...">
                 <?php echo $transactions->getError(Constants::$usernameInvalid); ?>
                 <?php echo $transactions->getError(Constants::$cantSendSelf); ?>
             </div>
@@ -75,6 +77,7 @@ if (isset($_GET['send_task'])) {
                 <button type="submit" name="sendMoneyButton" class="btn btn-primary">Send</button>
             </div>
         </form>
+        <?php echo $transactions->getSuccess(Constants::$CreditsSent); ?>
     </div>
 </div>
 <!--    Send Money Form End    -->
