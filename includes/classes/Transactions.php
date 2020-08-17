@@ -43,37 +43,12 @@
             
         }
 
-        #   Function to delete column using Row ID
-
-        public function deleteRowWithID($Id) {
-
-            $db = new mysqli("localhost", "root", "", "digital-wallet");
-
-            try {
-                # First of all, let's begin a transaction
-                $db->begin_transaction();
-                # A set of queries; if one fails, an exception should be thrown
-                $db->query("DELETE FROM `credit_requests` WHERE  `req_id` = '$Id'");
-
-                # If we arrive here, it means that no exception was thrown
-                # i.e. no query has failed, and we can commit the transaction
-                $db->commit();
-            } catch (\Throwable $e) {
-                # An exception has been thrown
-                # We must rollback the transaction
-                $db->rollback();
-                throw $e; # but the error must be handled anyway
-            }
-            
-            # closing connection 
-            mysqli_close($db); 
-        }
-
         #   Funtion to send Credits to an intended user account
 
         public function sendRequestedcredits($sen, $reciv, $amt) {
 
             $query = mysqli_query($this->con, "SELECT * FROM user_details WHERE email_id='$reciv'");
+            
             $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
             $resultarr = mysqli_fetch_assoc($creditbalance);
             
@@ -303,6 +278,7 @@
                 # A set of queries; if one fails, an exception should be thrown
                 $sth = $dbh->prepare("INSERT INTO `credit_requests`(`req_from`, `send_from`, `credits_requested`, `req_dateTime`) VALUES (?,?,?,?)");
                 $sth->execute(array($sen,$reciv,$amt,$date));
+                
                 # If we arrive here, it means that no exception was thrown
                 # i.e. no query has failed, and we can commit the transaction
                 array_push($this->SuccessArray, Constants::$RequestSent);
