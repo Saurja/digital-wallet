@@ -43,9 +43,6 @@ $transactions = new Transactions($con);
                     $wasSuccessful = $transactions->generateVoucherID($sender, $amount);
                     echo $wasSuccessful;
                 
-                    if(!isset($wasSuccessful)){
-                        header("Location: voucher.php");
-                    }
                 }
             
             ?>
