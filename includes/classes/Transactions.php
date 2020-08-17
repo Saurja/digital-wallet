@@ -128,7 +128,7 @@
                     $dbh->beginTransaction();
 
                     # A set of queries; if one fails, an exception should be thrown
-                    $sth = $dbh->prepare("INSERT INTO `voucher_table`(`sender`, `amount`, `voucher_code`) VALUES (?,?,?)");
+                    $sth = $dbh->prepare("INSERT INTO `voucher_table`(`sender_id`, `voucher_amount`, `voucher_code`) VALUES (?,?,?)");
                     $sth->execute(array($sen,$amt,$VoucherID));
                     $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`-? WHERE `email_id` =?");
                     $sth->execute(array($amt, $sen));
@@ -158,9 +158,9 @@
             $checkVoucherCodeQuery = mysqli_query($this->con, "SELECT `voucher_id` FROM `voucher_table` WHERE `voucher_code`='$vId'");
 
             #   Fetches amount that is need to be added if redeemed
-            $amt = mysqli_query($this->con, "SELECT `amount` FROM `voucher_table` WHERE `voucher_code`='$vId'");
+            $amt = mysqli_query($this->con, "SELECT `voucher_amount` FROM `voucher_table` WHERE `voucher_code`='$vId'");
             $amt = mysqli_fetch_array($amt);
-            $amt = isset($amt['amount']) ? ($amt['amount']) : 0;
+            $amt = isset($amt['voucher_amount']) ? ($amt['voucher_amount']) : 0;
 
             if (mysqli_num_rows($checkVoucherCodeQuery) == 0) {
                 array_push($this->errorArray, Constants::$voucherCodeInvalid);
@@ -351,7 +351,7 @@
                 $dbh->beginTransaction();
 
                 # A set of queries; if one fails, an exception should be thrown
-                $sth = $dbh->prepare("INSERT INTO `transaction_table`(`sender`, `reciever`, `trans_date`, `amount`) VALUES (?,?,?,?)");
+                $sth = $dbh->prepare("INSERT INTO `transaction_table`(`sender_id`, `receiver_id`, `transaction_date`, `transaction_amount`) VALUES (?,?,?,?)");
                 $sth->execute(array($sen,$rec,$date,$amt));
                 # If we arrive here, it means that no exception was thrown
                 # i.e. no query has failed, and we can commit the transaction

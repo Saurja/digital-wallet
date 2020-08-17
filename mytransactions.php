@@ -23,27 +23,27 @@ $transactions = new Transactions($con);
             <tbody>
                 <?php
                 $sen = $_SESSION['userLoggedIn'];
-                $albumQuery = mysqli_query($con, "SELECT * FROM `transaction_table` WHERE `sender`='$sen' OR `reciever`='$sen'");
+                $albumQuery = mysqli_query($con, "SELECT * FROM `transaction_table` WHERE `sender_id`='$sen' OR `receiver_id`='$sen'");
                 while($row = mysqli_fetch_array($albumQuery)) {
                 
-                if ($row['sender'] == $sen) {
+                if ($row['sender_id'] == $sen) {
                     # code...
                     
                     echo "<tr>
-                        <th scope='row'>" . $row['trans_id'] . "</th>
-                        <td>To " . $row['reciever'] . "</td>
-                        <td>" . $row['amount'] . " Points Sent</td>
-                        <td>" . $row['trans_date'] . "</td>
+                        <th scope='row'>" . $row['transaction_id'] . "</th>
+                        <td>To " . $row['receiver_id'] . "</td>
+                        <td>" . $row['transaction_date'] . " Points Sent</td>
+                        <td>" . $row['transaction_amount'] . "</td>
                     </tr>";
                 
 
-                }elseif ($row['reciever'] == $sen) {
+                }elseif ($row['receiver_id'] == $sen) {
                     # code....
                     echo "<tr>
-                        <th scope='row'>" . $row['trans_id'] . "</th>
-                        <td>From " . $row['sender'] . "</td>
-                        <td>" . $row['amount'] . " Points Received</td>
-                        <td>" . $row['trans_date'] . "</td>
+                        <th scope='row'>" . $row['transaction_id'] . "</th>
+                        <td>From " . $row['sender_id'] . "</td>
+                        <td>" . $row['transaction_date'] . " Points Received</td>
+                        <td>" . $row['transaction_amount'] . "</td>
                     </tr>";
 
                 }
