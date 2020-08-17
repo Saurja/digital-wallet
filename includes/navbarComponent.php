@@ -11,12 +11,16 @@
                 $accBal = mysqli_query($con, "SELECT `credits` FROM `user_details` where `email_id` = '$user'");
                 $resultarr = mysqli_fetch_assoc($accBal);
                 echo "<a class='nav-link' href='#'>Your Points: " . $resultarr['credits'] . "</a>";
-                
             ?>
             </li>
         </ul>
         <span class="navbar-text white-text mr-3">
-            Hello, <?php echo $_SESSION["userLoggedIn"]; ?>
+            <?php
+                $user = $_SESSION["userLoggedIn"];
+                $accBal = mysqli_query($con, "SELECT `user_name` FROM `user_details` where `email_id` = '$user'");
+                $resultarr = mysqli_fetch_assoc($accBal);
+                echo "Hello, ". $resultarr['user_name'] . "";
+            ?>
         </span>
         <a href="logout.php"><button type="button" class="btn btn-danger">Logout</button></a> 
     </div>
