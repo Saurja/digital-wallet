@@ -168,12 +168,8 @@
             } else {
 
                 # Create and check a new connection to the database
-                try {
-                    $dbh = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
-                } catch (Exception $e) {
-                    die("Unable to connect: " . $e->getMessage());
-                }
-
+                include("includes/transactionConfig.php");
+                
                 try {  
                     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
@@ -263,11 +259,7 @@
         private function sendCreditToUser($sen, $reciv, $amt) {
             
             # Create and check a new connection to the database
-            try {
-                $dbh = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
-            } catch (Exception $e) {
-                die("Unable to connect: " . $e->getMessage());
-            }
+            include("includes/transactionConfig.php");
 
             try {  
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -303,11 +295,7 @@
 
             $date = date("Y-m-d h:i:sa");
             # Create and check a new connection to the database
-            try {
-                $dbh = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
-            } catch (Exception $e) {+
-                die("Unable to connect: " . $e->getMessage());
-            }
+            include("includes/transactionConfig.php");
 
             try {  
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -338,11 +326,7 @@
 
             $date = date("Y-m-d h:i:sa");
             # Create and check a new connection to the database
-            try {
-                $dbh = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
-            } catch (Exception $e) {
-                die("Unable to connect: " . $e->getMessage());
-            }
+            include("includes/transactionConfig.php");
 
             try {  
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
