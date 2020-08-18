@@ -294,6 +294,8 @@
             $date = date("Y-m-d h:i:sa");
             # Create and check a new connection to the database
             include("includes/transactionConfig.php");
+            $sen = $this->getUserId($sen);
+            $reciv = $this->getUserId($reciv);
 
             try {  
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
