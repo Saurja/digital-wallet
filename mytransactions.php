@@ -23,26 +23,33 @@ $transactions = new Transactions($con);
             <tbody>
                 <?php
                 $sen = $_SESSION['userLoggedIn'];
-                $sen = $transactions->getUserId($sen);
-                $albumQuery = mysqli_query($con, "SELECT * FROM `transaction_table` WHERE `sender_id`='$sen' OR `receiver_id`='$sen'");
+                #$sen = $transactions->getUserId($sen);
+                #$albumQuery = mysqli_query($con, "SELECT * FROM `transaction_table` WHERE `sender_id`='$sen' OR `receiver_id`='$sen'");
+                $albumQuery = mysqli_query($con, "SELECT `transaction_id`, user1.`email_id` AS `sender` , user2.`email_id` AS `receiver`, `transaction_date`, `transaction_amount` 
+                FROM `transaction_table` t 
+                JOIN `user_details` user1 ON t.`sender_id` = user1.`user_ID` 
+                JOIN `user_details` user2 ON t.`receiver_id` = user2.`user_ID`
+                WHERE user1.`email_id` = '$sen' or user2.`email_id` = '$sen'");
+                
+
                 while($row = mysqli_fetch_array($albumQuery)) {
                 
-                if ($row['sender_id'] == $sen) {
+                if ($row['sender'] == $sen) {
                     # code...
                     
                     echo "<tr>
                         <th scope='row'>" . $row['transaction_id'] . "</th>
-                        <td>To " . $row['receiver_id'] . "</td>
+                        <td>To " . $row['receiver'] . "</td>
                         <td>" . $row['transaction_date'] . " Points Sent</td>
                         <td>" . $row['transaction_amount'] . "</td>
                     </tr>";
                 
 
-                }elseif ($row['receiver_id'] == $sen) {
+                }elseif ($row['receiver'] == $sen) {
                     # code....
                     echo "<tr>
                         <th scope='row'>" . $row['transaction_id'] . "</th>
-                        <td>From " . $row['sender_id'] . "</td>
+                        <td>From " . $row['sender'] . "</td>
                         <td>" . $row['transaction_date'] . " Points Received</td>
                         <td>" . $row['transaction_amount'] . "</td>
                     </tr>";
