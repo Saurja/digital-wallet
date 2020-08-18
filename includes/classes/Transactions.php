@@ -101,14 +101,17 @@
         #   Function to generate voucher ID and store it in a database
 
         public function generateVoucherID($sen, $amt) {
+            
             $VoucherID = $this->generateRandomString(8);
 
             $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
             $resultarr = mysqli_fetch_assoc($creditbalance);
-
+            
             # Create and check a new connection to the database
 
             include("includes/transactionConfig.php");
+
+            $sen = $this->getUserId($sen);
 
             if($amt < 1) { 
                 array_push($this->errorArray, Constants::$amountLessthanOne);
@@ -127,12 +130,11 @@
                     # A set of queries; if one fails, an exception should be thrown
                     $sth = $dbh->prepare("INSERT INTO `voucher_table`(`sender_id`, `voucher_amount`, `voucher_code`) VALUES (?,?,?)");
                     $sth->execute(array($sen,$amt,$VoucherID));
-                    $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`-? WHERE `email_id` =?");
+                    $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`-? WHERE `user_ID` =?");
                     $sth->execute(array($amt, $sen));
                     # If we arrive here, it means that no exception was thrown
                     # i.e. no query has failed, and we can commit the transaction
                     $dbh->commit();
-                    $this->saveTransactionHistory($sen,"Voucher", $amt);
                 
                 } catch (Exception $e) {
                     # An exception has been thrown; We must rollback the transaction
@@ -151,7 +153,7 @@
 
         public function redeemVoucherID($sen, $vId) {
 
-            $date = date("Y-m-d h:i:sa");
+            $sen = $this->getUserId($sen);
 
             $checkVoucherCodeQuery = mysqli_query($this->con, "SELECT `voucher_id` FROM `voucher_table` WHERE `voucher_code`='$vId'");
 
@@ -175,7 +177,7 @@
                     $dbh->beginTransaction();
     
                     # A set of queries; if one fails, an exception should be thrown
-                    $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`+? WHERE `email_id` =?");
+                    $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`+? WHERE `user_ID` =?");
                     $sth->execute(array($amt,$sen));
                     $sth = $dbh->prepare("DELETE FROM `voucher_table` WHERE  `voucher_code` = ?");
                     $sth->execute(array($vId));
@@ -184,7 +186,6 @@
                     array_push($this->SuccessArray, Constants::$RequestSent);
                     $dbh->commit();
                     array_push($this->SuccessArray, Constants::$VoucherRedeemed);
-                    $this->saveTransactionHistory("Voucher", $sen, $amt);
 
                 } catch (Exception $e) {
                     # An exception has been thrown; We must rollback the transaction
