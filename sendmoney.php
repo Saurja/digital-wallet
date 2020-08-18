@@ -32,7 +32,12 @@ if (isset($_GET['send_task'])) {
     $sender = $_SESSION['userLoggedIn'];
     
     //  Select all tasks if page is visited or refreshed
-    $reqCreditQuery = mysqli_query($con, "SELECT * FROM credit_requests WHERE send_from='$sender'");
+    $reqCreditQuery = mysqli_query($con, "SELECT `req_id`, user1.`email_id` AS `req_from`, user2.`email_id` AS `send_from`, `credits_requested`, `req_dateTime` 
+    FROM `credit_requests` t JOIN `user_details` user1
+    ON t.`req_from` = user1.`user_ID`
+    JOIN `user_details` user2 
+    ON t.`send_from` = user2.`user_ID`
+    WHERE user2.`email_id`='$sender'");
 
     while($row = mysqli_fetch_array($reqCreditQuery)) {
 
