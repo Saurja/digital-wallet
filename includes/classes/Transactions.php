@@ -166,7 +166,6 @@
 
             if (mysqli_num_rows($checkVoucherCodeQuery) == 0) {
                 array_push($this->errorArray, Constants::$voucherCodeInvalid);
-                return;
             } else {
 
                 # Create and check a new connection to the database
