@@ -107,11 +107,8 @@
             $resultarr = mysqli_fetch_assoc($creditbalance);
 
             # Create and check a new connection to the database
-            try {
-                $dbh = new PDO('mysql:host=localhost;dbname=digital-wallet','root','');
-            } catch (Exception $e) {
-                die("Unable to connect: " . $e->getMessage());
-            }
+            
+            include("includes/transactionConfig.php");
 
             if($amt < 1) { 
                 array_push($this->errorArray, Constants::$amountLessthanOne);
@@ -155,6 +152,7 @@
         public function redeemVoucherID($sen, $vId) {
 
             $date = date("Y-m-d h:i:sa");
+
             $checkVoucherCodeQuery = mysqli_query($this->con, "SELECT `voucher_id` FROM `voucher_table` WHERE `voucher_code`='$vId'");
 
             #   Fetches amount that is need to be added if redeemed
@@ -169,7 +167,7 @@
 
                 # Create and check a new connection to the database
                 include("includes/transactionConfig.php");
-                
+
                 try {  
                     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
