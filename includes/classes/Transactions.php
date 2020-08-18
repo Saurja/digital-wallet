@@ -107,7 +107,7 @@
             $resultarr = mysqli_fetch_assoc($creditbalance);
 
             # Create and check a new connection to the database
-            
+
             include("includes/transactionConfig.php");
 
             if($amt < 1) { 
@@ -325,7 +325,9 @@
             $date = date("Y-m-d h:i:sa");
             # Create and check a new connection to the database
             include("includes/transactionConfig.php");
-
+            $sen = $this->getUserId($sen);
+            $rec = $this->getUserId($rec);
+            
             try {  
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -347,6 +349,37 @@
             }
             # closing connection 
             $dbh = null;
+
+        }
+
+        private function getUserId($un) {
+            include("includes/transactionConfig.php");
+            
+            try {  
+                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                # begin a Transaction
+                $dbh->beginTransaction();
+
+                # A set of queries; if one fails, an exception should be thrown
+                $sth = $dbh->prepare("SELECT `user_ID` FROM `user_details` WHERE email_id=?");
+                $sth->execute(array($un));
+                $UserID = $sth -> fetch();
+                $UserID = $UserID["user_ID"];
+                # If we arrive here, it means that no exception was thrown
+                # i.e. no query has failed, and we can commit the transaction
+                array_push($this->SuccessArray, Constants::$RequestSent);
+                $dbh->commit();
+                
+            } catch (Exception $e) {
+                # An exception has been thrown; We must rollback the transaction
+                $dbh->rollBack();
+                array_push($this->errorArray, Constants::$TranscErr);
+            }
+            # closing connection 
+            $dbh = null;
+
+            return $UserID;
 
         }
 
