@@ -23,6 +23,7 @@ $transactions = new Transactions($con);
             <tbody>
                 <?php
                 $sen = $_SESSION['userLoggedIn'];
+                $sen = $transactions->getUserId($sen);
                 $albumQuery = mysqli_query($con, "SELECT * FROM `transaction_table` WHERE `sender_id`='$sen' OR `receiver_id`='$sen'");
                 while($row = mysqli_fetch_array($albumQuery)) {
                 
