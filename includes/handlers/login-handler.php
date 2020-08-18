@@ -4,7 +4,12 @@
         $email = $_POST['loginEmail'];
    
     //login function
+
+    $email = sanatizeFormString($email);
+    
     $loginSuccessful = $account->login($email);
+
+    $email = sanatizeFormString($email);
 
     if($loginSuccessful) {
         $_SESSION['userLoggedIn'] = $email;
