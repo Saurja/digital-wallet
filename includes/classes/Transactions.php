@@ -355,7 +355,7 @@
 
         }
 
-        private function getUserId($un) {
+        public function getUserId($un) {
             include("includes/transactionConfig.php");
             
             try {  

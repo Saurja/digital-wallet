@@ -30,6 +30,7 @@ if (isset($_GET['send_task'])) {
     $requestID = $_GET['send_task'];
     //  Get the email of user logged in
     $sender = $_SESSION['userLoggedIn'];
+
     //  Select all tasks if page is visited or refreshed
     $reqCreditQuery = mysqli_query($con, "SELECT * FROM credit_requests WHERE send_from='$sender'");
 
@@ -43,7 +44,6 @@ if (isset($_GET['send_task'])) {
                 $transactions->deleteRowWithID($requestID);
             }
         }
-        
         
     }
 }
@@ -102,21 +102,22 @@ if (isset($_GET['send_task'])) {
             <?php
                 //  Get the email of user logged in
                 $sender = $_SESSION['userLoggedIn'];
+                $sender = $transactions->getUserId($sender);
                 //  Select all tasks if page is visited or refreshed
                 $reqCreditQuery = mysqli_query($con, "SELECT * FROM credit_requests WHERE send_from='$sender'");
                 while($row = mysqli_fetch_array($reqCreditQuery)) {
-            ?>        
-                    <tr>
-                        <th scope='row'><?php echo $row['req_id']; ?></th>
-                        <td>From <?php echo  $row['req_from']; ?></td>
-                        <td><?php echo $row['credits_requested']; ?> Points Requested</td>
-                        <td><?php echo $row['req_dateTime']; ?></td>
-                        <td>
-                            <a href="sendMoney.php?send_task=<?php echo $row['req_id'] ?>">
-                                <button type='submit' class='btn btn-dark'>Pay Now</button>
-                            </a>
-                        </td>
-                    </tr>
+            ?>
+                <tr>
+                    <th scope='row'><?php echo $row['req_id']; ?></th>
+                    <td>From <?php echo  $row['req_from']; ?></td>
+                    <td><?php echo $row['credits_requested']; ?> Points Requested</td>
+                    <td><?php echo $row['req_dateTime']; ?></td>
+                    <td>
+                        <a href="sendMoney.php?send_task=<?php echo $row['req_id'] ?>">
+                            <button type='submit' class='btn btn-dark'>Pay Now</button>
+                        </a>
+                    </td>
+                </tr>
             <?php
                     }
             ?>
