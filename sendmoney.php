@@ -73,7 +73,7 @@ if (isset($_GET['send_task'])) {
                 <label for="sendAmount">Amount</label>
                 <input type="number" class="form-control" id="sendAmount" name="sendAmount" placeholder="Enter Amount...">
                 <?php echo $transactions->getError(Constants::$InsufficientBalance); ?>
-                <?php echo $transactions->getError(Constants::$amountLessthanZero); ?>
+                <?php echo $transactions->getError(Constants::$amountLessthanOne); ?>
             </div>
             <div class="form-group">
                 <button type="submit" name="sendMoneyButton" class="btn btn-primary">Send</button>
@@ -91,6 +91,7 @@ if (isset($_GET['send_task'])) {
     <h3>Transfer Requests</h3>
     <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
         <table class="table table-bordered mt-2">
+        <caption>The following users have requested credits. Press "Pay Now" to send.</caption>
             <thead>
                 <tr>
                     <th scope="col">Req ID</th>
@@ -106,7 +107,6 @@ if (isset($_GET['send_task'])) {
             <?php
                 //  Get the email of user logged in
                 $sender = $_SESSION['userLoggedIn'];
-                #$sender = $transactions->getUserId($sender);
                 //  Select all tasks if page is visited or refreshed
                 $reqCreditQuery = mysqli_query($con, "SELECT `req_id`, user1.`email_id` AS `req_from`, user2.`email_id` AS `send_from`, `credits_requested`, `req_dateTime` 
                 FROM `credit_requests` t JOIN `user_details` user1

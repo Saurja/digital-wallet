@@ -12,6 +12,7 @@ $transactions = new Transactions($con);
     <div class="col-10">
         <h3>Transaction History</h3>
         <table class="table table-bordered mt-4">
+        <caption>These are the transactions that you have made in the past.</caption>
             <thead>
                 <tr>
                     <th scope="col">Trans_id</th>
@@ -23,8 +24,6 @@ $transactions = new Transactions($con);
             <tbody>
                 <?php
                 $sen = $_SESSION['userLoggedIn'];
-                #$sen = $transactions->getUserId($sen);
-                #$albumQuery = mysqli_query($con, "SELECT * FROM `transaction_table` WHERE `sender_id`='$sen' OR `receiver_id`='$sen'");
                 $albumQuery = mysqli_query($con, "SELECT `transaction_id`, user1.`email_id` AS `sender` , user2.`email_id` AS `receiver`, `transaction_date`, `transaction_amount` 
                 FROM `transaction_table` t 
                 JOIN `user_details` user1 ON t.`sender_id` = user1.`user_ID` 

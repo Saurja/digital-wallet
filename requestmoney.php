@@ -11,8 +11,7 @@ $transactions = new Transactions($con);
 function sanitizeSender($inputText) {
     $inputText = strip_tags($inputText);
     $inputText = str_replace(" ", "", $inputText);
-    $inputText = ucfirst(strtolower($inputText));
-    return $inputText;
+    return ucfirst(strtolower($inputText));
 }
 
 if(isset($_POST['reqMoneyButton'])){

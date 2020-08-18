@@ -7,7 +7,6 @@ include("includes/config.php");
 #   PHP Classes Links
 include("includes/classes/Account.php"); 
 include("includes/classes/Constants.php"); 
-#include("includes/classes/Transactions.php"); 
 
 
 $account = new Account($con);
@@ -15,7 +14,6 @@ $account = new Account($con);
 #   PHP Handlers Links
 include("includes/handlers/register-handler.php");
 include("includes/handlers/login-handler.php"); 
-#include("includes/handlers/logout-handler.php"); 
 
 function getInputValue($name) {
     if(isset($_POST[$name])) {

@@ -1,9 +1,14 @@
 <?php
 
+    define("CONNECT_DB", "includes/transactionConfig.php");
+
     class Transactions{
 
         private $con;
         private $errorArray;
+
+        
+        
 
         public function __construct($con) {
             $this->con = $con;
@@ -19,8 +24,8 @@
             $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
             $resultarr = mysqli_fetch_assoc($creditbalance);
             
-            if($amt < 0) { 
-                array_push($this->errorArray, Constants::$amountLessthanZero);
+            if($amt < 1) { 
+                array_push($this->errorArray, Constants::$amountLessthanOne);
                 return false;
             }
             else if($resultarr['credits'] < $amt) { 
@@ -28,19 +33,16 @@
                 return false;
             }
             else if(mysqli_num_rows($query) != 1) {
-                    array_push($this->errorArray, Constants::$usernameInvalid);
-                    return false;
+                array_push($this->errorArray, Constants::$usernameInvalid);
+                return false;
             }
             else if($sen == $reciv) {
                 array_push($this->errorArray, Constants::$cantSendSelf);
                 return false;
             }
             else { 
-                    return $this->sendCreditToUser($sen, $reciv, $amt);
+                return $this->sendCreditToUser($sen, $reciv, $amt);
             }
-
-            return $this->saveTransactionHistory($sen, $reciv, $amt);
-            
         }
 
         #   Funtion to send Credits to an intended user account
@@ -109,8 +111,8 @@
             
             # Create and check a new connection to the database
 
-            include("includes/transactionConfig.php");
-
+            include(CONNECT_DB);
+            
             $sen = $this->getUserId($sen);
 
             if($amt < 1) { 
@@ -168,7 +170,7 @@
             } else {
 
                 # Create and check a new connection to the database
-                include("includes/transactionConfig.php");
+                include(CONNECT_DB);
 
                 try {  
                     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -202,26 +204,31 @@
 
         public function deleteRowWithID($Id) {
 
-            $db = new mysqli("localhost", "root", "", "digital-wallet");
+            include(CONNECT_DB);
 
-            try {
-                # First of all, let's begin a transaction
-                $db->begin_transaction();
+            try {  
+                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                # begin a Transaction
+                $dbh->beginTransaction();
+
                 # A set of queries; if one fails, an exception should be thrown
-                $db->query("DELETE FROM `credit_requests` WHERE  `req_id` = '$Id'");
+
+                $sth = $dbh->prepare("DELETE FROM `credit_requests` WHERE  `req_id` = ?");
+                $sth->execute(array($Id));
 
                 # If we arrive here, it means that no exception was thrown
                 # i.e. no query has failed, and we can commit the transaction
-                $db->commit();
-            } catch (\Throwable $e) {
-                # An exception has been thrown
-                # We must rollback the transaction
-                $db->rollback();
-                throw $e; # but the error must be handled anyway
+                array_push($this->SuccessArray, Constants::$RequestSent);
+                $dbh->commit();
+                
+            } catch (Exception $e) {
+                # An exception has been thrown; We must rollback the transaction
+                $dbh->rollBack();
+                array_push($this->errorArray, Constants::$TranscErr);
             }
-            
             # closing connection 
-            mysqli_close($db); 
+            $dbh = null;
         }
 
         #   Getting the error array ready
@@ -258,7 +265,7 @@
         private function sendCreditToUser($sen, $reciv, $amt) {
             
             # Create and check a new connection to the database
-            include("includes/transactionConfig.php");
+            include(CONNECT_DB);
 
             try {  
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -294,7 +301,7 @@
 
             $date = date("Y-m-d h:i:sa");
             # Create and check a new connection to the database
-            include("includes/transactionConfig.php");
+            include(CONNECT_DB);
             $sen = $this->getUserId($sen);
             $reciv = $this->getUserId($reciv);
 
@@ -327,7 +334,7 @@
 
             $date = date("Y-m-d h:i:sa");
             # Create and check a new connection to the database
-            include("includes/transactionConfig.php");
+            include(CONNECT_DB);
             $sen = $this->getUserId($sen);
             $rec = $this->getUserId($rec);
             
@@ -356,7 +363,7 @@
         }
 
         public function getUserId($un) {
-            include("includes/transactionConfig.php");
+            include(CONNECT_DB);
             
             try {  
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

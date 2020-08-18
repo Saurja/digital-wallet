@@ -3,8 +3,7 @@
     function sanatizeFormUsername($inputText) {
 
         $inputText = strip_tags($inputText);
-        $inputText = str_replace(" ", "", $inputText);
-        return $inputText;
+        return str_replace(" ", "", $inputText);
 
     }
 
@@ -12,15 +11,13 @@
 
         $inputText = strip_tags($inputText);
         $inputText = str_replace(" ", "", $inputText);
-        $inputText = ucfirst(strtolower($inputText));
-        return $inputText;
+        return ucfirst(strtolower($inputText));
 
     }
 
     function sanatizeFormPassword($inputText) {
 
-        $inputText = str_replace(" ", "", $inputText);
-        return $inputText;
+        return str_replace(" ", "", $inputText);
 
     }
 
@@ -29,8 +26,7 @@
         // Allow +, - and . in phone number
         $inputText = filter_var($inputText, FILTER_SANITIZE_NUMBER_INT);
         // Remove "-" from number
-        $inputText = str_replace("-", "", $inputText);
-        return $inputText;
+        return str_replace("-", "", $inputText);
 
     }
 
