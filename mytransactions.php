@@ -28,7 +28,8 @@ $transactions = new Transactions($con);
                 FROM `transaction_table` t 
                 JOIN `user_details` user1 ON t.`sender_id` = user1.`user_ID` 
                 JOIN `user_details` user2 ON t.`receiver_id` = user2.`user_ID`
-                WHERE user1.`email_id` = '$sen' or user2.`email_id` = '$sen'");
+                WHERE user1.`email_id` = '$sen' or user2.`email_id` = '$sen' 
+                ORDER BY `transaction_id` DESC");
                 
 
                 while($row = mysqli_fetch_array($albumQuery)) {

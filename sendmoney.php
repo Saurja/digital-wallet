@@ -113,7 +113,8 @@ if (isset($_GET['send_task'])) {
                 ON t.`req_from` = user1.`user_ID`
                 JOIN `user_details` user2 
                 ON t.`send_from` = user2.`user_ID`
-                WHERE user2.`email_id`='$sender'");
+                WHERE user2.`email_id`='$sender'
+                ORDER BY `req_id` DESC");
 
                 while($row = mysqli_fetch_array($reqCreditQuery)) {
             ?>
