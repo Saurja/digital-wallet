@@ -26,19 +26,15 @@
             
             if($amt < 1) { 
                 array_push($this->errorArray, Constants::$amountLessthanOne);
-                return false;
             }
             else if($resultarr['credits'] < $amt) { 
                 array_push($this->errorArray, Constants::$InsufficientBalance);
-                return false;
             }
             else if(mysqli_num_rows($query) != 1) {
                 array_push($this->errorArray, Constants::$usernameInvalid);
-                return false;
             }
             else if($sen == $reciv) {
                 array_push($this->errorArray, Constants::$cantSendSelf);
-                return false;
             }
             else { 
                 return $this->sendCreditToUser($sen, $reciv, $amt);
@@ -56,19 +52,15 @@
             
             if($amt < 1) { 
                 array_push($this->errorArray, Constants::$amountLessthanOne);
-                return false;
             }
             else if($resultarr['credits'] < $amt) { 
                 array_push($this->errorArray, Constants::$InsufficientBalanceForReq);
-                return false;
             }
             else if(mysqli_num_rows($query) != 1) {
                 array_push($this->errorArray, Constants::$usernameInvalid);
-                return false;
             }
             else if($sen == $reciv) {
                 array_push($this->errorArray, Constants::$cantSendSelf);
-                return false;
             }
             else { 
                 return $this->sendCreditToUser($sen, $reciv, $amt);
@@ -84,15 +76,12 @@
             
             if($amt < 1) { 
                 array_push($this->errorArray, Constants::$amountLessthanOne);
-                return false;
             }
             else if(mysqli_num_rows($query) != 1) {
                 array_push($this->errorArray, Constants::$usernameInvalid);
-                return false;
             }
             else if($sen == $reciv) {
                 array_push($this->errorArray, Constants::$cantReqSelf);
-                return false;
             }
             else { 
                 return $this->receiveCreditFromUser($sen, $reciv, $amt);
