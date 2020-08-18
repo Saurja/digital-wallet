@@ -47,9 +47,8 @@
 
             $init_cridit = 100;
             $date = date("Y-m-d h:i:sa");
-            $result = mysqli_query($this->con, "INSERT INTO `user_details` (`user_name`, `contact_no`, `email_id`, `credits`, `last_activity` ,`counter`) VALUES ('$un', '$mb', '$em', '$init_cridit','$date' ,'1')");
+            return  mysqli_query($this->con, "INSERT INTO `user_details` (`user_name`, `contact_no`, `email_id`, `credits`, `last_activity` ,`counter`) VALUES ('$un', '$mb', '$em', '$init_cridit','$date' ,'1')");
         
-            return $result;
         }
 
         private function validateUsername($un) {
@@ -62,7 +61,6 @@
             $checkUserNameQuery = mysqli_query($this->con, "SELECT `user_name` FROM `user_details` WHERE `user_name`='$un'");
             if (mysqli_num_rows($checkUserNameQuery) != 0) {
                 array_push($this->errorArray, Constants::$usernameTaken);
-                return;
             }
             
         }
@@ -81,7 +79,6 @@
             $checkEmailQuery = mysqli_query($this->con, "SELECT `email_id` FROM `user_details` WHERE `email_id`='$em'");
             if (mysqli_num_rows($checkEmailQuery) != 0) {
                 array_push($this->errorArray, Constants::$emailTaken);
-                return;
             }
         }
 
@@ -90,12 +87,11 @@
             $checkMobileQuery = mysqli_query($this->con, "SELECT `contact_no` FROM `user_details` WHERE `contact_no`='$mb'");
             if (mysqli_num_rows($checkMobileQuery) != 0) {
                 array_push($this->errorArray, Constants::$MobileTaken);
-                return;
+                return false;
             }
 
             if (strlen($mb) < 10 || strlen($mb) > 14) {
                 array_push($this->errorArray, Constants::$MobileNotValid);
-                return;
             } else {
             return true;
             }
