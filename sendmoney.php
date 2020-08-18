@@ -30,7 +30,7 @@ if (isset($_GET['send_task'])) {
     $requestID = $_GET['send_task'];
     //  Get the email of user logged in
     $sender = $_SESSION['userLoggedIn'];
-
+    
     //  Select all tasks if page is visited or refreshed
     $reqCreditQuery = mysqli_query($con, "SELECT * FROM credit_requests WHERE send_from='$sender'");
 
