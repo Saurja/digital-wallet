@@ -56,9 +56,11 @@ if(isset($_POST['reqMoneyButton'])){
 
 <!--    Stops form from resubmitting    -->
 <script>
+    
 if ( window.history.replaceState ) {
   window.history.replaceState( null, null, window.location.href );
 }
+
 </script>
 <!--    Stops form from resubmitting    -->
 <?php include("includes/footer.php"); ?>

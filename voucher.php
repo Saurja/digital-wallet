@@ -78,9 +78,11 @@ $transactions = new Transactions($con);
 
 <!--    Stops form from resubmitting    -->
 <script>
+    
 if ( window.history.replaceState ) {
   window.history.replaceState( null, null, window.location.href );
 }
+
 </script>
 <!--    Stops form from resubmitting    -->
 
