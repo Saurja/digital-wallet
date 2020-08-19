@@ -165,6 +165,7 @@ if (isset($_GET['del_task'])) {
 
 <!--    Stops form from resubmitting    -->
 <script>
+    
 if ( window.history.replaceState ) {
   window.history.replaceState( null, null, window.location.href );
 }
