@@ -1,6 +1,5 @@
 <?php include("includes/header.php"); ?>
 
-
 <!--    Send Money Handler  -->
 <?php
 
@@ -51,6 +50,30 @@ if (isset($_GET['send_task'])) {
     }
 }
 
+
+if (isset($_GET['del_task'])) {
+    
+    $requestID = $_GET['del_task'];
+    //  Get the email of user logged in
+    $sender = $_SESSION['userLoggedIn'];
+    
+    $reqCreditQuery = mysqli_query($con, "SELECT `req_id`, user1.`email_id` AS `req_from`, user2.`email_id` AS `send_from`, `credits_requested`, `req_dateTime` 
+    FROM `credit_requests` t JOIN `user_details` user1
+    ON t.`req_from` = user1.`user_ID`
+    JOIN `user_details` user2 
+    ON t.`send_from` = user2.`user_ID`
+    WHERE user2.`email_id`='$sender'");
+
+    while($row = mysqli_fetch_array($reqCreditQuery)) {
+
+
+        if($row['req_id'] == $requestID) {
+            $transactions->deleteRowWithID($requestID);
+        }
+        
+    }
+}
+
 ?>
 
 <!--    Send Money Handler End  -->
@@ -86,10 +109,10 @@ if (isset($_GET['send_task'])) {
 
 <!--    Display Request table    -->
 <div class="row justify-content-center my-5">
-    <div class="col-10"> 
+    <div class="col-8"> 
     <h3>Transfer Requests</h3>
     <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
-        <table class="table table-bordered mt-2">
+        <table class="table table-striped table-bordered mt-2 text-center">
         <caption>The following users have requested credits. Press "Pay Now" to send.</caption>
             <thead>
                 <tr>
@@ -97,7 +120,7 @@ if (isset($_GET['send_task'])) {
                     <th scope="col">Who</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Req-Date</th>
-                    <th scope="col">Responsce</th>
+                    <th scope="col">Response</th>
                 </tr>
             </thead>
             <tbody>
@@ -123,8 +146,11 @@ if (isset($_GET['send_task'])) {
                     <td><?php echo $row['credits_requested']; ?> Points Requested</td>
                     <td><?php echo $row['req_dateTime']; ?></td>
                     <td>
-                        <a href="index.php?send_task=<?php echo $row['req_id'] ?>">
+                        <a class="mx-1" href="index.php?send_task=<?php echo $row['req_id'] ?>">
                             <button type='submit' class='btn btn-dark'>Pay Now</button>
+                        </a>
+                        <a class="mx-1" href="index.php?del_task=<?php echo $row['req_id'] ?>">
+                            <button type='submit' class='btn btn-danger'>Del</button>
                         </a>
                     </td>
                 </tr>
@@ -142,12 +168,6 @@ if (isset($_GET['send_task'])) {
 if ( window.history.replaceState ) {
   window.history.replaceState( null, null, window.location.href );
 }
-
-$(function() {
-  $("refresh").click(function() {
-     $("#navbarNav").load("index.php")
-  })
-})
 
 </script>
 <!--    Stops form from resubmitting    -->

@@ -8,10 +8,10 @@ $transactions = new Transactions($con);
 
 ?>
 
-<div class="row justify-content-center mt-5 mx-2">
-    <div class="col-10">
+<div class="row justify-content-center mt-5">
+    <div class="col-8">
         <h3>Transaction History</h3>
-        <table class="table table-bordered mt-4">
+        <table class="table table-striped table-bordered mt-4">
         <caption>These are the transactions that you have made in the past.</caption>
             <thead>
                 <tr>
