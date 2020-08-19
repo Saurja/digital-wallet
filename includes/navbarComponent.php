@@ -6,7 +6,8 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
             
-            <li class="nav-item navbar-text white-text" id="userCreditBalance">
+            <li class="nav-item " id="userCreditBalance">
+            <a href="index.php" class="navbar-text white-text" style="text-decoration: none;">
             <?php
             /*
                 !   Note: Only updates after page is reloaded.
@@ -16,6 +17,7 @@
                 $accBal = mysqli_fetch_assoc($accBal);
                 echo "Your Points: ". $accBal['credits'] . "";
             ?>
+            </a>
             
             </li>
         </ul>

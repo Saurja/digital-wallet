@@ -8,6 +8,7 @@ include("includes/classes/Transactions.php");
 
 $transactions = new Transactions($con);
 
+#   PHP Handlers Link For Handling Transactions
 include("includes/handlers/transaction-handler.php"); 
 
 ?>

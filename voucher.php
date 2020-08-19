@@ -4,9 +4,7 @@
 <?php
 
 include("includes/classes/Transactions.php"); 
-
 $transactions = new Transactions($con);
-
 include("includes/handlers/transaction-handler.php"); 
         
 ?>

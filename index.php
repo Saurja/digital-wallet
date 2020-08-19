@@ -109,11 +109,6 @@ if ( window.history.replaceState ) {
   window.history.replaceState( null, null, window.location.href );
 };
 
-/*
-$("#sendMoneyButton").onclick(function(){
-    $("#userCreditBalance").load(" #userCreditBalance");
-});
-*/
 </script>
 <!--    Stops form from resubmitting    -->
 <?php include("includes/footer.php"); ?>
