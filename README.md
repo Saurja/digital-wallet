@@ -1,4 +1,4 @@
-#Project Overview
+# Digital Wallet
 
 Digital Wallet is a payment application that allows users to store and spend virtual money. This project does not use real money and only for educational purposes.
 
