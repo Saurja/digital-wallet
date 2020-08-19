@@ -25,7 +25,7 @@ include("includes/handlers/transaction-handler.php");
     <?php echo $transactions->getSuccess(Constants::$CreditsSent); ?>
     <div class="jumbotron ">
     <h1 class="display-5 mb-5">Send Money</h1>
-    <p class="lead">Send credits to a indented user via his email id.</p>
+    <p class="lead">Send credits to a intended user via his email id.</p>
         <?php echo $transactions->getError(Constants::$TranscErrSend); ?>
         <?php echo $transactions->getError(Constants::$TranscErrHistory); ?>
         
@@ -84,7 +84,16 @@ include("includes/handlers/transaction-handler.php");
                 ON t.`send_from` = user2.`user_ID`
                 WHERE user2.`email_id`='$sender'
                 ORDER BY `req_id` DESC");
-
+            ?>
+            
+            <?php
+            if (mysqli_num_rows($reqCreditQuery)==0) { 
+            ?> 
+                <tr>
+                    <td colspan="5">No requests to display here.</td>
+                </tr>
+            <?php
+            }else{
                 while($row = mysqli_fetch_array($reqCreditQuery)) {
             ?>
                 <tr>
@@ -102,6 +111,7 @@ include("includes/handlers/transaction-handler.php");
                     </td>
                 </tr>
             <?php
+                }
                     }
             ?>
             </tbody>

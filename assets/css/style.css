@@ -6,15 +6,16 @@ body {
 }
 
 .sidebar {
-  background-color: #424242;
-  width: 220px;
+  background-color: #207DFF;
+  width: 18rem;
   height: 100vh;
   position: fixed;
   left: 0;
 }
 
 .sidebar .navigation {
-  padding: 25px;
+  padding: 100px 40px;
+  font-size: 150%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -25,8 +26,9 @@ body {
 }
 
 .sidebar .navigation .group div a {
+  font-weight: bolder;
   text-decoration: none;
-  color: #818181;
+  color: #011627;
   display: block;
   -webkit-transition: 0.3s;
   transition: 0.3s;
@@ -34,12 +36,12 @@ body {
 
 .sidebar .navigation .group div a:hover {
   text-decoration: none;
-  color: #f1f1f1;
+  color: #F6F7F8;
 }
 
 .navItem {
-  margin-top: 5px;
-  padding: 5px 0px;
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
 }
 
 .mainViewContainer {
