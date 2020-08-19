@@ -7,14 +7,7 @@ include("includes/classes/Transactions.php");
 
 $transactions = new Transactions($con);
 
-    if(isset($_POST['reedeemVoucherbutton'])){
-
-        $sender = $_SESSION['userLoggedIn'];
-        $voucherId = $_POST['voucherId'];
-        
-        $wasSuccessful = $transactions->redeemVoucherID($sender, $voucherId);
-
-    }
+include("includes/handlers/transaction-handler.php"); 
         
 ?>
 

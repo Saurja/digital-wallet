@@ -5,16 +5,18 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
+            
+            <li class="nav-item navbar-text white-text" id="userCreditBalance">
+            <?php
             /*
                 !   Note: Only updates after page is reloaded.
             */
-            <li class="nav-item navbar-text white-text" id="userCreditBalance">
-            <?php
                 $user = $_SESSION["userLoggedIn"];
                 $accBal = mysqli_query($con, "SELECT `credits` FROM `user_details` where `email_id` = '$user'");
                 $accBal = mysqli_fetch_assoc($accBal);
                 echo "Your Points: ". $accBal['credits'] . "";
             ?>
+            
             </li>
         </ul>
         <span class="navbar-text white-text mr-3">

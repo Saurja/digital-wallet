@@ -8,21 +8,8 @@ include("includes/classes/Transactions.php");
 
 $transactions = new Transactions($con);
 
-function sanitizeSender($inputText) {
-    $inputText = strip_tags($inputText);
-    $inputText = str_replace(" ", "", $inputText);
-    return ucfirst(strtolower($inputText));
-}
+include("includes/handlers/transaction-handler.php"); 
 
-if(isset($_POST['reqMoneyButton'])){
-    
-    $sender = $_SESSION['userLoggedIn'];
-    $receiver = sanitizeSender($_POST['reqFrom']);
-    $amount = $_POST['reqAmount'];
-    
-    $wasSuccessful = $transactions->reqCredits($sender, $receiver, $amount);
-
-}
 ?>
 
 
