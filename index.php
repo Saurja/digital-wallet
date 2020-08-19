@@ -63,7 +63,7 @@ include("includes/handlers/transaction-handler.php");
         <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
         <?php echo $transactions->getSuccess(Constants::$RequestDeleted); ?>
         <table class="table table-striped table-bordered mt-2 text-center">
-            <caption>The following users have requested credits. Press "Pay Now" to send or Press "Del" to Cancel.
+            <caption>The following users have requested credits. Press "Pay" to send or Press "Reject" to Cancel.
             </caption>
             <thead>
                 <tr>
@@ -107,10 +107,10 @@ include("includes/handlers/transaction-handler.php");
                     <td><?php echo $row['req_dateTime']; ?></td>
                     <td>
                         <a class="mx-1" href="index.php?send_task=<?php echo $row['req_id'] ?>">
-                            <button type='submit' class='btn btn-dark'>Pay Now</button>
+                            <button type='submit' class='btn btn-success'>Pay</button>
                         </a>
                         <a class="mx-1" href="index.php?del_task=<?php echo $row['req_id'] ?>">
-                            <button type='submit' class='btn btn-danger'>Del</button>
+                            <button type='submit' class='btn btn-danger'>Reject</button>
                         </a>
                     </td>
                 </tr>
