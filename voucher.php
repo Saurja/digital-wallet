@@ -28,9 +28,9 @@ include("includes/handlers/transaction-handler.php");
                                 ID</button>
                         </div>
                     </div>
-            </div>
-            <!--    Voucher Handler  -->
-            <?php
+
+                    <!--    Voucher Handler  -->
+                    <?php
         
                     if(isset($_POST['createVoucherbutton'])){
                 
@@ -43,10 +43,11 @@ include("includes/handlers/transaction-handler.php");
                     }
             
                 ?>
-            <!--    Voucher Handler End  -->
-            <?php echo $transactions->getError(Constants::$amountLessthanOne); ?>
-            <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
-            </form>
+                    <!--    Voucher Handler End  -->
+                    <?php echo $transactions->getError(Constants::$amountLessthanOne); ?>
+                    <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
+                </form>
+            </div>
         </div>
     </div>
     <!--    Form to Create Voucher End  -->
