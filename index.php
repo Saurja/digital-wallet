@@ -18,11 +18,17 @@ include("includes/handlers/transaction-handler.php");
 <!--    Website Code    -->
 
 <!--    Send Money Form    -->
+
 <div class="row justify-content-center my-5">
-    <div class="col-6">
+    
+    <div class="col-8">
+    <?php echo $transactions->getSuccess(Constants::$CreditsSent); ?>
+    <div class="jumbotron ">
+    <h1 class="display-5 mb-5">Send Money</h1>
+    <p class="lead">Send credits to a indented user via his email id.</p>
         <?php echo $transactions->getError(Constants::$TranscErrSend); ?>
         <?php echo $transactions->getError(Constants::$TranscErrHistory); ?>
-        <?php echo $transactions->getSuccess(Constants::$CreditsSent); ?>
+        
         <form class="sendCreditMoney" action="index.php" method="POST">
             <div class="form-group ">
                 <label for="sendTo">Send To</label>
@@ -42,6 +48,8 @@ include("includes/handlers/transaction-handler.php");
         </form>
         
     </div>
+    </div>
+
 </div>
 <!--    Send Money Form End    -->
 
