@@ -20,35 +20,37 @@ include("includes/handlers/transaction-handler.php");
 <!--    Send Money Form    -->
 
 <div class="row justify-content-center my-5">
-    
+
     <div class="col-8">
-    <?php echo $transactions->getSuccess(Constants::$CreditsSent); ?>
-    <div class="jumbotron ">
-    <div class="offset-1 col-10">
-    <h1 class="display-5 mb-5">Send Money</h1>
-    <p class="lead">Send credits to a intended user via his email id.</p>
-        <?php echo $transactions->getError(Constants::$TranscErrSend); ?>
-        <?php echo $transactions->getError(Constants::$TranscErrHistory); ?>
-        
-        <form class="sendCreditMoney" action="index.php" method="POST">
-            <div class="form-group ">
-                <label for="sendTo">Send To</label>
-                <input type="text" class="form-control" id="sendTo" name="sendTo" placeholder="Enter Email...">
-                <?php echo $transactions->getError(Constants::$usernameInvalid); ?>
-                <?php echo $transactions->getError(Constants::$cantSendSelf); ?>
+        <?php echo $transactions->getSuccess(Constants::$CreditsSent); ?>
+        <div class="jumbotron ">
+            <div class="offset-1 col-10">
+                <h1 class="display-5 mb-5">Send Money</h1>
+                <p class="lead">Send credits to a intended user via his email id.</p>
+                <?php echo $transactions->getError(Constants::$TranscErrSend); ?>
+                <?php echo $transactions->getError(Constants::$TranscErrHistory); ?>
+
+                <form class="sendCreditMoney" action="index.php" method="POST">
+                    <div class="form-group ">
+                        <label for="sendTo">Send To</label>
+                        <input type="text" class="form-control" id="sendTo" name="sendTo" placeholder="Enter Email...">
+                        <?php echo $transactions->getError(Constants::$usernameInvalid); ?>
+                        <?php echo $transactions->getError(Constants::$cantSendSelf); ?>
+                    </div>
+                    <div class="form-group">
+                        <label for="sendAmount">Amount</label>
+                        <input type="number" class="form-control" id="sendAmount" name="sendAmount"
+                            placeholder="Enter Amount...">
+                        <?php echo $transactions->getError(Constants::$InsufficientBalance); ?>
+                        <?php echo $transactions->getError(Constants::$amountLessthanOne); ?>
+                    </div>
+                    <div class="form-group">
+                        <button id="sendMoneyButton" type="submit" name="sendMoneyButton"
+                            class="btn btn-primary">Send</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="sendAmount">Amount</label>
-                <input type="number" class="form-control" id="sendAmount" name="sendAmount" placeholder="Enter Amount...">
-                <?php echo $transactions->getError(Constants::$InsufficientBalance); ?>
-                <?php echo $transactions->getError(Constants::$amountLessthanOne); ?>
-            </div>
-            <div class="form-group">
-                <button id="sendMoneyButton" type="submit" name="sendMoneyButton" class="btn btn-primary">Send</button>
-            </div>
-        </form>
-        </div>  
-    </div>
+        </div>
     </div>
 
 </div>
@@ -56,12 +58,13 @@ include("includes/handlers/transaction-handler.php");
 
 <!--    Display Request table    -->
 <div class="row justify-content-center my-5">
-    <div class="col-8"> 
-    <h3>Transfer Requests</h3>
-    <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
-    <?php echo $transactions->getSuccess(Constants::$RequestDeleted); ?>
+    <div class="col-8">
+        <h3>Transfer Requests</h3>
+        <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
+        <?php echo $transactions->getSuccess(Constants::$RequestDeleted); ?>
         <table class="table table-striped table-bordered mt-2 text-center">
-        <caption>The following users have requested credits. Press "Pay Now" to send or Press "Del" to Cancel.</caption>
+            <caption>The following users have requested credits. Press "Pay Now" to send or Press "Del" to Cancel.
+            </caption>
             <thead>
                 <tr>
                     <th scope="col">Req ID</th>
@@ -73,8 +76,8 @@ include("includes/handlers/transaction-handler.php");
             </thead>
             <tbody>
 
-            <!--    List All Requests   -->
-            <?php
+                <!--    List All Requests   -->
+                <?php
                 //  Get the email of user logged in
                 $sender = $_SESSION['userLoggedIn'];
                 //  Select all tasks if page is visited or refreshed
@@ -86,14 +89,14 @@ include("includes/handlers/transaction-handler.php");
                 WHERE user2.`email_id`='$sender'
                 ORDER BY `req_id` DESC");
             ?>
-            
-            <?php
+
+                <?php
             if (mysqli_num_rows($reqCreditQuery)==0) { 
-            ?> 
+            ?>
                 <tr>
                     <td colspan="5">No requests to display here.</td>
                 </tr>
-            <?php
+                <?php
             }else{
                 while($row = mysqli_fetch_array($reqCreditQuery)) {
             ?>
@@ -111,7 +114,7 @@ include("includes/handlers/transaction-handler.php");
                         </a>
                     </td>
                 </tr>
-            <?php
+                <?php
                 }
                     }
             ?>
@@ -123,11 +126,9 @@ include("includes/handlers/transaction-handler.php");
 
 <!--    Stops form from resubmitting    -->
 <script>
-    
-if ( window.history.replaceState ) {
-  window.history.replaceState( null, null, window.location.href );
-};
-
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    };
 </script>
 <!--    Stops form from resubmitting    -->
 <?php include("includes/footer.php"); ?>
