@@ -26,22 +26,24 @@ function getInputValue($name) {
 <!--    Website Code    -->
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Digital Wallet</title>
 
-        <!--    Add Bootstrap links (Bootstrap / Jquery / Popper.js)-->
-        <?php include("includes/bootstrap.php"); ?>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Wallet</title>
 
-        <!--    Adds CSS links      -->
-        <link rel="stylesheet" href="assets/css/register.css">
+    <!--    Add Bootstrap links (Bootstrap / Jquery / Popper.js)-->
+    <?php include("includes/bootstrap.php"); ?>
 
-        <!--    Adds JS links      -->
-        <script src="assets/js/register.js"></script>
+    <!--    Adds CSS links      -->
+    <link rel="stylesheet" href="assets/css/register.css">
 
-    </head>
-    <body>
+    <!--    Adds JS links      -->
+    <script src="assets/js/register.js"></script>
+
+</head>
+
+<body>
     <!--    Show/Hide Form Handler    -->
     <?php
 
@@ -63,66 +65,69 @@ function getInputValue($name) {
 
     ?>
     <!--    Show/Hide Form Handler End    -->
-        <!--    Website View    -->
-        <div class="from-group loginFormHeading my-5">
-            <h1>Digital Wallets</h1>
-        </div>
-        <div id="loginContainer">
-
-            <!--    Login Form  -->
-            <div class="row justify-content-center h-50 align-items-center">
-                <div class="col-6">
-                    <form id="walletLoginForm" action="register.php" method="POST">
-                        <div class="from-group loginFormHeading">
-                            <h2>Login to your account</h2>
-                        </div>
+    <!--    Website View    -->
+    <div class="from-group loginFormHeading my-5">
+        <h1><em>Digital Wallets</em></h1>
+    </div>
+    <div id="loginContainer">
+        <!--    Login Form  -->
+        <div class="row justify-content-center h-50 align-items-center">
+            <div class="col-6">
+                <form id="walletLoginForm" action="register.php" method="POST">
+                    <div class="jumbotron ">
+                        <h3 class="display-5">Login to your account</h3>
                         <div class="form-group">
                             <label for="loginEmail">Enter Email id:</label><br>
-                            <input id="loginEmail" name="loginEmail" class="form-control" type="email"  placeholder="johnDoe@gmail.com" required>
+                            <input id="loginEmail" name="loginEmail" class="form-control" type="email"
+                                placeholder="johnDoe@gmail.com" required>
                             <?php echo $account->getError(Constants::$loginFailed); ?>
                         </div>
                         <button type="submit" name="loginButton" class="btn btn-primary">LOGIN</button>
-
                         <div class="hasAccountText">
                             <span id="hideLogin">Don&apos;t have an account yet? Sign-Up here</span>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
-            <!--    Login Form End      -->
+        </div>
+        <!--    Login Form End      -->
 
-            <!--    Register Form   -->
-            <div class="row justify-content-center h-50 align-items-center">
-                <div class="col-6">
-                    
-                    <form id="walletRegisterForm" action="register.php" method="POST">
+        <!--    Register Form   -->
+        <div class="row justify-content-center h-50 align-items-center">
+            <div class="col-6">
 
-                        <div class="from-group loginFormHeading">
-                            <h2>Register a new account</h2>
-                        </div>
+                <form id="walletRegisterForm" action="register.php" method="POST">
+                    <div class="jumbotron ">
+                        <h3 class="display-5">Register a new account</h3>
 
                         <div class="form-group">
                             <label for="username">Enter Username:</label><br>
-                            <input id="username" name="username" class="form-control" type="text" value="<?php getInputValue('username') ?>"  placeholder="johnDoe" required>
+                            <input id="username" name="username" class="form-control" type="text"
+                                value="<?php getInputValue('username') ?>" placeholder="johnDoe" required>
                             <?php echo $account->getError(Constants::$usernameTaken); ?>
                             <?php echo $account->getError(Constants::$UsernameCharecters); ?>
-                            
+
                             <div class="row">
                                 <div class="col">
                                     <label for="email">Enter Email id:</label><br>
-                                    <input id="email" name="email" class="form-control" type="email" value="<?php getInputValue('email') ?>"  placeholder="johnDoe@gmail.com" required>
+                                    <input id="email" name="email" class="form-control" type="email"
+                                        value="<?php getInputValue('email') ?>" placeholder="johnDoe@gmail.com"
+                                        required>
                                 </div>
                                 <div class="col">
                                     <label for="email2">Confirm Email id:</label><br>
-                                    <input id="email2" name="email2" class="form-control" type="email" value="<?php getInputValue('email2') ?>"  placeholder="johnDoe@gmail.com" required>
+                                    <input id="email2" name="email2" class="form-control" type="email"
+                                        value="<?php getInputValue('email2') ?>" placeholder="johnDoe@gmail.com"
+                                        required>
                                 </div>
-                             </div>                    
+                            </div>
                             <?php echo $account->getError(Constants::$emailsDoNotMatch); ?>
                             <?php echo $account->getError(Constants::$emailsNotValid); ?>
                             <?php echo $account->getError(Constants::$emailTaken); ?>
-                            
+
                             <label for="mobile">Enter Mobile Number:</label><br>
-                            <input id="mobile" name="mobile" class="form-control" type="tel" value="<?php getInputValue('mobile') ?>"  placeholder="09864452185" required>
+                            <input id="mobile" name="mobile" class="form-control" type="tel"
+                                value="<?php getInputValue('mobile') ?>" placeholder="09864452185" required>
                             <?php echo $account->getError(Constants::$MobileNotValid); ?>
                             <?php echo $account->getError(Constants::$MobileTaken); ?>
                         </div>
@@ -131,20 +136,22 @@ function getInputValue($name) {
                         <div class="hasAccountText">
                             <span id="hideRegister">Already have an account? Login here.</span>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
-            <!--    Register Form End   -->
         </div>
-        <!--    Website View End    -->
+        <!--    Register Form End   -->
+    </div>
+    <!--    Website View End    -->
 
-        <!--    Stops form from resubmitting    -->
-        <script>
-            if ( window.history.replaceState ) {
-            window.history.replaceState( null, null, window.location.href );
-            }
-        </script>
-        <!--    Stops form from resubmitting    -->
-    </body>
+    <!--    Stops form from resubmitting    -->
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+    <!--    Stops form from resubmitting    -->
+</body>
+
 </html>
 <!--    Website Code End    -->
