@@ -12,7 +12,7 @@ $transactions = new Transactions($con);
     <div class="col-8">
         <h3>Transaction History</h3>
         <table class="table table-striped table-bordered mt-4">
-        <caption>These are the transactions that you have made in the past.</caption>
+        <caption>These are the last transactions that you have made in the past.</caption>
             <thead>
                 <tr>
                     <th scope="col">Trans_id</th>
@@ -29,7 +29,7 @@ $transactions = new Transactions($con);
                 JOIN `user_details` user1 ON t.`sender_id` = user1.`user_ID` 
                 JOIN `user_details` user2 ON t.`receiver_id` = user2.`user_ID`
                 WHERE user1.`email_id` = '$sen' or user2.`email_id` = '$sen' 
-                ORDER BY `transaction_id` DESC");
+                ORDER BY `transaction_id` DESC LIMIT 20");
                 
 
                 while($row = mysqli_fetch_array($albumQuery)) {

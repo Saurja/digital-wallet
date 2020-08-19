@@ -17,7 +17,7 @@ include("includes/handlers/transaction-handler.php");
             <div class="offset-1 col-10">
                 <h1 class="display-5">Create Voucher</h1>
                 <p class="lead">Create a voucher to send credits.</p>
-                <form class="createVoucher mt-5" action="voucher.php" method="POST">
+                <form class="createVoucher mt-4" action="voucher.php" method="POST">
                     <div class="input-group">
 
                         <input type="number" class="form-control" id="voucherAmt" name="voucherAmt"
@@ -59,7 +59,7 @@ include("includes/handlers/transaction-handler.php");
             <div class="offset-1 col-10">
                 <h1 class="display-5">Reedeem Voucher</h1>
                 <p class="lead">Redeem a voucher to get credits.</p>
-                <form class="redeemVoucher mt-5" action="voucher.php" method="POST">
+                <form class="redeemVoucher mt-4" action="voucher.php" method="POST">
                     <div class="input-group">
 
                         <input type="text" class="form-control" id="voucherId" name="voucherId"
