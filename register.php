@@ -67,15 +67,18 @@ function getInputValue($name) {
     <!--    Show/Hide Form Handler End    -->
     <!--    Website View    -->
     <div class="from-group loginFormHeading my-5">
-        <h1><em>Digital Wallets</em></h1>
+        <h1 class="display-4"><strong><em>Digital Wallets</em></strong></h1>
     </div>
     <div id="loginContainer">
+
         <!--    Login Form  -->
         <div class="row justify-content-center h-50 align-items-center">
             <div class="col-6">
                 <form id="walletLoginForm" action="register.php" method="POST">
                     <div class="jumbotron ">
-                        <h3 class="display-5">Login to your account</h3>
+                        <div class="from-group loginFormHeading">
+                            <h2 class="display-5">Login to your account</h2>
+                        </div>
                         <div class="form-group">
                             <label for="loginEmail">Enter Email id:</label><br>
                             <input id="loginEmail" name="loginEmail" class="form-control" type="email"
@@ -83,6 +86,7 @@ function getInputValue($name) {
                             <?php echo $account->getError(Constants::$loginFailed); ?>
                         </div>
                         <button type="submit" name="loginButton" class="btn btn-primary">LOGIN</button>
+
                         <div class="hasAccountText">
                             <span id="hideLogin">Don&apos;t have an account yet? Sign-Up here</span>
                         </div>
@@ -98,7 +102,9 @@ function getInputValue($name) {
 
                 <form id="walletRegisterForm" action="register.php" method="POST">
                     <div class="jumbotron ">
-                        <h3 class="display-5">Register a new account</h3>
+                        <div class="from-group loginFormHeading">
+                            <h2 class="display-5">Register a new account</h2>
+                        </div>
 
                         <div class="form-group">
                             <label for="username">Enter Username:</label><br>
@@ -136,7 +142,6 @@ function getInputValue($name) {
                         <div class="hasAccountText">
                             <span id="hideRegister">Already have an account? Login here.</span>
                         </div>
-                    </div>
                 </form>
             </div>
         </div>
