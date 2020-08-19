@@ -66,9 +66,9 @@ if (isset($_GET['del_task'])) {
 
     while($row = mysqli_fetch_array($reqCreditQuery)) {
 
-
         if($row['req_id'] == $requestID) {
             $transactions->deleteRowWithID($requestID);
+            array_push($transactions->SuccessArray, Constants::$RequestDeleted);
         }
         
     }
@@ -86,6 +86,7 @@ if (isset($_GET['del_task'])) {
     <div class="col-6">
         <?php echo $transactions->getError(Constants::$TranscErrSend); ?>
         <?php echo $transactions->getError(Constants::$TranscErrHistory); ?>
+        <?php echo $transactions->getSuccess(Constants::$CreditsSent); ?>
         <form class="sendCreditMoney" action="index.php" method="POST">
             <div class="form-group ">
                 <label for="sendTo">Send To</label>
@@ -103,7 +104,6 @@ if (isset($_GET['del_task'])) {
                 <button type="submit" name="sendMoneyButton" class="btn btn-primary">Send</button>
             </div>
         </form>
-        <?php echo $transactions->getSuccess(Constants::$CreditsSent); ?>
         
     </div>
 </div>
@@ -114,6 +114,7 @@ if (isset($_GET['del_task'])) {
     <div class="col-8"> 
     <h3>Transfer Requests</h3>
     <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
+    <?php echo $transactions->getSuccess(Constants::$RequestDeleted); ?>
         <table class="table table-striped table-bordered mt-2 text-center">
         <caption>The following users have requested credits. Press "Pay Now" to send or Press "Del" to Cancel.</caption>
             <thead>

@@ -207,7 +207,6 @@
 
                 # If we arrive here, it means that no exception was thrown
                 # i.e. no query has failed, and we can commit the transaction
-                array_push($this->SuccessArray, Constants::$RequestSent);
                 $dbh->commit();
                 
             } catch (Exception $e) {
