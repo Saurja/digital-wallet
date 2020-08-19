@@ -35,23 +35,21 @@ $transactions = new Transactions($con);
                 while($row = mysqli_fetch_array($albumQuery)) {
                 
                 if ($row['sender'] == $sen) {
-                    # code...
                     
                     echo "<tr>
                         <th scope='row'>" . $row['transaction_id'] . "</th>
                         <td>To " . $row['receiver'] . "</td>
-                        <td>" . $row['transaction_date'] . " Points Sent</td>
-                        <td>" . $row['transaction_amount'] . "</td>
+                        <td>" . $row['transaction_amount'] . " Points Sent</td>
+                        <td>" . $row['transaction_date'] . "</td>
                     </tr>";
                 
-
                 }elseif ($row['receiver'] == $sen) {
-                    # code....
+                    
                     echo "<tr>
                         <th scope='row'>" . $row['transaction_id'] . "</th>
                         <td>From " . $row['sender'] . "</td>
-                        <td>" . $row['transaction_date'] . " Points Received</td>
-                        <td>" . $row['transaction_amount'] . "</td>
+                        <td>" . $row['transaction_amount'] . " Points Received</td>
+                        <td>" . $row['transaction_date'] . "</td>
                     </tr>";
 
                 }
