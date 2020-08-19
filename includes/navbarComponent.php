@@ -5,6 +5,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
+            /*
+                !   Note: Only updates after page is reloaded.
+            */
             <li class="nav-item navbar-text white-text" id="userCreditBalance">
             <?php
                 $user = $_SESSION["userLoggedIn"];
