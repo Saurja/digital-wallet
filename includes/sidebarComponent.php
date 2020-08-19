@@ -2,7 +2,7 @@
     <div class="navigation">
         <div class="group my-5">
             <div class="navItem">
-                <a href="sendmoney.php" class="navItemLink">Send Money</a>
+                <a href="index.php" class="navItemLink">Send Money</a>
             </div>
             <div class="navItem">
                 <a href="requestmoney.php" class="navItemLink">Request Money</a>
