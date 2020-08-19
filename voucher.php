@@ -22,7 +22,7 @@ $transactions = new Transactions($con);
 <div class="row justify-content-center mt-5">
     <div class="col-6">
         <!--    Form to Create Voucher  -->
-        <form class="createVoucher" action="voucher.php" method="POST">
+        <form class="createVoucher mt-5" action="voucher.php" method="POST">
             <label for="exampleInput">Create Voucher</label>
             <div class="input-group">
 
@@ -55,7 +55,7 @@ $transactions = new Transactions($con);
 
 
         <!--    Form to Redeem Voucher  -->
-        <form class="redeemVoucher" action="voucher.php" method="POST">
+        <form class="redeemVoucher mt-5" action="voucher.php" method="POST">
             <label for="exampleInput">Reedeem Voucher</label>
             <div class="input-group">
 
