@@ -76,19 +76,21 @@ function getInputValue($name) {
             <div class="col-6">
                 <form id="walletLoginForm" action="register.php" method="POST">
                     <div class="jumbotron ">
-                        <div class="from-group loginFormHeading">
-                            <h2 class="display-5">Login to your account</h2>
-                        </div>
-                        <div class="form-group">
-                            <label for="loginEmail">Enter Email id:</label><br>
-                            <input id="loginEmail" name="loginEmail" class="form-control" type="email"
-                                placeholder="johnDoe@gmail.com" required>
-                            <?php echo $account->getError(Constants::$loginFailed); ?>
-                        </div>
-                        <button type="submit" name="loginButton" class="btn btn-primary">LOGIN</button>
+                        <div class="offset-1 col-10">
+                            <div class="from-group loginFormHeading">
+                                <h2 class="display-5">Login to your account</h2>
+                            </div>
+                            <div class="form-group">
+                                <label for="loginEmail">Enter Email id:</label><br>
+                                <input id="loginEmail" name="loginEmail" class="form-control" type="email"
+                                    placeholder="johnDoe@gmail.com" required>
+                                <?php echo $account->getError(Constants::$loginFailed); ?>
+                            </div>
+                            <button type="submit" name="loginButton" class="btn btn-primary">LOGIN</button>
 
-                        <div class="hasAccountText">
-                            <span id="hideLogin">Don&apos;t have an account yet? Sign-Up here</span>
+                            <div class="hasAccountText">
+                                <span id="hideLogin">Don&apos;t have an account yet? Sign-Up here</span>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -102,45 +104,47 @@ function getInputValue($name) {
 
                 <form id="walletRegisterForm" action="register.php" method="POST">
                     <div class="jumbotron ">
-                        <div class="from-group loginFormHeading">
-                            <h2 class="display-5">Register a new account</h2>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="username">Enter Username:</label><br>
-                            <input id="username" name="username" class="form-control" type="text"
-                                value="<?php getInputValue('username') ?>" placeholder="johnDoe" required>
-                            <?php echo $account->getError(Constants::$usernameTaken); ?>
-                            <?php echo $account->getError(Constants::$UsernameCharecters); ?>
-
-                            <div class="row">
-                                <div class="col">
-                                    <label for="email">Enter Email id:</label><br>
-                                    <input id="email" name="email" class="form-control" type="email"
-                                        value="<?php getInputValue('email') ?>" placeholder="johnDoe@gmail.com"
-                                        required>
-                                </div>
-                                <div class="col">
-                                    <label for="email2">Confirm Email id:</label><br>
-                                    <input id="email2" name="email2" class="form-control" type="email"
-                                        value="<?php getInputValue('email2') ?>" placeholder="johnDoe@gmail.com"
-                                        required>
-                                </div>
+                        <div class="offset-1 col-10">
+                            <div class="from-group loginFormHeading">
+                                <h2 class="display-5">Register a new account</h2>
                             </div>
-                            <?php echo $account->getError(Constants::$emailsDoNotMatch); ?>
-                            <?php echo $account->getError(Constants::$emailsNotValid); ?>
-                            <?php echo $account->getError(Constants::$emailTaken); ?>
 
-                            <label for="mobile">Enter Mobile Number:</label><br>
-                            <input id="mobile" name="mobile" class="form-control" type="tel"
-                                value="<?php getInputValue('mobile') ?>" placeholder="09864452185" required>
-                            <?php echo $account->getError(Constants::$MobileNotValid); ?>
-                            <?php echo $account->getError(Constants::$MobileTaken); ?>
-                        </div>
-                        <button type="submit" name="registerButton" class="btn btn-primary">SIGN UP</button>
+                            <div class="form-group">
+                                <label for="username">Enter Username:</label><br>
+                                <input id="username" name="username" class="form-control" type="text"
+                                    value="<?php getInputValue('username') ?>" placeholder="johnDoe" required>
+                                <?php echo $account->getError(Constants::$usernameTaken); ?>
+                                <?php echo $account->getError(Constants::$UsernameCharecters); ?>
 
-                        <div class="hasAccountText">
-                            <span id="hideRegister">Already have an account? Login here.</span>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="email">Enter Email id:</label><br>
+                                        <input id="email" name="email" class="form-control" type="email"
+                                            value="<?php getInputValue('email') ?>" placeholder="johnDoe@gmail.com"
+                                            required>
+                                    </div>
+                                    <div class="col">
+                                        <label for="email2">Confirm Email id:</label><br>
+                                        <input id="email2" name="email2" class="form-control" type="email"
+                                            value="<?php getInputValue('email2') ?>" placeholder="johnDoe@gmail.com"
+                                            required>
+                                    </div>
+                                </div>
+                                <?php echo $account->getError(Constants::$emailsDoNotMatch); ?>
+                                <?php echo $account->getError(Constants::$emailsNotValid); ?>
+                                <?php echo $account->getError(Constants::$emailTaken); ?>
+
+                                <label for="mobile">Enter Mobile Number:</label><br>
+                                <input id="mobile" name="mobile" class="form-control" type="tel"
+                                    value="<?php getInputValue('mobile') ?>" placeholder="09864452185" required>
+                                <?php echo $account->getError(Constants::$MobileNotValid); ?>
+                                <?php echo $account->getError(Constants::$MobileTaken); ?>
+                            </div>
+                            <button type="submit" name="registerButton" class="btn btn-primary">SIGN UP</button>
+
+                            <div class="hasAccountText">
+                                <span id="hideRegister">Already have an account? Login here.</span>
+                            </div>
                         </div>
                 </form>
             </div>
