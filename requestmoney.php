@@ -56,15 +56,10 @@ if(isset($_POST['reqMoneyButton'])){
 
 <!--    Stops form from resubmitting    -->
 <script>
+    
 if ( window.history.replaceState ) {
   window.history.replaceState( null, null, window.location.href );
 }
-
-$(function() {
-  $("refresh").click(function() {
-     $("#navbarNav").load("requestmoney.php")
-  })
-})
 
 </script>
 <!--    Stops form from resubmitting    -->
