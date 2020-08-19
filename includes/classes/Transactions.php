@@ -130,7 +130,7 @@
                 } catch (Exception $e) {
                     # An exception has been thrown; We must rollback the transaction
                     $dbh->rollBack();
-                    array_push($this->errorArray, Constants::$TranscErr);
+                    array_push($this->errorArray, Constants::$TranscErrSend);
                 }
                 # closing connection 
                 $dbh = null;
@@ -219,6 +219,41 @@
             $dbh = null;
         }
 
+        #   Function to get USER_ID from the Email-ID
+
+        public function getUserId($un) {
+            include(CONNECT_DB);
+            
+            try {  
+                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                # begin a Transaction
+                $dbh->beginTransaction();
+
+                # A set of queries; if one fails, an exception should be thrown
+                $sth = $dbh->prepare("SELECT `user_ID` FROM `user_details` WHERE email_id=?");
+                $sth->execute(array($un));
+                
+                # If we arrive here, it means that no exception was thrown
+                # i.e. no query has failed, and we can commit the transaction
+                $UserID = $sth -> fetch();
+                $UserID = $UserID["user_ID"];
+                array_push($this->SuccessArray, Constants::$RequestSent);
+                $dbh->commit();
+                
+            } catch (Exception $e) {
+                # An exception has been thrown; We must rollback the transaction
+                $dbh->rollBack();
+                array_push($this->errorArray, Constants::$TranscErr);
+            } finally {
+                # closing connection 
+                $dbh = null;
+            }
+
+            return $UserID;
+
+        }
+
         #   Getting the error array ready
 
         Public function getError($error) {
@@ -260,26 +295,35 @@
 
                 # begin a Transaction
                 $dbh->beginTransaction();
-
+                $date = date("Y-m-d h:i:sa");
                 # A set of queries; if one fails, an exception should be thrown
                 $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`-? WHERE email_id=?");
                 $sth->execute(array($amt,$sen));
                 $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`+? WHERE email_id=?");
                 $sth->execute(array($amt,$reciv));
 
+                $sen = $this->getUserId($sen);
+                $reciv = $this->getUserId($reciv);
+
+                #   Saves transation information to transaction table
+                $sth = $dbh->prepare("INSERT INTO `transaction_table`(`sender_id`, `receiver_id`, `transaction_date`, `transaction_amount`) VALUES (?,?,?,?)");
+                $sth->execute(array($sen,$reciv,$date,$amt));
+                
                 # If we arrive here, it means that no exception was thrown
                 array_push($this->SuccessArray, Constants::$CreditsSent);
+                
                 # i.e. no query has failed, and we can commit the transaction
                 $dbh->commit();
                 
             } catch (Exception $e) {
                 # An exception has been thrown; We must rollback the transaction
                 $dbh->rollBack();
-                array_push($this->errorArray, Constants::$TranscErr);
+                array_push($this->errorArray, Constants::$TranscErrSend);
+                return false;
+            } finally {
+                # closing connection 
+                $dbh = null;
             }
-            $this->saveTransactionHistory($sen, $reciv, $amt);
-            # closing connection 
-            $dbh = null;
             
         }
 
@@ -316,69 +360,6 @@
             
             # closing connection 
             $dbh = null;
-        }
-
-        private function saveTransactionHistory($sen, $rec, $amt) {
-
-            $date = date("Y-m-d h:i:sa");
-            # Create and check a new connection to the database
-            include(CONNECT_DB);
-            $sen = $this->getUserId($sen);
-            $rec = $this->getUserId($rec);
-            
-            try {  
-                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                # begin a Transaction
-                $dbh->beginTransaction();
-
-                # A set of queries; if one fails, an exception should be thrown
-                $sth = $dbh->prepare("INSERT INTO `transaction_table`(`sender_id`, `receiver_id`, `transaction_date`, `transaction_amount`) VALUES (?,?,?,?)");
-                $sth->execute(array($sen,$rec,$date,$amt));
-                # If we arrive here, it means that no exception was thrown
-                # i.e. no query has failed, and we can commit the transaction
-                array_push($this->SuccessArray, Constants::$RequestSent);
-                $dbh->commit();
-                
-            } catch (Exception $e) {
-                # An exception has been thrown; We must rollback the transaction
-                $dbh->rollBack();
-                array_push($this->errorArray, Constants::$TranscErr);
-            }
-            # closing connection 
-            $dbh = null;
-
-        }
-
-        public function getUserId($un) {
-            include(CONNECT_DB);
-            
-            try {  
-                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-                # begin a Transaction
-                $dbh->beginTransaction();
-
-                # A set of queries; if one fails, an exception should be thrown
-                $sth = $dbh->prepare("SELECT `user_ID` FROM `user_details` WHERE email_id=?");
-                $sth->execute(array($un));
-                $UserID = $sth -> fetch();
-                $UserID = $UserID["user_ID"];
-                # If we arrive here, it means that no exception was thrown
-                # i.e. no query has failed, and we can commit the transaction
-                array_push($this->SuccessArray, Constants::$RequestSent);
-                $dbh->commit();
-                
-            } catch (Exception $e) {
-                # An exception has been thrown; We must rollback the transaction
-                $dbh->rollBack();
-                array_push($this->errorArray, Constants::$TranscErr);
-            }
-            # closing connection 
-            $dbh = null;
-
-            return $UserID;
-
         }
 
     }

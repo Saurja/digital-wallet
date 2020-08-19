@@ -84,6 +84,8 @@ if (isset($_GET['del_task'])) {
 <!--    Send Money Form    -->
 <div class="row justify-content-center my-5">
     <div class="col-6">
+        <?php echo $transactions->getError(Constants::$TranscErrSend); ?>
+        <?php echo $transactions->getError(Constants::$TranscErrHistory); ?>
         <form class="sendCreditMoney" action="index.php" method="POST">
             <div class="form-group ">
                 <label for="sendTo">Send To</label>
@@ -102,7 +104,7 @@ if (isset($_GET['del_task'])) {
             </div>
         </form>
         <?php echo $transactions->getSuccess(Constants::$CreditsSent); ?>
-        <?php echo $transactions->getError(Constants::$TranscErr); ?>
+        
     </div>
 </div>
 <!--    Send Money Form End    -->
@@ -113,7 +115,7 @@ if (isset($_GET['del_task'])) {
     <h3>Transfer Requests</h3>
     <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
         <table class="table table-striped table-bordered mt-2 text-center">
-        <caption>The following users have requested credits. Press "Pay Now" to send.</caption>
+        <caption>The following users have requested credits. Press "Pay Now" to send or Press "Del" to Cancel.</caption>
             <thead>
                 <tr>
                     <th scope="col">Req ID</th>
