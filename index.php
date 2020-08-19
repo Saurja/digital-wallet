@@ -142,7 +142,13 @@ if (isset($_GET['send_task'])) {
 if ( window.history.replaceState ) {
   window.history.replaceState( null, null, window.location.href );
 }
-$("#userCreditBalance").load(location.href + " #userCreditBalance");
+
+$(function() {
+  $("refresh").click(function() {
+     $("#navbarNav").load("index.php")
+  })
+})
+
 </script>
 <!--    Stops form from resubmitting    -->
 <?php include("includes/footer.php"); ?>
