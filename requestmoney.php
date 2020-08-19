@@ -20,6 +20,7 @@ include("includes/handlers/transaction-handler.php");
 <div class="row justify-content-center my-5">
     <div class="col-8">
         <div class="jumbotron">
+        <div class="offset-1 col-10">
             <h1 class="display-5 mb-5">Request Credits</h1>
             <p class="lead">Request credits from a indented user via his email id.</p>
             <form class="reqCreditMoney" action="" method="POST">
@@ -42,6 +43,7 @@ include("includes/handlers/transaction-handler.php");
             </form>
             <?php echo $transactions->getSuccess(Constants::$RequestSent); ?>
             <?php echo $transactions->getError(Constants::$TranscErr); ?>
+        </div>
         </div>
     </div>
 </div>
