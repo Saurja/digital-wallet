@@ -24,6 +24,7 @@ include("includes/handlers/transaction-handler.php");
     <div class="col-8">
     <?php echo $transactions->getSuccess(Constants::$CreditsSent); ?>
     <div class="jumbotron ">
+    <div class="offset-1 col-10">
     <h1 class="display-5 mb-5">Send Money</h1>
     <p class="lead">Send credits to a intended user via his email id.</p>
         <?php echo $transactions->getError(Constants::$TranscErrSend); ?>
@@ -46,7 +47,7 @@ include("includes/handlers/transaction-handler.php");
                 <button id="sendMoneyButton" type="submit" name="sendMoneyButton" class="btn btn-primary">Send</button>
             </div>
         </form>
-        
+        </div>  
     </div>
     </div>
 
