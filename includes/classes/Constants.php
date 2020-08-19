@@ -28,6 +28,8 @@ class Constants {
     public static $voucherCodeInvalid = "Error: The voucher code is Invalid";
     
     public static $TranscErr = "Error in transaction : Please try again";
+    public static $TranscErrSend = "Error : Transaction failed credits not send";
+    public static $TranscErrHistory = "Error : Transaction history not saved";
     public static $CannotConnectToDB = "Error : Unable to connect to Database";
 
     #   Success Messages
