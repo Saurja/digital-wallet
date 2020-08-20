@@ -11,10 +11,10 @@ body {
     width: 18rem;
     height: 100vh;
     position: fixed;
+    overflow: auto;
     left: 0;
-
     .navigation {
-        padding: 100px 40px;
+        
         font-size: 150%;
         display: flex;
         flex-direction: column;
@@ -26,23 +26,24 @@ body {
             color: #011627;
             display: block;
             transition: 0.3s;
+            display: block;
+            padding: 16px;
         }
 
         .group div a:hover {
+            background-color: #011627;
             text-decoration: none;
             color: #F6F7F8;
         }
     }
 }
 
-.navItem {
-    margin-top: 1rem;
-    padding: 1rem 1.2rem;
+.navItem:first-child {
+    margin-top: 5rem;
 }
 
 .mainViewContainer {
-    margin-left: 220px;
-    padding-bottom: 90px;
+    margin-left: 15rem;
     width: calc(100% - 220px);
 
     .mainContent {
