@@ -15,19 +15,20 @@ body {
     left: 0;
     .navigation {
         
-        font-size: 150%;
+        
         display: flex;
         flex-direction: column;
         -ms-flex-direction: column;
 
         .group div a {
+            font-size: 150%;
             font-weight: bolder;
             text-decoration: none;
             color: #011627;
             display: block;
             transition: 0.3s;
             display: block;
-            padding: 16px;
+            padding: 1.5rem 1.7rem;
         }
 
         .group div a:hover {

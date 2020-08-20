@@ -14,7 +14,6 @@ body {
 }
 
 .sidebar .navigation {
-  font-size: 150%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -25,6 +24,7 @@ body {
 }
 
 .sidebar .navigation .group div a {
+  font-size: 150%;
   font-weight: bolder;
   text-decoration: none;
   color: #011627;
@@ -32,7 +32,7 @@ body {
   -webkit-transition: 0.3s;
   transition: 0.3s;
   display: block;
-  padding: 16px;
+  padding: 1.5rem 1.7rem;
 }
 
 .sidebar .navigation .group div a:hover {

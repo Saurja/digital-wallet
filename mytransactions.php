@@ -15,7 +15,7 @@ $transactions = new Transactions($con);
         <caption>These are the last transactions that you have made in the past.</caption>
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Trans_id</th>
+                    <th scope="col">Trans_Id</th>
                     <th scope="col">To whom/ From whom</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Date</th>
