@@ -31,7 +31,7 @@ body {
   -webkit-transition: 0.3s;
   transition: 0.3s;
   display: block;
-  padding: 1.5rem 1.7rem;
+  padding: 1.5rem 3rem;
 }
 
 .sidebar .navigation .group div a:hover {
