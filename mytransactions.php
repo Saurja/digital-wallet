@@ -11,9 +11,9 @@ $transactions = new Transactions($con);
 <div class="row justify-content-center mt-5">
     <div class="col-8">
         <h3>Transaction History</h3>
-        <table class="table table-striped table-bordered mt-4">
+        <table class="table table-bordered table-hover mt-4">
         <caption>These are the last transactions that you have made in the past.</caption>
-            <thead>
+            <thead class="thead-dark">
                 <tr>
                     <th scope="col">Trans_id</th>
                     <th scope="col">To whom/ From whom</th>
@@ -36,7 +36,7 @@ $transactions = new Transactions($con);
                 
                 if ($row['sender'] == $sen) {
                     
-                    echo "<tr>
+                    echo "<tr class='table-danger'>
                         <th scope='row'>" . $row['transaction_id'] . "</th>
                         <td>To " . $row['receiver'] . "</td>
                         <td>" . $row['transaction_amount'] . " Points Sent</td>
@@ -45,7 +45,7 @@ $transactions = new Transactions($con);
                 
                 }elseif ($row['receiver'] == $sen) {
                     
-                    echo "<tr>
+                    echo "<tr class='table-success'>
                         <th scope='row'>" . $row['transaction_id'] . "</th>
                         <td>From " . $row['sender'] . "</td>
                         <td>" . $row['transaction_amount'] . " Points Received</td>
