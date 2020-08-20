@@ -1,11 +1,13 @@
 <?php
 
+    #   function to sanitize email Id sent via form input
     function sanitizeSender($inputText) {
         $inputText = strip_tags($inputText);
         $inputText = str_replace(" ", "", $inputText);
         return ucfirst(strtolower($inputText));
     }
 
+    #   when Send Money button is pressed
     if(isset($_POST['sendMoneyButton'])){
         
         $sender = $_SESSION['userLoggedIn'];
@@ -16,6 +18,7 @@
 
     }
 
+    #   when Pay Requested Credit Button is pressed
     if (isset($_GET['send_task'])) {
         
         $requestID = $_GET['send_task'];
@@ -43,6 +46,7 @@
         }
     }
 
+    #   when Delete Requested Money button is pressed
     if (isset($_GET['del_task'])) {
         
         $requestID = $_GET['del_task'];
@@ -66,6 +70,7 @@
         }
     }
 
+    #   when Request Money button is pressed
     if(isset($_POST['reqMoneyButton'])){
         
         $sender = $_SESSION['userLoggedIn'];
@@ -76,6 +81,8 @@
 
         
     }
+
+    #   when Reedeem Voucher button is pressed
     if(isset($_POST['reedeemVoucherbutton'])){
 
         $sender = $_SESSION['userLoggedIn'];

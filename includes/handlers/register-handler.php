@@ -1,5 +1,6 @@
 <?php
 
+    #   function to sanatize username input
     function sanatizeFormUsername($inputText) {
 
         $inputText = strip_tags($inputText);
@@ -7,6 +8,7 @@
 
     }
 
+    #   function to sanatize email input
     function sanatizeFormString($inputText) {
 
         $inputText = strip_tags($inputText);
@@ -15,12 +17,14 @@
 
     }
 
+    #   function to sanatize password input
     function sanatizeFormPassword($inputText) {
 
         return str_replace(" ", "", $inputText);
 
     }
 
+    #   function to sanatize mobile number input
     function sanatizeFormMobile($inputText) {
 
         // Allow +, - and . in phone number
@@ -30,6 +34,7 @@
 
     }
 
+    #   when register button is pressed
     if (isset($_POST['registerButton'])) {
 
         //Register Button Was Pressed
