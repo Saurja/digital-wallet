@@ -24,7 +24,6 @@ body {
 }
 
 .sidebar .navigation .group div a {
-  font-size: 150%;
   font-weight: bolder;
   text-decoration: none;
   color: #011627;
@@ -36,6 +35,7 @@ body {
 }
 
 .sidebar .navigation .group div a:hover {
+  font-size: 1.1rem;
   background-color: #011627;
   text-decoration: none;
   color: #F6F7F8;

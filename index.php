@@ -65,7 +65,7 @@ include("includes/handlers/transaction-handler.php");
         <table class="table table-hover table-striped table-bordered mt-2 text-center">
             <caption>The following users have requested credits. Press "Pay" to send or Press "Reject" to Cancel.
             </caption>
-            <thead>
+            <thead class="thead-dark">
                 <tr>
                     <th scope="col">Req ID</th>
                     <th scope="col">Who</th>

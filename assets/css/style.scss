@@ -15,13 +15,12 @@ body {
     left: 0;
     .navigation {
         
-        
         display: flex;
         flex-direction: column;
         -ms-flex-direction: column;
 
         .group div a {
-            font-size: 150%;
+
             font-weight: bolder;
             text-decoration: none;
             color: #011627;
@@ -32,6 +31,7 @@ body {
         }
 
         .group div a:hover {
+            font-size: 1.1rem;
             background-color: #011627;
             text-decoration: none;
             color: #F6F7F8;
