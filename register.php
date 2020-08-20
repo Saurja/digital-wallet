@@ -86,9 +86,9 @@ function getInputValue($name) {
                                     placeholder="johnDoe@gmail.com" required>
                                 <?php echo $account->getError(Constants::$loginFailed); ?>
                             </div>
-                            <button type="submit" name="loginButton" class="btn btn-primary">LOGIN</button>
+                            <button type="submit" name="loginButton" class="btn btn-primary btn-lg btn-block">LOGIN</button>
 
-                            <div class="hasAccountText">
+                            <div class="hasAccountText mt-3">
                                 <span id="hideLogin">Don&apos;t have an account yet? Sign-Up here</span>
                             </div>
                         </div>
@@ -140,9 +140,9 @@ function getInputValue($name) {
                                 <?php echo $account->getError(Constants::$MobileNotValid); ?>
                                 <?php echo $account->getError(Constants::$MobileTaken); ?>
                             </div>
-                            <button type="submit" name="registerButton" class="btn btn-primary">SIGN UP</button>
+                            <button type="submit" name="registerButton" class="btn btn-primary btn-lg btn-block">SIGN UP</button>
 
-                            <div class="hasAccountText">
+                            <div class="hasAccountText mt-3">
                                 <span id="hideRegister">Already have an account? Login here.</span>
                             </div>
                         </div>
