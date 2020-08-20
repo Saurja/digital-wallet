@@ -7,8 +7,8 @@ body {
 
 
 .sidebar {
-    background-color: #207DFF;
-    width: 18rem;
+    background-color: #4285F4;
+    width: 15rem;
     height: 100vh;
     position: fixed;
     overflow: auto;
@@ -44,7 +44,7 @@ body {
 }
 
 .mainViewContainer {
-    margin-left: 15rem;
+    margin-left: 12rem;
     width: calc(100% - 220px);
 
     .mainContent {
