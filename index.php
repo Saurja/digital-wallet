@@ -63,7 +63,7 @@ include("includes/handlers/transaction-handler.php");
         <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
         <?php echo $transactions->getSuccess(Constants::$RequestDeleted); ?>
         <table class="table table-hover table-striped table-bordered mt-2 text-center">
-            <caption>The following users have requested credits. Press "Pay" to send or Press "Reject" to Cancel.
+            <caption>The following users have requested credits. Press "Pay" to send or Press "Reject" to Cancel. 
             </caption>
             <thead class="thead-dark">
                 <tr>
