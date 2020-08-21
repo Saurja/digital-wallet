@@ -134,6 +134,7 @@
                 }
                 # closing connection 
                 $dbh = null;
+                $sth = null;
             }
 
             return "<span class='voucherIdhere'>Voucher ID: $VoucherID</span>";
@@ -184,6 +185,7 @@
                 }
                 # closing connection 
                 $dbh = null;
+                $sth = null;
             }
 
         }
@@ -216,6 +218,7 @@
             }
             # closing connection 
             $dbh = null;
+            $sth = null;
         }
 
         #   Function to get USER_ID from the Email-ID
@@ -247,6 +250,7 @@
             } finally {
                 # closing connection 
                 $dbh = null;
+                $sth = null;
             }
 
             return $UserID;
@@ -322,6 +326,7 @@
             } finally {
                 # closing connection 
                 $dbh = null;
+                $sth = null;
             }
             
         }
@@ -359,6 +364,7 @@
             
             # closing connection 
             $dbh = null;
+            $sth = null;
         }
 
     }

@@ -37,12 +37,10 @@
             if($row['req_id'] == $requestID) {
                 $receiver= $row['req_from'];
                 $amount = $row['credits_requested'];
-                $wasSuccess = $transactions->sendRequestedcredits($sender, $receiver, $amount);
-                if(!isset($wasSuccess)) {
-                    $transactions->deleteRowWithID($requestID);
-                }
+                $transactions->sendRequestedcredits($sender, $receiver, $amount);
+                $transactions->deleteRowWithID($requestID);
             }
-            
+        
         }
     }
 
