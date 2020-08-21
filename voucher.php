@@ -2,11 +2,9 @@
 
 <!--    Send Money Handler  -->
 <?php
-
 include("includes/classes/Transactions.php"); 
 $transactions = new Transactions($con);
-include("includes/handlers/transaction-handler.php"); 
-        
+include("includes/handlers/transaction-handler.php");        
 ?>
 
 <!--    Voucher View    -->
@@ -31,7 +29,6 @@ include("includes/handlers/transaction-handler.php");
 
                     <!--    Voucher Handler  -->
                     <?php
-        
                     if(isset($_POST['createVoucherbutton'])){
                 
                         $sender = $_SESSION['userLoggedIn'];
@@ -41,7 +38,6 @@ include("includes/handlers/transaction-handler.php");
                         echo $wasSuccessful;
                     
                     }
-            
                 ?>
                     <!--    Voucher Handler End  -->
                     <?php echo $transactions->getError(Constants::$amountLessthanOne); ?>

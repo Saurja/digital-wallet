@@ -1,28 +1,19 @@
 <!--    PHP Code    -->
 <?php 
-
-#   MySQL Database Config File
 include("includes/config.php"); 
-
 #   PHP Classes Links
 include("includes/classes/Account.php"); 
 include("includes/classes/Constants.php"); 
-
-
 $account = new Account($con);
-
 #   PHP Handlers Links
 include("includes/handlers/register-handler.php");
 include("includes/handlers/login-handler.php"); 
-
 function getInputValue($name) {
     if(isset($_POST[$name])) {
         echo $_POST[$name];
     }
 }
-
 ?>
-
 <!--    Website Code    -->
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +37,6 @@ function getInputValue($name) {
 <body>
     <!--    Show/Hide Form Handler    -->
     <?php
-
         if(isset($_POST['registerButton'])) {
             echo '<script>
                     $(document).ready(function(){
@@ -62,7 +52,6 @@ function getInputValue($name) {
                     });
                 </script>';
         }
-
     ?>
     <!--    Show/Hide Form Handler End    -->
     <!--    Website View    -->
@@ -87,7 +76,6 @@ function getInputValue($name) {
                                 <?php echo $account->getError(Constants::$loginFailed); ?>
                             </div>
                             <button type="submit" name="loginButton" class="btn btn-primary btn-lg btn-block">LOGIN</button>
-
                             <div class="hasAccountText mt-3">
                                 <span id="hideLogin">Don&apos;t have an account yet? Sign-Up here</span>
                             </div>
