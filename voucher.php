@@ -73,7 +73,50 @@ include("includes/handlers/transaction-handler.php");
                 <?php echo $transactions->getSuccess(Constants::$VoucherRedeemed); ?>
             </div>
         </div>
-        <!--    Form to Redeem Voucher End  -->
+    </div>
+    <!--    Form to Redeem Voucher End  -->
+
+    <div class="col-8">
+        <table class="table table-hover table-striped table-bordered table-hover mt-4">
+            <caption>These are the last transactions that you have made in the past.</caption>
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Voucher ID</th>
+                    <th scope="col">Voucher Code</th>
+                    <th scope="col">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $sen = $_SESSION['userLoggedIn'];
+                $VocuherQuery = mysqli_query($con, "SELECT `voucher_id`, user1.`email_id` AS `send_from`, voucher_amount, voucher_code
+                FROM `voucher_table` t JOIN `user_details` user1
+                ON t.`sender_id` = user1.`user_ID`
+                WHERE user1.`email_id`='$sen'
+                ORDER BY `voucher_id` DESC");
+                ?>
+
+                <?php
+                if (mysqli_num_rows($VocuherQuery)==0) { 
+                ?>
+                <tr>
+                    <td colspan="3">No generated vouchers to display here.</td>
+                </tr>
+                <?php
+                }else{
+                    while($row = mysqli_fetch_array($VocuherQuery)) {
+                ?>
+                <tr>
+                    <th scope='row'><?php echo $row['voucher_id']; ?></th>
+                    <td><?php echo $row['voucher_code']; ?></td>
+                    <td><?php echo $row['voucher_amount']; ?></td>
+                </tr>
+                <?php
+                }
+                    }
+            ?>
+            </tbody>
+        </table>
     </div>
 </div>
 <!--    Voucher View    -->
