@@ -103,7 +103,7 @@ include("includes/handlers/transaction-handler.php");
                 if (mysqli_num_rows($VocuherQuery)==0) { 
                 ?>
                 <tr>
-                    <td colspan="3">No generated vouchers to display here.</td>
+                    <td colspan="3">No vouchers to display here.</td>
                 </tr>
                 <?php
                 }else{
