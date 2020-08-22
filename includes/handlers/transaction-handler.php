@@ -84,9 +84,6 @@
         $amount = $_POST['reqAmount'];
         
         $wasSuccessful = $transactions->reqCredits($sender, $receiver, $amount);
-        if($wasSuccessful){
-            header("requestmoney.php");
-        }
 
     }
 
