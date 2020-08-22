@@ -37,7 +37,8 @@
                 array_push($this->errorArray, Constants::$cantSendSelf);
             }
             else { 
-                return $this->sendCreditToUser($sen, $reciv, $amt);
+                $this->sendCreditToUser($sen, $reciv, $amt);
+                return true;
             }
         }
 
@@ -85,7 +86,8 @@
                 array_push($this->errorArray, Constants::$cantReqSelf);
             }
             else { 
-                return $this->receiveCreditFromUser($sen, $reciv, $amt);
+                $this->receiveCreditFromUser($sen, $reciv, $amt);
+                return true;
             }
             
         }

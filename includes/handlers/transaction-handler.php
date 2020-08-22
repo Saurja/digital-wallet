@@ -16,6 +16,10 @@
         
         $wasSuccessful = $transactions->sendcredits($sender, $receiver, $amount);
 
+        if($wasSuccessful){
+            header("Location: index.php");
+        }
+
     }
 
     #   when Pay Requested Credit Button is pressed
@@ -40,6 +44,7 @@
                 $requestmade =    $transactions->sendRequestedcredits($sender, $receiver, $amount);
                 if($requestmade){
                     $transactions->deleteRowWithID($requestID);
+                    header("Location: index.php");
                 }
 
             }
@@ -79,6 +84,9 @@
         $amount = $_POST['reqAmount'];
         
         $wasSuccessful = $transactions->reqCredits($sender, $receiver, $amount);
+        if($wasSuccessful){
+            header("requestmoney.php");
+        }
 
     }
 
