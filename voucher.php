@@ -76,9 +76,12 @@ include("includes/handlers/transaction-handler.php");
     </div>
     <!--    Form to Redeem Voucher End  -->
 
+    <!--    Voucher Table  -->
+    
     <div class="col-8">
-        <table class="table table-hover table-striped table-bordered table-hover mt-4">
-            <caption>These are the last transactions that you have made in the past.</caption>
+        <h3 class="mt-4">Vouchers Created</h3>
+        <table class="table table-hover table-striped table-bordered table-hover ">
+            <caption>These are the vouchers with their respective amount created by you.</caption>
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Voucher ID</th>
