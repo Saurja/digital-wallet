@@ -7,6 +7,12 @@
         return ucfirst(strtolower($inputText));
     }
 
+    function sanitizevoucher($inputText) {
+        $inputText = strip_tags($inputText);
+        return str_replace(" ", "", $inputText);
+        
+    }
+
     #   when Send Money button is pressed
     if(isset($_POST['sendMoneyButton'])){
         
@@ -92,8 +98,12 @@
 
         $sender = $_SESSION['userLoggedIn'];
         $voucherId = $_POST['voucherId'];
+        $voucherId = sanitizevoucher($voucherId);
         
         $wasSuccessful = $transactions->redeemVoucherID($sender, $voucherId);
+        if($wasSuccessful){
+            header("Location: voucher.php");
+        }
 
     }
 

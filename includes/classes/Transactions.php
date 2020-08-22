@@ -189,7 +189,10 @@
                 # closing connection 
                 $dbh = null;
                 $sth = null;
+                return true;
             }
+
+            
 
         }
 
