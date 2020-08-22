@@ -63,7 +63,8 @@
                 array_push($this->errorArray, Constants::$cantSendSelf);
             }
             else { 
-                return $this->sendCreditToUser($sen, $reciv, $amt);
+                $this->sendCreditToUser($sen, $reciv, $amt);
+                return true;
             }
             
         }

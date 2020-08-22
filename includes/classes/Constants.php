@@ -22,7 +22,7 @@ class Constants {
     public static $cantSendSelf = "Error: You cannot send Money to yourself";
     public static $cantReqSelf = "Error: You cannot request Money from yourself";
 
-    public static $InsufficientBalanceForReq = "Error: Insufficient Account Balance To Send Credits, Ask user for re-request";
+    public static $InsufficientBalanceForReq = "Error: Insufficient Account Balance To Send Requested Credits";
     public static $amountLessthanOne = "Error: Amount must be greater than zero";
 
     public static $voucherCodeInvalid = "Error: The voucher code is Invalid";

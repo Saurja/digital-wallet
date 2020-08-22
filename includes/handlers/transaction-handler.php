@@ -37,8 +37,11 @@
             if($row['req_id'] == $requestID) {
                 $receiver= $row['req_from'];
                 $amount = $row['credits_requested'];
-                $transactions->sendRequestedcredits($sender, $receiver, $amount);
-                $transactions->deleteRowWithID($requestID);
+                $requestmade =    $transactions->sendRequestedcredits($sender, $receiver, $amount);
+                if($requestmade){
+                    $transactions->deleteRowWithID($requestID);
+                }
+
             }
         
         }
@@ -77,7 +80,6 @@
         
         $wasSuccessful = $transactions->reqCredits($sender, $receiver, $amount);
 
-        
     }
 
     #   when Reedeem Voucher button is pressed
