@@ -35,7 +35,9 @@ include("includes/handlers/transaction-handler.php");
                         $amount = $_POST['voucherAmt'];
                         
                         $wasSuccessful = $transactions->generateVoucherID($sender, $amount);
-                        echo $wasSuccessful;
+                        if($wasSuccessful){
+                            header("Location: voucher.php");
+                        }
                     
                     }
                 ?>
