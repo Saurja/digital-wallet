@@ -5,6 +5,13 @@ include("includes/classes/Constants.php");
 
 if(isset($_SESSION['userLoggedIn'])) {
     $userLoggedIn = $_SESSION['userLoggedIn'];
+    if(time()-$_SESSION["login_time_stamp"] >600)   
+    { 
+        session_unset(); 
+        session_destroy();
+        mysqli_close($con);  
+        header("Location:register.php"); 
+    } 
 } else {
     header("Location: register.php");
 }

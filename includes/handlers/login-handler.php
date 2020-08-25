@@ -9,7 +9,13 @@
     $loginSuccessful = $account->login($email);
     mysqli_query($con, "UPDATE `user_details` SET `counter`=`counter`+1 WHERE `email_id` = '$email'");
     if($loginSuccessful) {
+        
+        // Session Variables are created 
         $_SESSION['userLoggedIn'] = $email;
+
+        // Login time is stored in a session variable 
+        $_SESSION["login_time_stamp"] = time();   
+
         header("Location: index.php");
     }
 }
