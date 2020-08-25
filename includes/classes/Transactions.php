@@ -150,8 +150,12 @@
 
             $sen = $this->getUserId($sen);
 
-            $checkVoucherCodeQuery = mysqli_query($this->con, "SELECT `voucher_id` FROM `voucher_table` WHERE `voucher_code`='$vId'");
-
+            #$checkVoucherCodeQuery = mysqli_query($this->con, "SELECT `voucher_id` FROM `voucher_table` WHERE `voucher_code`='$vId'");
+            $stmt = $this->con->prepare('SELECT `voucher_id` FROM `voucher_table` WHERE `voucher_code` = ?');
+            $stmt->bind_param('s', $vId);
+            $stmt->execute();
+            $checkVoucherCodeQuery = $stmt->get_result();
+            
             #   Fetches amount that is need to be added if redeemed
             $amt = mysqli_query($this->con, "SELECT `voucher_amount` FROM `voucher_table` WHERE `voucher_code`='$vId'");
             $amt = mysqli_fetch_array($amt);
@@ -185,11 +189,14 @@
                     # An exception has been thrown; We must rollback the transaction
                     $dbh->rollBack();
                     array_push($this->errorArray, Constants::$TranscErr);
+                } finally {
+                    # closing connection 
+                    $dbh = null;
+                    $sth = null;
+                    $stmt = null;
+                    return true;
                 }
-                # closing connection 
-                $dbh = null;
-                $sth = null;
-                return true;
+                
             }
 
             
