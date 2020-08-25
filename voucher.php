@@ -2,6 +2,7 @@
 
 <!--    Send Money Handler  -->
 <?php
+
 include("includes/classes/Transactions.php"); 
 $transactions = new Transactions($con);
 include("includes/handlers/transaction-handler.php");        
@@ -36,7 +37,10 @@ include("includes/handlers/transaction-handler.php");
                         
                         $wasSuccessful = $transactions->generateVoucherID($sender, $amount);
                         if($wasSuccessful){
+                            $logger->debug('Transaction: /Create_Voucher/ Successful. Voucher Amount: '.$amount.' | via account '.$sender);
                             header("Location: voucher.php");
+                        }else{
+                            $logger->debug('Transaction: /Create_Voucher/ Failed. Voucher Amount: '.$amount.' | via account '.$sender);
                         }
                     
                     }

@@ -1,5 +1,9 @@
 <!--    PHP Code    -->
 <?php 
+
+require 'vendor/autoload.php';
+$logger = new Katzgrau\KLogger\Logger(__DIR__.'/logs');
+
 include("includes/config.php"); 
 #   PHP Classes Links
 include("includes/classes/Account.php"); 

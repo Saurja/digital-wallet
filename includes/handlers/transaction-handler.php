@@ -23,7 +23,10 @@
         $wasSuccessful = $transactions->sendcredits($sender, $receiver, $amount);
 
         if($wasSuccessful){
+            $logger->debug('Transaction Type: /Send_Money/ Successful. '.$amount.' has been sent to '.$receiver.' via account '.$sender);
             header("Location: index.php");
+        }else{
+            $logger->debug('Transaction Type: /Send_Money/ Failed. '.$amount.' has been reverted to account '.$sender);
         }
 
     }
@@ -50,7 +53,10 @@
                 $requestmade =    $transactions->sendRequestedcredits($sender, $receiver, $amount);
                 if($requestmade){
                     $transactions->deleteRowWithID($requestID);
+                    $logger->debug('Transaction: /Send_Requested_Money/ Successful. '.$amount.' has been sent to '.$receiver.' via account '.$sender);
                     header("Location: index.php");
+                }else{
+                    $logger->debug('Transaction Type: /Send_Money/ Failed. '.$amount.' has been reverted to account '.$sender);
                 }
 
             }
@@ -73,10 +79,12 @@
         WHERE user2.`email_id`='$sender'");
 
         while($row = mysqli_fetch_array($reqCreditQuery)) {
-
             if($row['req_id'] == $requestID) {
                 $transactions->deleteRowWithID($requestID);
+                $logger->debug('Transaction: /Delete_Requested_Money/ Successful. Request ID: ' .$requestID. ' | via account '.$sender);
                 array_push($transactions->SuccessArray, Constants::$RequestDeleted);
+            }else{
+                $logger->debug('Transaction: /Delete_Requested_Money/ Failed. Request ID: ' .$requestID. ' | via account '.$sender);
             }
             
         }
@@ -91,6 +99,13 @@
         
         $wasSuccessful = $transactions->reqCredits($sender, $receiver, $amount);
 
+        if($wasSuccessful){
+            $logger->debug('Transaction: /Request_Money/ Successful. Request Amount: ' .$amount. ' | From: ' .$receiver. ' | via account '.$sender);
+        }else{
+            $logger->debug('Transaction: /Request_Money/ Failed. via account '.$sender);
+
+        }
+
     }
 
     #   when Reedeem Voucher button is pressed
@@ -102,7 +117,10 @@
         
         $wasSuccessful = $transactions->redeemVoucherID($sender, $voucherId);
         if($wasSuccessful){
+            $logger->debug('Transaction: /Reedeem_Voucher/ Successful. Voucher Code: '.$voucherId.' | via account '.$sender);
             header("Location: voucher.php");
+        }else{
+            $logger->debug('Transaction: /Reedeem_Voucher/ Failed. Voucher Code: '.$voucherId.' | via account '.$sender);
         }
 
     }

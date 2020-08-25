@@ -1,5 +1,8 @@
 <?php
 
+require 'vendor/autoload.php';
+$logger = new Katzgrau\KLogger\Logger(__DIR__.'/logs');
+
 include("includes/config.php");
 include("includes/classes/Constants.php"); 
 

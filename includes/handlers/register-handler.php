@@ -37,6 +37,7 @@
     #   when register button is pressed
     if (isset($_POST['registerButton'])) {
 
+        $logger->info('Register button pressed...');
         //Register Button Was Pressed
         $username = sanatizeFormUsername($_POST['username']);
         $email = sanatizeFormString($_POST['email']);
@@ -47,7 +48,11 @@
 
         if($wasSuccessful) {
             $_SESSION['userLoggedIn'] = $email;
+            $logger->info('User registration was Successfull...');
+            $logger->info('User Details : Username'.$username.' | Email: '.$email.' | Mobile: '.$mobile.' saved to the server....');
             header("Location: index.php");
+        }else{
+            $logger->error('OOPS! Something went wrong with the registration......');
         }
     }
 ?>
