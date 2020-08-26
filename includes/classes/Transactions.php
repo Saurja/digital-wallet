@@ -59,15 +59,23 @@
 
         public function sendRequestedcredits($sen, $reciv, $amt) {
 
-            $query = mysqli_query($this->con, "SELECT * FROM user_details WHERE email_id='$reciv'");
+            #   Get whom to send from database
+            $stmt = $this->con->prepare('SELECT * FROM user_details WHERE email_id= ?');
+            $stmt->bind_param('s', $reciv); // 's' specifies the variable type => 'string'
+            $stmt->execute();
+            $query = $stmt->get_result();
 
-            $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
-            $resultarr = mysqli_fetch_assoc($creditbalance);
+            #   Get Logged in user's credit balance
+            $stmt = $this->con->prepare('SELECT credits FROM user_details WHERE email_id= ?');
+            $stmt->bind_param('s', $sen); // 's' specifies the variable type => 'string'
+            $stmt->execute();
+            $creditbalance = $stmt->get_result();
+            $creditbalance = mysqli_fetch_assoc($creditbalance);
             
             if($amt < 1) { 
                 array_push($this->errorArray, Constants::$amountLessthanOne);
             }
-            else if($resultarr['credits'] < $amt) { 
+            else if($creditbalance['credits'] < $amt) { 
                 array_push($this->errorArray, Constants::$InsufficientBalanceForReq);
             }
             else if(mysqli_num_rows($query) != 1) {
@@ -87,7 +95,11 @@
 
         public function reqCredits($sen, $reciv, $amt) {
 
-            $query = mysqli_query($this->con, "SELECT * FROM user_details WHERE email_id='$reciv'");
+            #   Get whom to send from database
+            $stmt = $this->con->prepare('SELECT * FROM user_details WHERE email_id= ?');
+            $stmt->bind_param('s', $reciv); // 's' specifies the variable type => 'string'
+            $stmt->execute();
+            $query = $stmt->get_result();
             
             if($amt < 1) { 
                 array_push($this->errorArray, Constants::$amountLessthanOne);
