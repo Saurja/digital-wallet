@@ -8,7 +8,12 @@
     #   Code to login user and reditect it to index.php i.e the main page
     $email = sanatizeFormString($email);
     $loginSuccessful = $account->login($email);
-    mysqli_query($con, "UPDATE `user_details` SET `counter`=`counter`+1 WHERE `email_id` = '$email'");
+
+    #   Adding one to login counter
+    $stmt = $con->prepare('UPDATE user_details SET counter = counter+1 WHERE email_id = ?');
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+
     if($loginSuccessful) {
         
         // Session Variables are created 
