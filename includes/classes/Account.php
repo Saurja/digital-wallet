@@ -12,7 +12,10 @@
 
         public function login($em) {
             
-            $query = mysqli_query($this->con, "SELECT * FROM `user_details` WHERE `email_id`='$em'");
+            $stmt = $this->con->prepare('SELECT * FROM `user_details` WHERE `email_id`= ?');
+            $stmt->bind_param('s', $em); // 's' specifies the variable type => 'string'
+            $stmt->execute();
+            $query = $stmt->get_result();
 
             if(mysqli_num_rows($query)) {
                 return true;
@@ -58,7 +61,10 @@
                 return;
             }
 
-            $checkUserNameQuery = mysqli_query($this->con, "SELECT `user_name` FROM `user_details` WHERE `user_name`='$un'");
+            $stmt = $this->con->prepare('SELECT `user_name` FROM `user_details` WHERE `user_name`= ?');
+            $stmt->bind_param('s', $un); // 's' specifies the variable type => 'string'
+            $stmt->execute();
+            $checkUserNameQuery = $stmt->get_result();
             if (mysqli_num_rows($checkUserNameQuery) != 0) {
                 array_push($this->errorArray, Constants::$usernameTaken);
             }
