@@ -9,9 +9,6 @@
             <li class="nav-item " id="userCreditBalance">
                 <a href="index.php" class="navbar-text white-text" style="text-decoration: none;">
                 <?php
-                /*
-                    !   Note: Only updates after page is reloaded.
-                */
                     $user = $_SESSION["userLoggedIn"];
                     $accBal = mysqli_query($con, "SELECT `credits` FROM `user_details` where `email_id` = '$user'");
                     $accBal = mysqli_fetch_assoc($accBal);
