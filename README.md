@@ -31,7 +31,6 @@
 * [Usage](#usage)
 * [Roadmap](#roadmap)
 * [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
 
 
 
