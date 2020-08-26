@@ -24,6 +24,8 @@
                 return false;
             }
 
+            $stmt->close();
+
         }
 
         public function register($un, $em, $em2, $mb) { 
@@ -68,6 +70,7 @@
             if (mysqli_num_rows($checkUserNameQuery) != 0) {
                 array_push($this->errorArray, Constants::$usernameTaken);
             }
+            $stmt->close();
             
         }
 
@@ -89,6 +92,7 @@
             if (mysqli_num_rows($checkEmailQuery) != 0) {
                 array_push($this->errorArray, Constants::$emailTaken);
             }
+            $stmt->close();
         }
 
         private function validatePhoneNumber($mb)
@@ -108,6 +112,7 @@
             } else {
             return true;
             }
+            $stmt->close();
         }
     }
 

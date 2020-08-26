@@ -25,12 +25,14 @@
             $stmt->bind_param('s', $reciv); // 's' specifies the variable type => 'string'
             $stmt->execute();
             $query = $stmt->get_result();
+            $stmt->close();
 
             #   Get Logged in user's credit balance
             $stmt = $this->con->prepare('SELECT credits FROM user_details WHERE email_id= ?');
             $stmt->bind_param('s', $sen); // 's' specifies the variable type => 'string'
             $stmt->execute();
             $creditbalance = $stmt->get_result();
+            $stmt->close();
             $creditbalance = mysqli_fetch_assoc($creditbalance);
             
             if($amt < 1) { 
@@ -60,12 +62,14 @@
             $stmt->bind_param('s', $reciv); // 's' specifies the variable type => 'string'
             $stmt->execute();
             $query = $stmt->get_result();
+            $stmt->close();
 
             #   Get Logged in user's credit balance
             $stmt = $this->con->prepare('SELECT credits FROM user_details WHERE email_id= ?');
             $stmt->bind_param('s', $sen); // 's' specifies the variable type => 'string'
             $stmt->execute();
             $creditbalance = $stmt->get_result();
+            $stmt->close();
             $creditbalance = mysqli_fetch_assoc($creditbalance);
             
             if($amt < 1) { 
@@ -96,6 +100,7 @@
             $stmt->bind_param('s', $reciv); // 's' specifies the variable type => 'string'
             $stmt->execute();
             $query = $stmt->get_result();
+            $stmt->close();
             
             if($amt < 1) { 
                 array_push($this->errorArray, Constants::$amountLessthanOne);
@@ -124,6 +129,7 @@
             $stmt->bind_param('s', $sen); // 's' specifies the variable type => 'string'
             $stmt->execute();
             $creditbalance = $stmt->get_result();
+            $stmt->close();
             $creditbalance = mysqli_fetch_assoc($creditbalance);
             
             # Create and check a new connection to the database
@@ -179,14 +185,14 @@
             $stmt->bind_param('s', $vId);
             $stmt->execute();
             $checkVoucherCodeQuery = $stmt->get_result();
+            $stmt->close();
             
             #   Fetches amount that is need to be added if redeemed
             $stmt = $this->con->prepare('SELECT `voucher_amount` FROM `voucher_table` WHERE `voucher_code`= ?');
             $stmt->bind_param('s', $vId); // 's' specifies the variable type => 'string'
-
             $stmt->execute();
-
             $amt = $stmt->get_result();
+            $stmt->close();
 
             $amt = mysqli_fetch_array($amt);
             $amt = isset($amt['voucher_amount']) ? ($amt['voucher_amount']) : 0;
@@ -223,7 +229,6 @@
                     # closing connection 
                     $dbh = null;
                     $sth = null;
-                    $stmt = null;
                     return true;
                 }
                 
