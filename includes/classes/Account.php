@@ -13,7 +13,7 @@
         public function login($em) {
             
             $stmt = $this->con->prepare('SELECT * FROM `user_details` WHERE `email_id`= ?');
-            $stmt->bind_param('s', $em); // 's' specifies the variable type => 'string'
+            $stmt->bind_param('s', $em);
             $stmt->execute();
             $query = $stmt->get_result();
 
@@ -62,7 +62,7 @@
             }
 
             $stmt = $this->con->prepare('SELECT `user_name` FROM `user_details` WHERE `user_name`= ?');
-            $stmt->bind_param('s', $un); // 's' specifies the variable type => 'string'
+            $stmt->bind_param('s', $un);
             $stmt->execute();
             $checkUserNameQuery = $stmt->get_result();
             if (mysqli_num_rows($checkUserNameQuery) != 0) {
