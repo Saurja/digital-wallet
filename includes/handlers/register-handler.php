@@ -48,6 +48,7 @@
 
         if($wasSuccessful) {
             $_SESSION['userLoggedIn'] = $email;
+            $_SESSION["login_time_stamp"] = time(); 
             $logger->info('User registration was Successfull...');
             $logger->info('User Details : Username'.$username.' | Email: '.$email.' | Mobile: '.$mobile.' saved to the server....');
             header("Location: index.php");

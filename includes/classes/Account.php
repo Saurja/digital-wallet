@@ -51,9 +51,16 @@
         private function insertUserDetails($un, $em, $mb){
 
             $init_cridit = 100;
+            $init_Counter = 1;
             $date = date("Y-m-d h:i:sa");
-            return  mysqli_query($this->con, "INSERT INTO `user_details` (`user_name`, `contact_no`, `email_id`, `credits`, `last_activity` ,`counter`) VALUES ('$un', '$mb', '$em', '$init_cridit','$date' ,'1')");
+            #return  mysqli_query($this->con, "INSERT INTO `user_details` (`user_name`, `contact_no`, `email_id`, `credits`, `last_activity` ,`counter`) VALUES ('$un', '$mb', '$em', '$init_cridit','$date' ,'1')");
         
+            $stmt = $this->con->prepare("INSERT INTO `user_details` (`user_name`, `contact_no`, `email_id`, `credits`, `last_activity` ,`counter`) VALUES (?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssdsi", $un, $mb, $em, $init_cridit,$date ,$init_Counter);
+            $stmt->execute();
+            $stmt->close();
+            return true;
+
         }
 
         private function validateUsername($un) {
