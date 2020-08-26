@@ -30,8 +30,6 @@
   * [Installation](#installation)
 * [Usage](#usage)
 * [Roadmap](#roadmap)
-* [Contact](#contact)
-
 
 
 <!-- ABOUT THE PROJECT -->
@@ -82,12 +80,3 @@ How a real digital payment system works. How a transaction happens. How to log d
 
 See the [open issues](https://github.com/Saurja/digital-wallet/issues) for a list of proposed features (and known issues).
 
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Saurja Ghosh - [@Saurja](https://github.com/Saurja) - Github Profile
-
-Project Link: [https://github.com/Saurja/digital-wallet](https://github.com/Saurja/digital-wallet)
