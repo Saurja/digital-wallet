@@ -2,7 +2,7 @@
 <br />
 <p align="center">
 
-  <h3 align="center">Digital Wallets</h3>
+  <h1 align="center">Digital Wallets</h1>
 
   <p align="center">
     Digital Wallet is a payment application that allows users to store and spend virtual money.
