@@ -82,7 +82,10 @@
                 return;
             }
 
-            $checkEmailQuery = mysqli_query($this->con, "SELECT `email_id` FROM `user_details` WHERE `email_id`='$em'");
+            $stmt = $this->con->prepare('SELECT `email_id` FROM `user_details` WHERE `email_id`= ?');
+            $stmt->bind_param('s', $em);
+            $stmt->execute();
+            $checkEmailQuery = $stmt->get_result();
             if (mysqli_num_rows($checkEmailQuery) != 0) {
                 array_push($this->errorArray, Constants::$emailTaken);
             }
@@ -90,7 +93,11 @@
 
         private function validatePhoneNumber($mb)
         {
-            $checkMobileQuery = mysqli_query($this->con, "SELECT `contact_no` FROM `user_details` WHERE `contact_no`='$mb'");
+
+            $stmt = $this->con->prepare('SELECT `contact_no` FROM `user_details` WHERE `contact_no`= ?');
+            $stmt->bind_param('s', $mb);
+            $stmt->execute();
+            $checkMobileQuery = $stmt->get_result();
             if (mysqli_num_rows($checkMobileQuery) != 0) {
                 array_push($this->errorArray, Constants::$MobileTaken);
                 return false;
