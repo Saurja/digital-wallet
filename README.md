@@ -92,13 +92,3 @@ See the [open issues](https://github.com/Saurja/digital-wallet/issues) for a lis
 Saurja Ghosh - [@Saurja](https://github.com/Saurja) - Github Profile
 
 Project Link: [https://github.com/Saurja/digital-wallet](https://github.com/Saurja/digital-wallet)
-
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-
-* []()
-* []()
-* []()
-
