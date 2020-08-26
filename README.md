@@ -60,8 +60,6 @@ Some Features of this project includes:
 
 To get a local copy up and running follow these simple steps.
 
-### Prerequisites
-
 ### Installation
 
 1. Clone the repo
