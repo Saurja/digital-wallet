@@ -20,10 +20,6 @@
 
         public function sendcredits($sen, $reciv, $amt) {
 
-            #$query = mysqli_query($this->con, "SELECT * FROM user_details WHERE email_id='$reciv'");
-            #$creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
-            #$resultarr = mysqli_fetch_assoc($creditbalance);
-
             #   Get whom to send from database
             $stmt = $this->con->prepare('SELECT * FROM user_details WHERE email_id= ?');
             $stmt->bind_param('s', $reciv); // 's' specifies the variable type => 'string'
@@ -123,8 +119,12 @@
             
             $VoucherID = $this->generateRandomString(8);
 
-            $creditbalance = mysqli_query($this->con, "SELECT credits FROM user_details WHERE email_id='$sen'");
-            $resultarr = mysqli_fetch_assoc($creditbalance);
+            #   Get Logged in user's credit balance
+            $stmt = $this->con->prepare('SELECT credits FROM user_details WHERE email_id= ?');
+            $stmt->bind_param('s', $sen); // 's' specifies the variable type => 'string'
+            $stmt->execute();
+            $creditbalance = $stmt->get_result();
+            $creditbalance = mysqli_fetch_assoc($creditbalance);
             
             # Create and check a new connection to the database
 
@@ -136,7 +136,7 @@
                 array_push($this->errorArray, Constants::$amountLessthanOne);
                 return false;
             }
-            else if($resultarr['credits'] < $amt) { 
+            else if($creditbalance['credits'] < $amt) { 
                 array_push($this->errorArray, Constants::$InsufficientBalanceForReq);
                 return false;
             }else{
@@ -175,14 +175,19 @@
 
             $sen = $this->getUserId($sen);
 
-            #$checkVoucherCodeQuery = mysqli_query($this->con, "SELECT `voucher_id` FROM `voucher_table` WHERE `voucher_code`='$vId'");
             $stmt = $this->con->prepare('SELECT `voucher_id` FROM `voucher_table` WHERE `voucher_code` = ?');
             $stmt->bind_param('s', $vId);
             $stmt->execute();
             $checkVoucherCodeQuery = $stmt->get_result();
             
             #   Fetches amount that is need to be added if redeemed
-            $amt = mysqli_query($this->con, "SELECT `voucher_amount` FROM `voucher_table` WHERE `voucher_code`='$vId'");
+            $stmt = $this->con->prepare('SELECT `voucher_amount` FROM `voucher_table` WHERE `voucher_code`= ?');
+            $stmt->bind_param('s', $vId); // 's' specifies the variable type => 'string'
+
+            $stmt->execute();
+
+            $amt = $stmt->get_result();
+
             $amt = mysqli_fetch_array($amt);
             $amt = isset($amt['voucher_amount']) ? ($amt['voucher_amount']) : 0;
 
