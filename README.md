@@ -5,7 +5,7 @@
   <h3 align="center">Digital Wallets</h3>
 
   <p align="center">
-    YOUR_SHORT_DESCRIPTION
+    Digital Wallet is a payment application that allows users to store and spend virtual money.
     <br />
     <a href="https://github.com/Saurja/digital-wallet"><strong>Explore the docs »</strong></a>
     <br />
