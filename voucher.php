@@ -63,7 +63,6 @@ include("includes/handlers/transaction-handler.php");
                 <p class="lead">Redeem a voucher to get credits.</p>
                 <form class="redeemVoucher mt-4" action="voucher.php" method="POST">
                     <div class="input-group">
-
                         <input type="text" class="form-control" id="voucherId" name="voucherId"
                             placeholder="Enter Voucher Id...." aria-label="Enter Voucher Id...."
                             aria-describedby="basic-addon2">
@@ -71,9 +70,7 @@ include("includes/handlers/transaction-handler.php");
                             <button type="submit" name="reedeemVoucherbutton"
                                 class="btn btn-primary mb-2">Redeem</button>
                         </div>
-
                     </div>
-
                 </form>
                 <?php echo $transactions->getError(Constants::$voucherCodeInvalid); ?>
                 <?php echo $transactions->getSuccess(Constants::$VoucherRedeemed); ?>

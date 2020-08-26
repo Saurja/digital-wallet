@@ -15,7 +15,6 @@
                     echo "Your Points: ". $accBal['credits'] . "";
                 ?>
                 </a>
-            
             </li>
         </ul>
         <span class="navbar-text white-text mr-3">

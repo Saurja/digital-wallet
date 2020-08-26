@@ -18,7 +18,6 @@ include("includes/handlers/transaction-handler.php");
 <!--    Send Money Form    -->
 
 <div class="row justify-content-center my-5">
-
     <div class="col-8">
         <?php echo $transactions->getSuccess(Constants::$CreditsSent); ?>
         <div class="jumbotron ">
@@ -50,7 +49,6 @@ include("includes/handlers/transaction-handler.php");
             </div>
         </div>
     </div>
-
 </div>
 <!--    Send Money Form End    -->
 
@@ -73,7 +71,6 @@ include("includes/handlers/transaction-handler.php");
                 </tr>
             </thead>
             <tbody>
-
                 <!--    List All Requests   -->
                 <?php
                 //  Get the email of user logged in
@@ -87,7 +84,6 @@ include("includes/handlers/transaction-handler.php");
                 WHERE user2.`email_id`='$sender'
                 ORDER BY `req_id` DESC");
             ?>
-
                 <?php
             if (mysqli_num_rows($reqCreditQuery)==0) { 
             ?>
