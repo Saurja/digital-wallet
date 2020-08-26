@@ -74,7 +74,7 @@ composer install
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-How a real digital payment system works How a transaction happens How to log detailed transactions Building a system in JEE and RDBMS.
+How a real digital payment system works. How a transaction happens. How to log detailed transactions Building a system in JEE and RDBMS.
 
 
 <!-- ROADMAP -->
