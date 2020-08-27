@@ -55,7 +55,6 @@ include("includes/handlers/transaction-handler.php");
     <!--    Form to Create Voucher End  -->
 
     <!--    Voucher Table  -->
-    
     <div class="col-8">
         <h3 class="mt-1">Vouchers Created</h3>
         <table class="table table-hover table-striped table-bordered table-hover ">
@@ -125,8 +124,6 @@ include("includes/handlers/transaction-handler.php");
         </div>
     </div>
     <!--    Form to Redeem Voucher End  -->
-
-    
 </div>
 <!--    Voucher View    -->
 
