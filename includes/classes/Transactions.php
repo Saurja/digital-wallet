@@ -208,15 +208,21 @@
                 # Create and check a new connection to the database
                 include(CONNECT_DB);
 
+                $amtadd = $this->getUserCredit($_SESSION["userLoggedIn"]);
+                $amtadd = $this->numhash($amtadd);
+                $amtadd = $amtadd + $amt;
+                $amtadd = $this->numhash($amtadd);
+
                 try {  
+
                     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
                     # begin a Transaction
                     $dbh->beginTransaction();
     
                     # A set of queries; if one fails, an exception should be thrown
-                    $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`+? WHERE `user_ID` =?");
-                    $sth->execute(array($amt,$sen));
+                    $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=? WHERE `user_ID` =?");
+                    $sth->execute(array($amtadd,$sen));
                     $sth = $dbh->prepare("DELETE FROM `voucher_table` WHERE  `voucher_code` = ?");
                     $sth->execute(array($vId));
                     # If we arrive here, it means that no exception was thrown
