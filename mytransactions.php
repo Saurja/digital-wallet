@@ -10,7 +10,7 @@ $transactions = new Transactions($con);
 
 <div class="row justify-content-center mt-5">
     <div class="col-8">
-        <h3>Transaction History</h3>
+        <h1 class="display-5"><strong>Transaction History</strong></h1>
         <table class="table table-bordered table-hover mt-4">
         <caption>These are the last transactions that you have made in the past.</caption>
             <thead class="thead-dark">

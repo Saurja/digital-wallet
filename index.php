@@ -22,7 +22,7 @@ include("includes/handlers/transaction-handler.php");
         <?php echo $transactions->getSuccess(Constants::$CreditsSent); ?>
         <div class="jumbotron ">
             <div class="offset-1 col-10">
-                <h1 class="display-5 mb-5">Send Money</h1>
+                <h1 class="display-5"><em><strong>Send Money</strong></em></h1>
                 <p class="lead">Send credits to a intended user via his email id.</p>
                 <?php echo $transactions->getError(Constants::$TranscErrSend); ?>
                 <?php echo $transactions->getError(Constants::$TranscErrHistory); ?>
@@ -55,7 +55,7 @@ include("includes/handlers/transaction-handler.php");
 <!--    Display Request table    -->
 <div class="row justify-content-center my-5">
     <div class="col-8">
-        <h3>Transfer Requests</h3>
+        <strong><h2>Transfer Requests</h2></strong>
         <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
         <?php echo $transactions->getSuccess(Constants::$RequestDeleted); ?>
         <table class="table table-hover table-striped table-bordered mt-2 text-center">

@@ -19,7 +19,7 @@ include("includes/handlers/transaction-handler.php");
     <div class="col-8">
         <div class="jumbotron">
             <div class="offset-1 col-10">
-                <h1 class="display-5 mb-5">Request Credits</h1>
+                <h1 class="display-5"><em><strong>Request Credits</strong></em></h1>
                 <p class="lead">Request credits from a indented user via his email id.</p>
                 <form class="reqCreditMoney" action="" method="POST">
                     <div class="form-group ">
