@@ -8,7 +8,7 @@ body {
 
 
 .sidebar {
-    background-color: #4285F4;
+    background-color: #011627;
     width: 15rem;
     height: 100vh;
     position: fixed;
@@ -24,7 +24,7 @@ body {
 
             font-weight: bolder;
             text-decoration: none;
-            color: #011627;
+            color: #f37121;
             display: block;
             transition: 0.3s;
             display: block;
@@ -33,7 +33,7 @@ body {
 
         .group div a:hover {
             font-size: 1.1rem;
-            background-color: #011627;
+            background-color: #c70039;
             text-decoration: none;
             color: #F6F7F8;
         }

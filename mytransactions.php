@@ -45,7 +45,7 @@ $transactions = new Transactions($con);
                 
                 }elseif ($row['receiver'] == $sen) {
                     
-                    echo "<tr class='table-primary'>
+                    echo "<tr class='table-success'>
                         <th scope='row'>" . $row['transaction_id'] . "</th>
                         <td>From " . $row['sender'] . "</td>
                         <td>" . numhash($row['transaction_amount']) . " Points Received</td>

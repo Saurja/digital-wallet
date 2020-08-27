@@ -38,7 +38,7 @@
             if($amt < 1) { 
                 array_push($this->errorArray, Constants::$amountLessthanOne);
             }
-            else if($creditbalance['credits'] < $amt) { 
+            else if(numhash($creditbalance['credits']) < $amt) { 
                 array_push($this->errorArray, Constants::$InsufficientBalance);
             }
             else if(mysqli_num_rows($query) != 1) {
