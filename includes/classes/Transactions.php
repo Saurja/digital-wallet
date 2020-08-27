@@ -415,6 +415,8 @@
                 $sen = $this->getUserId($sen);
                 $reciv = $this->getUserId($reciv);
 
+                $amt = numhash($amt);
+
                 #   Saves transation information to transaction table
                 $sth = $dbh->prepare("INSERT INTO `transaction_table`(`sender_id`, `receiver_id`, `transaction_date`, `transaction_amount`) VALUES (?,?,?,?)");
                 $sth->execute(array($sen,$reciv,$date,$amt));

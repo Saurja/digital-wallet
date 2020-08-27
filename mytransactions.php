@@ -39,7 +39,7 @@ $transactions = new Transactions($con);
                     echo "<tr class='table-danger'>
                         <th scope='row'>" . $row['transaction_id'] . "</th>
                         <td>To " . $row['receiver'] . "</td>
-                        <td>" . $row['transaction_amount'] . " Points Sent</td>
+                        <td>" . numhash($row['transaction_amount']) . " Points Sent</td>
                         <td>" . $row['transaction_date'] . "</td>
                     </tr>";
                 
@@ -48,7 +48,7 @@ $transactions = new Transactions($con);
                     echo "<tr class='table-success'>
                         <th scope='row'>" . $row['transaction_id'] . "</th>
                         <td>From " . $row['sender'] . "</td>
-                        <td>" . $row['transaction_amount'] . " Points Received</td>
+                        <td>" . numhash($row['transaction_amount']) . " Points Received</td>
                         <td>" . $row['transaction_date'] . "</td>
                     </tr>";
 
