@@ -54,35 +54,10 @@ include("includes/handlers/transaction-handler.php");
     </div>
     <!--    Form to Create Voucher End  -->
 
-    <!--    Form to Redeem Voucher  -->
-    <div class="col-8">
-
-        <div class="jumbotron">
-            <div class="offset-1 col-10">
-                <h1 class="display-5"><em><strong>Reedeem Voucher</strong></em></h1>
-                <p class="lead">Redeem a voucher to get credits.</p>
-                <form class="redeemVoucher mt-4" action="voucher.php" method="POST">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="voucherId" name="voucherId"
-                            placeholder="Enter Voucher Id...." aria-label="Enter Voucher Id...."
-                            aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button type="submit" name="reedeemVoucherbutton"
-                                class="btn btn-primary mb-2">Redeem</button>
-                        </div>
-                    </div>
-                </form>
-                <?php echo $transactions->getError(Constants::$voucherCodeInvalid); ?>
-                <?php echo $transactions->getSuccess(Constants::$VoucherRedeemed); ?>
-            </div>
-        </div>
-    </div>
-    <!--    Form to Redeem Voucher End  -->
-
     <!--    Voucher Table  -->
     
     <div class="col-8">
-        <h3 class="mt-4">Vouchers Created</h3>
+        <h3 class="mt-1">Vouchers Created</h3>
         <table class="table table-hover table-striped table-bordered table-hover ">
             <caption>These are the vouchers with their respective amount created by you.</caption>
             <thead class="thead-dark">
@@ -124,9 +99,36 @@ include("includes/handlers/transaction-handler.php");
             </tbody>
         </table>
     </div>
+    <!--    Voucher Table End -->
+
+    <!--    Form to Redeem Voucher  -->
+    <div class="col-8">
+
+        <div class="jumbotron">
+            <div class="offset-1 col-10">
+                <h1 class="display-5"><em><strong>Reedeem Voucher</strong></em></h1>
+                <p class="lead">Redeem a voucher to get credits.</p>
+                <form class="redeemVoucher mt-4" action="voucher.php" method="POST">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="voucherId" name="voucherId"
+                            placeholder="Enter Voucher Id...." aria-label="Enter Voucher Id...."
+                            aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button type="submit" name="reedeemVoucherbutton"
+                                class="btn btn-primary mb-2">Redeem</button>
+                        </div>
+                    </div>
+                </form>
+                <?php echo $transactions->getError(Constants::$voucherCodeInvalid); ?>
+                <?php echo $transactions->getSuccess(Constants::$VoucherRedeemed); ?>
+            </div>
+        </div>
+    </div>
+    <!--    Form to Redeem Voucher End  -->
+
+    
 </div>
 <!--    Voucher View    -->
-</div>
 
 <!--    Stops form from resubmitting    -->
 <script>
