@@ -305,6 +305,42 @@
 
         }
 
+        #   Function to get Credits from the Email-ID
+
+        public function getUserCredit($un) {
+            include(CONNECT_DB);
+            
+            try {  
+                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                # begin a Transaction
+                $dbh->beginTransaction();
+
+                # A set of queries; if one fails, an exception should be thrown
+                $sth = $dbh->prepare("SELECT `credits` FROM `user_details` WHERE email_id=?");
+                $sth->execute(array($un));
+                
+                # If we arrive here, it means that no exception was thrown
+                # i.e. no query has failed, and we can commit the transaction
+                $UserCredits = $sth -> fetch();
+                $UserCredits = $UserCredits["credits"];
+                array_push($this->SuccessArray, Constants::$RequestSent);
+                $dbh->commit();
+                
+            } catch (Exception $e) {
+                # An exception has been thrown; We must rollback the transaction
+                $dbh->rollBack();
+                array_push($this->errorArray, Constants::$TranscErr);
+            } finally {
+                # closing connection 
+                $dbh = null;
+                $sth = null;
+            }
+
+            return $UserCredits;
+
+        }
+
         #   Getting the error array ready
 
         Public function getError($error) {
@@ -320,6 +356,10 @@
                 $Success = "";
             }
             return "<span class='successMessage'>$Success</span>";
+        }
+
+        private function numhash($n) {
+            return (((0x0000FFFF & $n) << 16) + ((0xFFFF0000 & $n) >> 16));
         }
 
         #   Function to generate random strings
