@@ -380,6 +380,15 @@
             
             # Create and check a new connection to the database
             include(CONNECT_DB);
+            $amtadd = $this->getUserCredit($reciv);
+            $amtadd = $this->numhash($amtadd);
+            $amtadd = $amtadd + $amt;
+            $amtadd = $this->numhash($amtadd);
+
+            $amtdeduct = $this->getUserCredit($sen);
+            $amtdeduct = $this->numhash($amtdeduct);
+            $amtdeduct = $amtdeduct - $amt;
+            $amtdeduct = $this->numhash($amtdeduct);
 
             try {  
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -388,10 +397,10 @@
                 $dbh->beginTransaction();
                 $date = date("Y-m-d h:i:sa");
                 # A set of queries; if one fails, an exception should be thrown
-                $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`-? WHERE email_id=?");
-                $sth->execute(array($amt,$sen));
-                $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`+? WHERE email_id=?");
-                $sth->execute(array($amt,$reciv));
+                $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=? WHERE email_id=?");
+                $sth->execute(array($amtdeduct,$sen));
+                $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=? WHERE email_id=?");
+                $sth->execute(array($amtadd,$reciv));
 
                 $sen = $this->getUserId($sen);
                 $reciv = $this->getUserId($reciv);
