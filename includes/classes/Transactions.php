@@ -85,6 +85,7 @@
                 array_push($this->errorArray, Constants::$cantSendSelf);
             }
             else { 
+                $amt = numhash($amt);
                 $this->sendCreditToUser($sen, $reciv, $amt);
                 return true;
             }
@@ -457,6 +458,7 @@
                 # begin a Transaction
                 $dbh->beginTransaction();
 
+                $amt = numhash($amt);
                 # A set of queries; if one fails, an exception should be thrown
                 $sth = $dbh->prepare("INSERT INTO `credit_requests`(`req_from`, `send_from`, `credits_requested`, `req_dateTime`) VALUES (?,?,?,?)");
                 $sth->execute(array($sen,$reciv,$amt,$date));

@@ -97,7 +97,7 @@ include("includes/handlers/transaction-handler.php");
                 <tr>
                     <th scope='row'><?php echo $row['req_id']; ?></th>
                     <td>From <?php echo  $row['req_from']; ?></td>
-                    <td><?php echo $row['credits_requested']; ?> Points Requested</td>
+                    <td><?php echo numhash($row['credits_requested']) ?> Points Requested</td>
                     <td><?php echo $row['req_dateTime']; ?></td>
                     <td>
                         <a class="mx-1" href="index.php?send_task=<?php echo $row['req_id'] ?>">
