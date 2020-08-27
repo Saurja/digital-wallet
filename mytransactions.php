@@ -36,7 +36,7 @@ $transactions = new Transactions($con);
                 
                 if ($row['sender'] == $sen) {
                     
-                    echo "<tr class='table-danger'>
+                    echo "<tr class='table-warning'>
                         <th scope='row'>" . $row['transaction_id'] . "</th>
                         <td>To " . $row['receiver'] . "</td>
                         <td>" . numhash($row['transaction_amount']) . " Points Sent</td>
@@ -45,7 +45,7 @@ $transactions = new Transactions($con);
                 
                 }elseif ($row['receiver'] == $sen) {
                     
-                    echo "<tr class='table-success'>
+                    echo "<tr class='table-primary'>
                         <th scope='row'>" . $row['transaction_id'] . "</th>
                         <td>From " . $row['sender'] . "</td>
                         <td>" . numhash($row['transaction_amount']) . " Points Received</td>
