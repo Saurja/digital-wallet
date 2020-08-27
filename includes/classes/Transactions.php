@@ -131,7 +131,7 @@
             $creditbalance = $stmt->get_result();
             $stmt->close();
             $creditbalance = mysqli_fetch_assoc($creditbalance);
-            
+            $creditbalance = numhash($creditbalance['credits']);
             # Create and check a new connection to the database
 
             include(CONNECT_DB);
@@ -142,11 +142,15 @@
                 array_push($this->errorArray, Constants::$amountLessthanOne);
                 return false;
             }
-            else if($creditbalance['credits'] < $amt) { 
+            else if($creditbalance < $amt) { 
                 array_push($this->errorArray, Constants::$InsufficientBalanceForReq);
                 return false;
             }else{
                 try {  
+                    
+                    $amtdeduct = $creditbalance - $amt;
+                    $amtdeduct = $this->numhash($amtdeduct);
+
                     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                     # begin a Transaction
@@ -155,8 +159,8 @@
                     # A set of queries; if one fails, an exception should be thrown
                     $sth = $dbh->prepare("INSERT INTO `voucher_table`(`sender_id`, `voucher_amount`, `voucher_code`) VALUES (?,?,?)");
                     $sth->execute(array($sen,$amt,$VoucherID));
-                    $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=`credits`-? WHERE `user_ID` =?");
-                    $sth->execute(array($amt, $sen));
+                    $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=? WHERE `user_ID` =?");
+                    $sth->execute(array($amtdeduct, $sen));
                     # If we arrive here, it means that no exception was thrown
                     # i.e. no query has failed, and we can commit the transaction
                     $dbh->commit();
