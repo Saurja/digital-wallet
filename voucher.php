@@ -115,7 +115,7 @@ include("includes/handlers/transaction-handler.php");
                 <tr>
                     <th scope='row'><?php echo $row['voucher_id']; ?></th>
                     <td><?php echo $row['voucher_code']; ?></td>
-                    <td><?php echo $row['voucher_amount']; ?></td>
+                    <td><?php echo numhash($row['voucher_amount']) ?></td>
                 </tr>
                 <?php
                 }

@@ -156,6 +156,7 @@
                     # begin a Transaction
                     $dbh->beginTransaction();
 
+                    $amt = numhash($amt);
                     # A set of queries; if one fails, an exception should be thrown
                     $sth = $dbh->prepare("INSERT INTO `voucher_table`(`sender_id`, `voucher_amount`, `voucher_code`) VALUES (?,?,?)");
                     $sth->execute(array($sen,$amt,$VoucherID));
@@ -197,9 +198,9 @@
             $stmt->execute();
             $amt = $stmt->get_result();
             $stmt->close();
-
             $amt = mysqli_fetch_array($amt);
             $amt = isset($amt['voucher_amount']) ? ($amt['voucher_amount']) : 0;
+            $amt = numhash($amt);
 
             if (mysqli_num_rows($checkVoucherCodeQuery) == 0) {
                 array_push($this->errorArray, Constants::$voucherCodeInvalid);
