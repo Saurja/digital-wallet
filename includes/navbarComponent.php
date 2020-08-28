@@ -9,13 +9,7 @@
             <li class="nav-item " id="userCreditBalance">
                 <a href="index.php" class="navbar-text white-text" style="text-decoration: none;">
                 <?php
-                    function numhash($n) {
-                        return ((0x0000000F & $n) << 4) + ((0x000000F0& $n)>>4)
-                        + ((0x00000F00 & $n) << 4) + ((0x0000F000& $n)>>4)
-                        + ((0x000F0000 & $n) << 4) + ((0x00F00000& $n)>>4)
-                        + ((0x0F000000 & $n) << 4) + ((0xF0000000& $n)>>4);
-                    }
-
+                    include("includes/encryptFunction.php"); 
                     $user = $_SESSION["userLoggedIn"];
                     $accBal = mysqli_query($con, "SELECT `credits` FROM `user_details` where `email_id` = '$user'");
                     $accBal = mysqli_fetch_assoc($accBal);
