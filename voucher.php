@@ -80,7 +80,7 @@ include("includes/handlers/transaction-handler.php");
         </div>
         <!--    Form to Redeem Voucher End  -->
     </div>
-    <div class=" col-8 alert alert-light">
+    <div class="col-8">
     <?php echo $transactions->getError(Constants::$amountLessthanOne); ?>
     <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
     <?php echo $transactions->getError(Constants::$voucherCodeInvalid); ?>
@@ -88,7 +88,7 @@ include("includes/handlers/transaction-handler.php");
     </div>
     <!--    Voucher Table  -->
     <div class="col-8">
-        <h3 class="mt-1">Vouchers Created</h3>
+        <h3>Vouchers Created</h3>
         <table class="table table-hover table-striped table-bordered table-hover ">
             <caption>These are the vouchers with their respective amount created by you.</caption>
             <thead class="thead-dark">
