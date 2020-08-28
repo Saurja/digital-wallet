@@ -47,13 +47,13 @@ include("includes/handlers/transaction-handler.php");
                         }
                     ?>
                         <!--    Voucher Handler End  -->
-                        
+
                     </form>
-                    
+
                 </div>
             </div>
         </div>
-        
+
         <!--    Form to Create Voucher End  -->
 
         <!--    Form to Redeem Voucher  -->
@@ -74,17 +74,17 @@ include("includes/handlers/transaction-handler.php");
                             </div>
                         </div>
                     </form>
-                    
+
                 </div>
             </div>
         </div>
         <!--    Form to Redeem Voucher End  -->
     </div>
     <div class="col-8">
-    <?php echo $transactions->getError(Constants::$amountLessthanOne); ?>
-    <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
-    <?php echo $transactions->getError(Constants::$voucherCodeInvalid); ?>
-    <?php echo $transactions->getSuccess(Constants::$VoucherRedeemed); ?>
+        <?php echo $transactions->getError(Constants::$amountLessthanOne); ?>
+        <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
+        <?php echo $transactions->getError(Constants::$voucherCodeInvalid); ?>
+        <?php echo $transactions->getSuccess(Constants::$VoucherRedeemed); ?>
     </div>
     <!--    Voucher Table  -->
     <div class="col-8">
@@ -131,9 +131,6 @@ include("includes/handlers/transaction-handler.php");
         </table>
     </div>
     <!--    Voucher Table End -->
-
-    
-
 </div>
 <!--    Voucher View    -->
 
