@@ -53,7 +53,7 @@ include("includes/handlers/transaction-handler.php");
 <!--    Send Money Form End    -->
 
 <!--    Display Request table    -->
-<div class="row justify-content-center mt-5">
+<div class="row justify-content-center">
     <div class="col-8">
         <strong><h2>Transfer Requests</h2></strong>
         <?php echo $transactions->getError(Constants::$InsufficientBalanceForReq); ?>
