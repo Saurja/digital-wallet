@@ -10,7 +10,10 @@
                 <a href="index.php" class="navbar-text white-text" style="text-decoration: none;">
                 <?php
                     function numhash($n) {
-                        return (((0x0000FFFF & $n) << 16) + ((0xFFFF0000 & $n) >> 16));
+                        return ((0x0000000F & $n) << 4) + ((0x000000F0& $n)>>4)
+                        + ((0x00000F00 & $n) << 4) + ((0x0000F000& $n)>>4)
+                        + ((0x000F0000 & $n) << 4) + ((0x00F00000& $n)>>4)
+                        + ((0x0F000000 & $n) << 4) + ((0xF0000000& $n)>>4);
                     }
 
                     $user = $_SESSION["userLoggedIn"];

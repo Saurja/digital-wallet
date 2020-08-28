@@ -34,11 +34,12 @@
             $creditbalance = $stmt->get_result();
             $stmt->close();
             $creditbalance = mysqli_fetch_assoc($creditbalance);
+            $creditbalance = numhash($creditbalance['credits']);
             
             if($amt < 1) { 
                 array_push($this->errorArray, Constants::$amountLessthanOne);
             }
-            else if(numhash($creditbalance['credits']) < $amt) { 
+            else if($creditbalance < $amt) { 
                 array_push($this->errorArray, Constants::$InsufficientBalance);
             }
             else if(mysqli_num_rows($query) != 1) {
@@ -371,7 +372,10 @@
         }
 
         private function numhash($n) {
-            return (((0x0000FFFF & $n) << 16) + ((0xFFFF0000 & $n) >> 16));
+            return ((0x0000000F & $n) << 4) + ((0x000000F0& $n)>>4)
+            + ((0x00000F00 & $n) << 4) + ((0x0000F000& $n)>>4)
+            + ((0x000F0000 & $n) << 4) + ((0x00F00000& $n)>>4)
+            + ((0x0F000000 & $n) << 4) + ((0xF0000000& $n)>>4);
         }
 
         #   Function to generate random strings
@@ -392,15 +396,17 @@
             
             # Create and check a new connection to the database
             include(CONNECT_DB);
+
             $amtadd = $this->getUserCredit($reciv);
             $amtadd = $this->numhash($amtadd);
-            $amtadd = $amtadd + $amt;
-            $amtadd = $this->numhash($amtadd);
+            $credit = $amtadd + $amt;
+            $credit = $this->numhash($credit);
 
             $amtdeduct = $this->getUserCredit($sen);
             $amtdeduct = $this->numhash($amtdeduct);
-            $amtdeduct = $amtdeduct - $amt;
-            $amtdeduct = $this->numhash($amtdeduct);
+            $debit = $amtdeduct - $amt;
+            $debit = $this->numhash($debit);
+            $amt = numhash($amt);
 
             try {  
                 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -410,14 +416,12 @@
                 $date = date("Y-m-d h:i:sa");
                 # A set of queries; if one fails, an exception should be thrown
                 $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=? WHERE email_id=?");
-                $sth->execute(array($amtdeduct,$sen));
+                $sth->execute(array($debit,$sen));
                 $sth = $dbh->prepare("UPDATE `user_details` SET `credits`=? WHERE email_id=?");
-                $sth->execute(array($amtadd,$reciv));
+                $sth->execute(array($credit,$reciv));
 
                 $sen = $this->getUserId($sen);
                 $reciv = $this->getUserId($reciv);
-
-                $amt = numhash($amt);
 
                 #   Saves transation information to transaction table
                 $sth = $dbh->prepare("INSERT INTO `transaction_table`(`sender_id`, `receiver_id`, `transaction_date`, `transaction_amount`) VALUES (?,?,?,?)");
