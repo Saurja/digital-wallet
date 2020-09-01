@@ -99,11 +99,16 @@ Users can have different ways to send or receive money which gives them a wide v
 * how a real digital payment system works
 * how a transaction happens
 * how to log detailed transactions
-Understand requirements
-write User Stories and do Estimation
-Develop & Test System
+* Understand requirements
+* write User Stories and do Estimation
+* Develop & Test System
 
-
+### Screens in this project
+* Login/Registration Screen
+* Send Money
+* Request Money
+* Vouchers
+* View Transactions
 
 
 <!-- ROADMAP -->
