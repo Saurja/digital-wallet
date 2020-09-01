@@ -88,9 +88,21 @@ npm install
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+Digital Wallet is a payment application that allows users to store and spend virtual money. This project does not use real money and only for educational purposes.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+There are applications like an online bank account where users can have a wallet to store their money and spend from there. Users can also use vouchers or request money from others.
+
+Users can have different ways to send or receive money which gives them a wide variety of possibilities while making a transaction. User has the choice of signing up via multiple authentication processes which makes the app more smoothe and secure.
+
+
+### Things we have to keep in mind
+* how a real digital payment system works
+* how a transaction happens
+* how to log detailed transactions
+Understand requirements
+write User Stories and do Estimation
+Develop & Test System
+
 
 
 
