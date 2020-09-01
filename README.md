@@ -2,7 +2,7 @@
 <br />
 <p align="center">
 
-  <h3 align="center">Digital Wallet</h3>
+  <h1 align="center">Digital Wallet</h1>
 
   <p align="center">
     An awesome README template to jumpstart your projects!
