@@ -29,7 +29,6 @@
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
   * [Installation](#installation)
 * [Usage](#usage)
 * [Roadmap](#roadmap)
@@ -66,26 +65,23 @@ This section should list any major frameworks that you built your project using.
 This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* composer
-```sh
-npm install npm@latest -g
-```
 
 ### Installation
 
 1. Clone the repo
 ```sh
-git clone https://github.com/your_username_/Project-Name.git
+git clone https://github.com/Saurja/digital-wallet
 ```
-2. Install composer
+2. Install Composer packages
 ```sh
-npm install
+composer install
 ```
+3. Use the database_dw.sql file to get the code for the database and paste it in your phpmyadmin sql query entry
+4. Edit the config.php and transactionConfig.php routing them to your MySQL Database
+
 
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
 Digital Wallet is a payment application that allows users to store and spend virtual money. This project does not use real money and only for educational purposes.
