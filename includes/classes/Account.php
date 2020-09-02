@@ -16,15 +16,13 @@
             $stmt->bind_param('s', $em);
             $stmt->execute();
             $query = $stmt->get_result();
-
+            $stmt->close();
             if(mysqli_num_rows($query)) {
                 return true;
             } else {
                 array_push($this->errorArray, Constants::$loginFailed);
                 return false;
             }
-
-            $stmt->close();
 
         }
 
