@@ -112,5 +112,5 @@ See the [open issues](https://github.com/Saurja/digital-wallet/issues) for a lis
 <!--CONTRIBUTORS-->
 
 ## contributors
-*[Saurja Ghosh](https://github.com/Saurja)
-*[Debalina Bhattacharjee](https://github.com/Debalina-B)
+* [Saurja Ghosh](https://github.com/Saurja)
+* [Debalina Bhattacharjee](https://github.com/Debalina-B)
